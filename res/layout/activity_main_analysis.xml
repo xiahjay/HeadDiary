@@ -1,0 +1,537 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    
+	<!-- 头部的标题栏*********************************************************************** -->
+
+    <RelativeLayout
+        android:id="@+id/analysis_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar" >
+
+        <Button
+            android:id="@+id/analysis_btn_back"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_style_back"
+            android:text="@string/action_back"
+            android:textColor="#fff"
+            android:textSize="14sp" 
+            android:onClick="onClickBack"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/title_analysis"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        
+
+    </RelativeLayout>
+
+
+     <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"  >
+		
+        <RelativeLayout
+      		android:id="@+id/analysis_rlayout_period"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:background="@drawable/diary_single_item"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="onClickPeriod">
+            
+            <TextView
+                android:id="@+id/analysis_tv_time"
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:layout_centerVertical="true"
+        		android:padding="8dp" 
+        		android:text="三个月"
+        		android:textSize="13sp"		
+				android:textColor="#000" />  
+			<TextView
+                android:id="@+id/analysis_tv_record"
+            	android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:padding="6dp"
+            	android:layout_toRightOf="@id/analysis_tv_time"
+            	android:layout_centerVertical="true"
+            	android:layout_toLeftOf="@+id/analysis_arrow1"
+            	android:textSize="13sp" 
+            	android:text="3次"
+            	android:textColor="@color/orange"
+            	android:gravity="right"/>    
+			<ImageView
+			    android:id="@id/analysis_arrow1"
+            	android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"        	     	
+        		android:scaleType="matrix"
+        		android:layout_centerVertical="true"
+        		android:layout_alignParentRight="true"
+        		android:src="@drawable/diary_arrow" /> 					
+      	</RelativeLayout>
+ 			
+ 		<RelativeLayout
+      		android:id="@+id/analysis_rlayout_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:background="@drawable/diary_single_item"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="onClickStyle">
+            
+            <TextView
+                android:id="@+id/analysis_tv_style"
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:layout_centerVertical="true"
+        		android:padding="8dp" 
+        		android:text="列表"
+        		android:textSize="13sp"		
+				android:textColor="#000" />  
+  
+			<ImageView
+			    android:id="@+id/analysis_arrow2"
+            	android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"        	     	
+        		android:scaleType="matrix"
+        		android:layout_centerVertical="true"
+        		android:layout_alignParentRight="true"
+        		android:src="@drawable/diary_arrow" /> 					
+      </RelativeLayout>
+	</LinearLayout>
+	
+    <!-- 主内容界面 *********************************************************************** -->
+    
+
+    <ScrollView 
+    	android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    	android:scrollbarStyle="outsideOverlay" 
+    	android:paddingTop="6dp"
+    	android:paddingBottom="15dp">
+    	
+   		<LinearLayout
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="vertical" >
+        	
+           
+           <!--   头痛基本信息素等 ********************************************************************   -->
+            		<RelativeLayout
+                		android:layout_width="match_parent"
+                		android:layout_height="wrap_content">
+                
+                		<ImageView
+                		    android:id="@+id/analysis_iv_head"
+           		 			android:layout_width="35dp"
+            				android:layout_height="35dp"
+            				android:layout_alignParentLeft="true"
+            				android:layout_marginLeft="10dp"
+            				android:src="@drawable/icon_head" />
+
+                		<TextView
+                    		android:layout_width="wrap_content"
+                    		android:layout_height="wrap_content"
+                    		android:layout_alignBottom="@id/analysis_iv_head"
+                    		android:layout_toRightOf="@id/analysis_iv_head"
+                    		android:layout_marginLeft="5dp"
+                    		android:text="@string/title_basic_info"
+                    		android:textColor="@color/orange"
+                    		android:textAppearance="?android:attr/textAppearanceMedium" />
+                
+            		</RelativeLayout>
+            	
+            		
+            		<RelativeLayout
+      				    android:id="@+id/analysis_rlayout_frequency"
+            			android:layout_width="match_parent"
+            			android:layout_height="wrap_content"  
+            			android:layout_marginTop="5dp"    
+            			android:paddingBottom="6dp"     			
+            			android:background="@drawable/diary_first_item">
+            			<TextView
+        					android:id="@+id/analysis_tv_title0"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:layout_marginRight="25dp"
+        					android:paddingTop="8dp"
+        					android:paddingBottom="2dp"
+        					android:paddingLeft="8dp"
+        					android:text="@string/title_frequency"
+        					android:textSize="17sp"		
+							android:textColor="#000" />  
+						<TextView
+            		        android:id="@+id/analysis_tv_frequency"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:layout_below="@id/analysis_tv_title0"
+            		        android:paddingLeft="8dp"
+            		        android:paddingBottom="2dp"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"/>     				
+      				</RelativeLayout>
+      			
+      				<RelativeLayout
+      				    android:id="@+id/analysis_rlayout_interval"
+            			android:layout_width="match_parent"
+            			android:layout_height="wrap_content"           			
+            			android:background="@drawable/diary_item" 
+            			android:paddingBottom="6dp">
+            			<TextView
+        					android:id="@+id/analysis_tv_title1"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:layout_marginRight="25dp"
+        					android:paddingTop="8dp"
+        					android:paddingLeft="8dp"
+        					android:paddingBottom="2dp"
+        					android:text="@string/title_interval"
+        					android:textSize="17sp"		
+							android:textColor="#000" />  
+						<TextView
+            		        android:id="@+id/analysis_tv_interval"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:layout_below="@id/analysis_tv_title1"
+            		        android:paddingLeft="8dp"
+            		        android:paddingBottom="2dp"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"/>     
+			
+      				</RelativeLayout>
+      				
+      			<RelativeLayout
+      				    android:id="@+id/analysis_rlayout_position"
+            			android:layout_width="match_parent"
+            			android:layout_height="wrap_content"           			
+            			android:background="@drawable/diary_item" 
+            			android:paddingBottom="6dp">
+            			<TextView
+        					android:id="@+id/analysis_tv_title2"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:layout_marginRight="25dp"
+        					android:paddingTop="8dp"
+        					android:paddingLeft="8dp"
+        					android:paddingBottom="2dp"
+        					android:text="@string/select_position"
+        					android:textSize="17sp"		
+							android:textColor="#000" />  
+						<TextView
+            		        android:id="@+id/analysis_tv_position"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:layout_below="@id/analysis_tv_title2"
+            		        android:paddingLeft="8dp"
+            		        android:paddingBottom="2dp"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"/>     
+			
+      				</RelativeLayout>
+
+      				<RelativeLayout
+      				    android:id="@+id/analysis_rlayout_ache_type"
+            			android:layout_width="match_parent"
+            			android:layout_height="wrap_content"  
+            			android:paddingBottom="6dp"         			
+            			android:background="@drawable/diary_item">
+            			<TextView
+        					android:id="@+id/analysis_tv_title3"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:layout_marginRight="25dp"
+        					android:paddingTop="8dp"
+        					android:paddingLeft="8dp"
+        					android:paddingBottom="2dp"
+        					android:text="@string/select_ache_type"
+        					android:textSize="17sp"		
+							android:textColor="#000" />  
+						<TextView
+            		        android:id="@+id/analysis_tv_ache_type"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:layout_below="@id/analysis_tv_title3"
+            		        android:paddingLeft="8dp"
+            		        android:paddingBottom="2dp"
+            		        android:text="" 
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"/>  			
+      				</RelativeLayout>
+      				
+      				<RelativeLayout
+      				    android:id="@+id/analysis_rlayout_ache_degree"
+            			android:layout_width="match_parent"
+            			android:layout_height="wrap_content"
+            			android:paddingBottom="6dp"           			
+            			android:background="@drawable/diary_item">
+            			<TextView
+        					android:id="@+id/analysis_tv_title4"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:layout_marginRight="25dp"
+        					android:paddingTop="8dp"
+        					android:paddingLeft="8dp"
+        					android:paddingBottom="2dp"
+        					android:text="@string/select_ache_degree"
+        					android:textSize="17sp"		
+							android:textColor="#000" />  
+						<TextView
+            		        android:id="@+id/analysis_tv_ache_degree"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:layout_below="@id/analysis_tv_title4"
+            		        android:paddingLeft="8dp"
+            		        android:paddingBottom="2dp"
+            		        android:text="" 
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"/>     
+					
+      				</RelativeLayout>
+      				
+      				<RelativeLayout
+      				    android:id="@+id/analysis_rlayout_activity"
+            			android:layout_width="match_parent"
+            			android:layout_height="wrap_content"   
+            			android:paddingBottom="6dp"     			
+            			android:background="@drawable/diary_item">
+            			<TextView
+        					android:id="@+id/analysis_tv_title5"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:paddingTop="8dp"
+        					android:paddingBottom="2dp"
+        					android:paddingLeft="8dp"
+        					android:text="@string/select_activity"
+        					android:textSize="17sp"		
+							android:textColor="#000" 
+							android:layout_marginRight="25dp"/>  
+						<TextView
+            		        android:id="@+id/analysis_tv_activity"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:layout_below="@id/analysis_tv_title5"
+            		        android:paddingLeft="8dp"
+            		        android:paddingBottom="2dp"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"/>     				
+      				</RelativeLayout>
+      				
+
+      				<RelativeLayout
+      				    android:id="@+id/analysis_rlayout_prodrome"
+            			android:layout_width="match_parent"
+            			android:layout_height="wrap_content"           			
+            			android:background="@drawable/diary_item" 
+            			android:paddingBottom="6dp"  >
+            			<TextView
+        					android:id="@+id/analysis_tv_title6"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:layout_marginRight="25dp"
+        					android:paddingTop="8dp"
+        					android:paddingLeft="8dp"
+        					android:paddingBottom="2dp"
+        					android:text="@string/select_prodrome"
+        					android:textSize="17sp"		
+							android:textColor="#000" />  
+						<TextView
+            		        android:id="@+id/analysis_tv_prodrome"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:layout_below="@id/analysis_tv_title6"
+            		        android:paddingLeft="8dp"
+            		        android:paddingBottom="2dp"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"/>     				
+      				</RelativeLayout>
+      				
+      			<RelativeLayout
+      				    android:id="@+id/analysis_rlayout_companion"
+            			android:layout_width="match_parent"
+            			android:layout_height="wrap_content"
+            			android:background="@drawable/diary_last_item" 
+            			android:paddingBottom="8dp">
+            			<TextView
+        					android:id="@+id/analysis_tv_title7"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:layout_marginRight="25dp"
+        					android:paddingTop="8dp"
+        					android:paddingLeft="8dp"
+        					android:paddingBottom="2dp"
+        					android:text="@string/select_companion"
+        					android:textSize="17sp"		
+							android:textColor="#000" />  
+						<TextView
+            		        android:id="@+id/analysis_tv_companion"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:layout_below="@id/analysis_tv_title7"
+            		        android:paddingLeft="8dp"
+            		        android:paddingBottom="2dp"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"/>     
+			
+      				</RelativeLayout>
+      				
+      				
+      				<!--   伴随症状、缓解因素等 ********************************************************************   -->
+      				
+      				<RelativeLayout
+                		android:layout_width="match_parent"
+                		android:layout_height="wrap_content"
+                		android:layout_marginTop="10dp">
+                
+                		<ImageView
+            				android:id="@+id/analysis_iv_rest"
+           		 			android:layout_width="35dp"
+            				android:layout_height="35dp"
+            				android:layout_alignParentLeft="true"
+            				android:layout_marginLeft="10dp"
+            				android:src="@drawable/icon_rest" />
+
+               		 	<TextView
+                    		android:id="@+id/textView1"
+                    		android:layout_width="wrap_content"
+                    		android:layout_height="wrap_content"
+                    		android:layout_alignBottom="@+id/analysis_iv_rest"
+                    		android:layout_toRightOf="@id/analysis_iv_rest"
+                    		android:layout_marginLeft="5dp"
+                    		android:text="@string/title_additional_info"
+                    		android:textColor="@color/darkgreen"
+                    		android:textAppearance="?android:attr/textAppearanceMedium" />
+                
+           			 </RelativeLayout>
+           			 
+           			 
+      				<RelativeLayout
+      				    android:id="@+id/analysis_rlayout_precipiating"
+            			android:layout_width="match_parent"
+            			android:layout_height="wrap_content"  
+            			android:layout_marginTop="5dp"  
+            			android:paddingBottom="6dp"         			
+            			android:background="@drawable/diary_first_item">
+            			<TextView
+        					android:id="@+id/analysis_tv_title8"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:paddingTop="8dp"
+        					android:paddingLeft="8dp"
+        					android:paddingBottom="2dp"
+        					android:text="@string/select_precipiating_factor"
+        					android:textSize="17sp"		
+							android:textColor="#000" 
+							android:layout_marginRight="25dp"/>  
+						<TextView
+            		        android:id="@+id/analysis_tv_precipiating"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:layout_below="@id/analysis_tv_title8"
+            		        android:paddingLeft="8dp"
+            		        android:paddingBottom="2dp"
+            		        android:text="" 
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/green"/>  			
+      				</RelativeLayout>
+      				
+      				<RelativeLayout
+      				    android:id="@+id/analysis_rlayout_mitigating"
+            			android:layout_width="match_parent"
+            			android:layout_height="wrap_content"
+            			android:paddingBottom="8dp"           			
+            			android:background="@drawable/diary_last_item" >
+            			<TextView
+        					android:id="@+id/analysis_tv_title9"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:paddingTop="8dp"
+        					android:paddingLeft="8dp"
+        					android:paddingBottom="2dp"
+        					android:text="@string/select_mitigating_factor"
+        					android:textSize="17sp"		
+							android:textColor="#000" 
+							android:layout_marginRight="25dp"/>  
+						<TextView
+            		        android:id="@+id/analysis_tv_mitigating"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:layout_below="@id/analysis_tv_title9"
+            		        android:paddingLeft="8dp"
+            		        android:paddingBottom="2dp"
+            		        android:text="" 
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/green"/>     
+					
+      				</RelativeLayout>
+      				
+      				
+      				<!-- 药物信息 ***********************************************************************   -->
+      				<RelativeLayout
+                		android:layout_width="match_parent"
+               			android:layout_height="wrap_content"
+               			android:layout_marginTop="10dp">
+                
+                		<ImageView
+            				android:id="@+id/analysis_iv_drug"
+           		 			android:layout_width="35dp"
+            				android:layout_height="35dp"
+            				android:layout_alignParentLeft="true"
+            				android:layout_marginLeft="10dp"
+            				android:src="@drawable/icon_drug" />
+
+                		<TextView
+                    		android:id="@+id/textView1"
+                    		android:layout_width="wrap_content"
+                    		android:layout_height="wrap_content"
+                    		android:layout_alignBottom="@+id/analysis_iv_drug"
+                    		android:layout_toRightOf="@id/analysis_iv_drug"
+                    		android:layout_marginLeft="5dp"
+                    		android:text="@string/title_drug_info"
+                    		android:textColor="#0066FF"
+                    		android:textAppearance="?android:attr/textAppearanceMedium" />
+                
+           			 </RelativeLayout>
+      				
+      				
+      				
+      				<RelativeLayout   
+      				    android:id="@+id/analysis_rlayout_drug"   				    
+            			android:layout_width="fill_parent"
+            			android:layout_height="wrap_content"
+            			android:layout_marginTop="5dp"
+            			android:gravity="center_vertical"
+            			android:clickable="true"
+            			android:background="@drawable/diary_single_item" >
+            			<TextView
+        					android:id="@+id/analysis_tv_drug"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:paddingTop="8dp"
+        					android:paddingLeft="8dp"
+        					android:paddingBottom="2dp"
+        					android:text="未服用止痛药物"
+        					android:textColor="@color/black"
+        					android:textSize="17sp"		 
+							android:lineSpacingExtra="5dp"/>    					
+      				</RelativeLayout>
+      				
+      				
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

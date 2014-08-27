@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- Strings related to login -->
+    <string name="title_document">Document</string>
+    <string name="title_analysis">Analysis</string>
+    <string name="title_online_doc">Doctor</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_everydayfocus">Today\'s Focus</string>
+    <string name="news_title">How to ease migraine headache?</string>
+    <string name="news_content">Method 1 of 3: Get Some Rest. Get a good night\'s sleep. Changes in sleep patterns, changing work schedules and jet lag can affect the quality of sleep cycles and trigger migraines. Try to maintain a regular sleep schedule. Get up and go to bed at the same time every day if possible.\nMethod 2 of 3: Food And Drink. Take caffeine. It\'s a paradox of headaches: ingest too much caffeine and you may get a headache, but take a little bit and it can help make the pain disappear. Studies have shown that aspirin and ibuprofen are more effective when combined with caffeine. So if you take aspirin or ibuprofen at the onset of a migraine, wash it down with a cup of coffee.\nMethod 3 of 3: Other Treatments. Ice packs. Lie down and put an ice pack or cold compress on your head. Close your eyes while doing that.</string>
+    <string name="action_new_headache">New Headache Diary</string>
+    <string name="action_continue_headache">Continue Last Diary</string>
+    <string name="action_new_others">Add Drug or Medical Records</string>
+
+</resources>

@@ -1,0 +1,258 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".HomeActivity" >
+
+    <!-- 头部的标题栏*********************************************************************** -->
+
+   <RelativeLayout
+        android:id="@+id/home_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/title_bar" >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/app_name"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- 主内容界面 *********************************************************************** -->
+
+     <RelativeLayout
+       	android:layout_width="match_parent"
+       	android:layout_height="match_parent"
+       	android:orientation="vertical" 
+       	android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_below="@id/home_layout_top"
+        android:layout_above="@+id/home_layout_bottom"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp">
+
+		<!-- 每日焦点 **************************-->
+
+        <RelativeLayout
+           android:id="@+id/home_layout_newstitle"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+                
+            <ImageView
+            	android:id="@+id/home_iv_icon"
+            	android:layout_width="wrap_content"
+            	android:layout_height="35dp"
+            	android:layout_alignParentLeft="true"
+            	android:layout_marginLeft="10dp"
+            	android:src="@drawable/ic_launcher" />
+            
+            <TextView 
+                android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" 
+                android:text="@string/title_everydayfocus" 
+                android:textSize="22sp"
+                android:textColor="@color/navy" 
+                android:layout_marginLeft="10dp" 
+                android:layout_toRightOf="@id/home_iv_icon"
+                android:layout_alignBottom="@id/home_iv_icon"/>
+                
+          </RelativeLayout>
+            
+          <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/home_layout_newstitle"
+                android:layout_marginTop="5dp"
+                android:layout_above="@+id/home_btn_new_headache"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/home_textview_bac"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/home_tv_news_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/news_title"
+                    android:textSize="20sp"
+                    android:textColor="@color/navy"/>
+
+                <TextView
+                    android:id="@+id/home_tv_news_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/home_tv_news_title"
+                    android:layout_below="@+id/home_tv_news_title"
+                    android:layout_marginTop="7dp"
+                    android:text="@string/news_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray" 
+                    android:scrollbars="vertical"
+                    android:lineSpacingExtra="3dp"/>
+
+                
+                
+            </RelativeLayout>
+            
+            <!-- 添加头痛的按键 ********************** -->
+    		<Button
+        		android:id="@id/home_btn_new_headache"
+        		android:layout_width="match_parent"
+        		android:layout_height="50dp"
+        		android:layout_above="@+id/home_btn_synchronize"
+        		android:layout_marginBottom="10dp"
+        		android:layout_marginLeft="35dp"
+        		android:layout_marginRight="35dp"
+        		android:layout_gravity="center_horizontal"
+        		android:text="@string/action_new_headache" 
+        		android:background="@drawable/btn_style_blue"
+        		android:textColor="@color/white"
+        		android:onClick="onClickNewHeadDiary"/>
+			
+			<Button
+        		android:id="@id/home_btn_synchronize"
+        		android:layout_width="match_parent"
+        		android:layout_height="50dp"
+        		android:layout_alignParentBottom="true"
+        		android:layout_gravity="center_horizontal"
+        		android:layout_marginLeft="35dp"
+        		android:layout_marginRight="35dp"
+        		android:text="云端同步头痛日志" 
+        		android:background="@drawable/btn_style_white"
+        		android:textColor="@color/green"
+        		android:onClick="onClickSynchronize"/>
+		
+        </RelativeLayout>
+
+    <!-- 底部的tab选择************************************************************* -->
+
+    <RelativeLayout
+        android:id="@id/home_layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottom_bar"
+        android:orientation="vertical" >
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="2dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" 
+                android:onClick="onClickDocument">
+
+                <ImageView
+                    android:id="@+id/home_iv_tab_document"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="matrix"
+                    android:src="@drawable/btn_home_document" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_document"
+                    android:textColor="@color/color_white_to_green"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" 
+                android:onClick="onClickAnalysis" >
+
+                <ImageView
+                    android:id="@+id/home_iv_tab_analyasis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="matrix"
+                    android:src="@drawable/btn_home_analysis"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_analysis"
+                    android:textColor="@color/color_white_to_green"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:onClick="onClickOnlineDoctor"  >
+
+                <ImageView
+                    android:id="@+id/home_iv_tab_onlinedoctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="matrix"
+                    android:src="@drawable/btn_home_onlinedoc"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_online_doc"
+                    android:textColor="@color/color_white_to_green"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" 
+                android:onClick="onClickSetting">
+
+                <ImageView
+                    android:id="@+id/home_iv_tab_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="matrix"
+                    android:src="@drawable/btn_home_setting"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_setting"
+                    android:textColor="@color/color_white_to_green"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+	<ProgressBar
+        android:id="@+id/home_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="29dp" 
+        android:visibility="gone"/>
+
+</RelativeLayout>

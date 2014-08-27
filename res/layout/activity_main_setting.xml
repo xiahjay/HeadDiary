@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#eee"
+        android:orientation="vertical" >
+        
+    <RelativeLayout
+        android:id="@+id/home_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/title_bar" >
+
+        <Button
+            android:id="@+id/home_btn_back"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_style_back"
+            android:text="@string/action_back"
+            android:textColor="#fff"
+            android:textSize="14sp" 
+            android:onClick="onClickBack"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/title_setting"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    
+		<ScrollView 
+    		android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:scrollbarStyle="outsideOverlay" 
+    		android:layout_below="@id/home_layout_top"
+    		 >
+        <LinearLayout
+            	android:layout_width="fill_parent"
+            	android:layout_height="wrap_content"
+            	android:orientation="vertical" >
+            		
+      				
+      				<!--   ********************************************************************   -->
+      				<RelativeLayout
+      				    android:layout_width="fill_parent"
+      				    android:layout_height="wrap_content"
+      				    android:layout_marginTop="14dp"
+      				    android:background="@drawable/diary_single_item"
+      				    android:clickable="true"
+      				    android:gravity="center_vertical" >
+						
+						<ImageView
+      				        android:id="@+id/iv1"
+      				        android:layout_width="80dp"
+      				        android:layout_height="80dp"
+      				        android:layout_alignParentLeft="true"
+      				        android:layout_centerVertical="true"
+      				        android:src="@drawable/img_patient" 
+      				        android:padding="8dp"/>
+      				    
+
+      				    <ImageView
+      				        android:layout_width="wrap_content"
+      				        android:layout_height="wrap_content"
+      				        android:layout_alignParentRight="true"
+      				        android:layout_centerVertical="true"
+      				        android:scaleType="matrix"
+      				        android:src="@drawable/diary_arrow" />
+
+      				    <LinearLayout
+      				        android:layout_width="wrap_content"
+      				        android:layout_height="wrap_content"
+      				        android:layout_toRightOf="@id/iv1"
+      				        android:orientation="vertical" 
+      				        android:layout_centerVertical="true">
+      				        <TextView
+      				        android:id="@+id/setting_tv_name"
+      				        android:layout_width="wrap_content"
+      				        android:layout_height="wrap_content"
+      				        android:padding="3dp"
+      				        android:text="@string/title_patient_name"
+      				        android:textColor="#000"
+      				        android:textSize="17sp" />
+      				    <TextView
+      				        android:id="@+id/setting_tv_cellphone"
+      				        android:layout_width="wrap_content"
+      				        android:layout_height="wrap_content"
+      				        android:padding="3dp"
+      				        android:text="@string/title_phone_num"
+      				        android:textColor="#000"
+      				        android:textSize="15sp" />
+      				    </LinearLayout>
+
+      				</RelativeLayout>
+      				
+      				<!--   ***********************************************************************   -->
+      				<RelativeLayout      				    
+            			android:layout_width="fill_parent"
+            			android:layout_height="wrap_content"
+            			android:layout_marginTop="14dp"
+            			android:gravity="center_vertical"
+            			android:onClick="onClickDoctor"
+            			android:background="@drawable/diary_first_item" >
+            			<TextView
+            		        android:id="@+id/tv0"
+            		        android:layout_width="120dp"
+            		        android:layout_height="wrap_content"
+            		        android:layout_centerVertical="true"
+            		        android:padding="8dp"
+            		        android:text="@string/title_associated_doc"
+            		        android:textColor="#000"
+            		        android:textSize="17sp" />
+            		    
+            		    <TextView
+            		        android:id="@+id/setting_tv_doctor"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:padding="8dp"
+            		        android:layout_toRightOf="@id/tv0"
+            		        android:layout_marginLeft="40dp"
+            		        android:layout_toLeftOf="@+id/arrow"
+            		        android:layout_centerVertical="true"
+            		        android:text="@string/prompt_none"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/green"
+            		        android:gravity="right"/>
+
+            		    <ImageView
+            		        android:id="@id/arrow"
+            		        android:layout_width="wrap_content"
+            		        android:layout_height="wrap_content"
+            		        android:layout_alignParentRight="true"
+            		        android:layout_centerVertical="true"
+            		        android:clickable="true"
+            		        android:scaleType="matrix"
+            		        android:src="@drawable/diary_arrow" />      					
+      				</RelativeLayout>
+      				
+      				<RelativeLayout      				    
+            			android:layout_width="fill_parent"
+            			android:layout_height="wrap_content"
+            			android:gravity="center_vertical"
+            			android:onClick="onClickAutoUpload"
+            			android:background="@drawable/diary_last_item" >
+            			<TextView
+            		        android:id="@+id/tv1"
+            		        android:layout_width="120dp"
+            		        android:layout_height="wrap_content"
+            		        android:layout_centerVertical="true"
+            		        android:padding="8dp"
+            		        android:text="@string/title_auto_upload"
+            		        android:textColor="#000"
+            		        android:textSize="17sp" />
+            		    
+            		    <TextView
+            		        android:id="@+id/setting_tv_autoupload"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:padding="8dp"
+            		        android:layout_toRightOf="@id/tv1"
+            		        android:layout_marginLeft="40dp"
+            		        android:layout_toLeftOf="@+id/arrow"
+            		        android:layout_centerVertical="true"
+            		        android:text="@string/prompt_on"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/green"
+            		        android:gravity="right"/>
+
+            		    <ImageView
+            		        android:id="@id/arrow"
+            		        android:layout_width="wrap_content"
+            		        android:layout_height="wrap_content"
+            		        android:layout_alignParentRight="true"
+            		        android:layout_centerVertical="true"
+            		        android:clickable="true"
+            		        android:scaleType="matrix"
+            		        android:src="@drawable/diary_arrow" />      					
+      				</RelativeLayout>
+      				
+      				<!--   ***********************************************************************   -->
+      				
+      				
+      				<RelativeLayout      				    
+            			android:layout_width="fill_parent"
+            			android:layout_height="wrap_content"
+            			android:layout_marginTop="14dp"
+            			android:gravity="center_vertical"
+            			android:clickable="true"
+            			android:background="@drawable/diary_single_item" 
+            			android:onClick="onClickLanguage">
+            			<TextView
+            		        android:id="@+id/tv2"
+            		        android:layout_width="120dp"
+            		        android:layout_height="wrap_content"
+            		        android:layout_centerVertical="true"
+            		        android:padding="8dp"
+            		        android:text="@string/title_language"
+            		        android:textColor="#000"
+            		        android:textSize="17sp" />
+            		    
+            		    <TextView
+            		        android:id="@+id/setting_tv_language"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:padding="8dp"
+            		        android:layout_toRightOf="@id/tv2"
+            		        android:layout_marginLeft="40dp"
+            		        android:layout_toLeftOf="@+id/arrow"
+            		        android:layout_centerVertical="true"
+            		        android:text="@string/title_chosen_language"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/green"
+            		        android:gravity="right"/>
+
+            		    <ImageView
+            		        android:id="@id/arrow"
+            		        android:layout_width="wrap_content"
+            		        android:layout_height="wrap_content"
+            		        android:layout_alignParentRight="true"
+            		        android:layout_centerVertical="true"
+            		        android:clickable="true"
+            		        android:scaleType="matrix"
+            		        android:src="@drawable/diary_arrow" />      					
+      				</RelativeLayout>
+      				
+
+      				<!--   ***********************************************************************   -->
+      				
+      				<Button 
+      				    android:layout_width="fill_parent" 
+        				android:layout_height="wrap_content"
+        				android:layout_marginTop="14dp"
+        				android:layout_marginBottom="14dp"
+        				android:layout_marginLeft="12dp"
+        				android:layout_marginRight="12dp"
+        				android:padding="4dp" 
+        				android:text="@string/action_exit_login"
+        				android:textSize="18sp"		
+						android:textColor="#fff"
+						android:gravity="center"
+						android:background="@drawable/btn_style_red"
+						android:onClick="onClickExitAndLogout"
+      				    />
+
+
+        	</LinearLayout>
+    </ScrollView>
+    <ProgressBar
+      	android:id="@+id/setting_progressBar"
+      	android:layout_width="wrap_content"
+      	android:layout_height="wrap_content" 
+      	android:layout_centerInParent="true"
+      	android:visibility="gone"/>
+
+</RelativeLayout>

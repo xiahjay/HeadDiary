@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mitigating_linlayout_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp">
+
+    <TextView
+        android:id="@+id/mitigating_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="5dp"
+        android:text="@string/ask_mitigating_factor"
+        android:textSize="20sp" 
+        android:textColor="@color/orange"
+        android:gravity="center"/>
+    
+    <TextView
+        android:id="@+id/mitigating_tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mitigating_tv_title"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:layout_marginLeft="20dp"
+    	android:layout_marginRight="20dp"
+        android:text="@string/prompt_multiple_choice" 
+        android:textSize="17sp"
+        android:textColor="@color/darkgray"
+        />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:layout_below="@id/mitigating_tv_hint"
+        android:layout_above="@+id/mitigating_llayout_bottom"
+        android:layout_marginTop="5dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+       <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+		
+			<CheckBox
+        		android:id="@+id/mitigating_check0"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:text="checkbox" 
+        		android:textColor="@color/black"
+        		android:textSize="18sp"
+        		android:paddingLeft="15dp"
+        		android:paddingTop="15dp"
+        		android:paddingBottom="10dp"
+        		android:button="@null" 
+        		android:background="@drawable/radiobtn_style_orange_top"/>    
+
+        
+
+    		<CheckBox
+        		android:id="@+id/mitigating_check1"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:text="checkbox" 
+        		android:textColor="@color/black"
+        		android:textSize="18sp"
+        		android:paddingLeft="15dp"
+        		android:paddingTop="10dp"
+        		android:paddingBottom="10dp"
+        		android:button="@null" 
+        		android:background="@drawable/radiobtn_style_orange_center"/>
+    		
+    		<CheckBox
+        		android:id="@+id/mitigating_check2"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:text="checkbox" 
+        		android:textColor="@color/black"
+        		android:textSize="18sp"
+        		android:paddingLeft="15dp"
+        		android:paddingTop="10dp"
+        		android:paddingBottom="10dp"
+        		android:button="@null" 
+        		android:background="@drawable/radiobtn_style_orange_center"/>
+    		
+    		<CheckBox
+        		android:id="@+id/mitigating_check3"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:text="checkbox" 
+        		android:textColor="@color/black"
+        		android:textSize="18sp"
+        		android:paddingLeft="15dp"
+        		android:paddingTop="10dp"
+        		android:paddingBottom="10dp"
+        		android:button="@null" 
+        		android:background="@drawable/radiobtn_style_orange_center"/>
+    		
+    		<CheckBox
+        		android:id="@+id/mitigating_check4"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:text="checkbox" 
+        		android:textColor="@color/black"
+        		android:textSize="18sp"
+        		android:paddingLeft="15dp"
+        		android:paddingTop="10dp"
+        		android:paddingBottom="10dp"
+        		android:button="@null" 
+        		android:background="@drawable/radiobtn_style_orange_center"/>
+    		
+    		<CheckBox
+        		android:id="@+id/mitigating_check5"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:text="checkbox" 
+        		android:textColor="@color/black"
+        		android:textSize="18sp"
+        		android:paddingLeft="15dp"
+        		android:paddingTop="10dp"
+        		android:paddingBottom="10dp"
+        		android:button="@null" 
+        		android:background="@drawable/radiobtn_style_orange_center"/>
+    		
+    		<CheckBox
+        		android:id="@+id/mitigating_check6"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:text="checkbox" 
+        		android:textColor="@color/black"
+        		android:textSize="18sp"
+        		android:paddingLeft="15dp"
+        		android:paddingTop="10dp"
+        		android:paddingBottom="10dp"
+        		android:button="@null" 
+        		android:background="@drawable/radiobtn_style_orange_center"/>
+    		
+    		<CheckBox
+        		android:id="@+id/mitigating_check7"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:text="checkbox" 
+        		android:textColor="@color/black"
+        		android:textSize="18sp"
+        		android:paddingLeft="15dp"
+        		android:paddingTop="10dp"
+        		android:paddingBottom="10dp"
+        		android:button="@null" 
+        		android:background="@drawable/radiobtn_style_orange_center"/>
+    		
+        
+    		<CheckBox
+        		android:id="@+id/mitigating_check8"
+        		android:layout_width="match_parent"
+        		android:layout_height="wrap_content"
+        		android:text="checkbox"  
+        		android:textSize="18sp"
+        		android:textColor="@color/black"
+        		android:paddingLeft="15dp"
+        		android:paddingTop="10dp"
+        		android:paddingBottom="15dp"
+        		android:button="@null" 
+        		android:background="@drawable/radiobtn_style_orange_bottom"/>
+    
+    		<EditText
+            		android:id="@+id/mitigating_et_else"
+            		android:layout_width="match_parent"
+            		android:layout_height="wrap_content"
+            		android:layout_marginTop="8dp"
+            		android:hint="@string/prompt_other_situation"
+            		android:background="@color/darkseagreen"
+            		android:textColor="@color/black"
+            		android:paddingTop="8dp"
+            		android:paddingBottom="8dp"
+            		android:paddingLeft="15dp"
+            		android:paddingRight="15dp"> 
+    		</EditText>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    
+    <LinearLayout
+        android:id="@id/mitigating_llayout_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="33dp"
+        android:layout_centerHorizontal="true" >
+
+        <Button
+            android:id="@+id/mitigating_btn_cancel"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/btn_style_white"
+            android:gravity="center"
+            android:onClick="onClickCancel"
+            android:text="@string/action_cancel"
+            android:textColor="#333"
+            android:textSize="16sp" />
+        <Button
+            android:id="@+id/mitigating_btn_confirm"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/btn_style_green"
+            android:gravity="center"
+            android:onClick="onClickConfirm"
+            android:text="@string/action_confirm"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</RelativeLayout>

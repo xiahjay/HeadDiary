@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fcfcfc"
+    android:orientation="vertical" >
+        
+    <RelativeLayout
+        android:id="@+id/home_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/title_bar" >
+
+        <Button
+            android:id="@+id/home_btn_back"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_style_back"
+            android:text="@string/action_back"
+            android:textColor="#fff"
+            android:textSize="14sp" 
+            android:onClick="onClickBack"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/title_online_doc"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    
+	<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/search_bar_bg" >
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:hint="@string/action_search"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:textColor="#000"
+                android:drawableLeft="@drawable/search_bar_icon_normal" 
+                android:background="@drawable/search_bar_edit_bg" >               
+            </EditText>
+            
+       </LinearLayout>
+        
+	<ScrollView 
+    	android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    	android:scrollbarStyle="outsideOverlay" >
+    	
+   		<LinearLayout
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="vertical" >
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/mm_listitem"
+            android:clickable="true"
+            android:onClick="onClickHeadAssist">
+            
+            <ImageView
+                android:id="@+id/head"
+                android:layout_width="55dp"
+		        android:layout_height="55dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                android:src="@drawable/ic_launcher" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="7dp"
+                android:text="@string/title_chat_time1"
+                android:textColor="#666" />
+
+            <LinearLayout
+      			android:layout_width="wrap_content"
+      			android:layout_height="wrap_content"
+      			android:layout_toRightOf="@id/head"
+      			android:orientation="vertical" 
+      			android:layout_centerVertical="true">
+      			<TextView
+      				android:id="@+id/tv1"
+      				android:layout_width="wrap_content"
+      				android:layout_height="wrap_content"
+      				android:padding="3dp"
+      				android:text="@string/title_headache_assist"
+      				android:textColor="#000"
+      				android:textSize="15sp" />
+      			<TextView
+      				android:id="@+id/tv2"
+      				android:layout_width="wrap_content"
+      				android:layout_height="wrap_content"
+      				android:padding="3dp"
+      				android:text="@string/explain_headache_assist"
+      				android:textColor="@color/gray"
+      				android:textSize="13sp" />
+      			</LinearLayout>
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/mm_listitem"
+            android:clickable="true"
+            android:onClick="onClickDoctor">
+            
+            <ImageView
+                android:id="@+id/head"
+                android:layout_width="55dp"
+		        android:layout_height="55dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                android:src="@drawable/img_doctor" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="7dp"
+                android:text="@string/title_chat_time2"
+                android:textColor="#666" />
+
+            <LinearLayout
+      			android:layout_width="wrap_content"
+      			android:layout_height="wrap_content"
+      			android:layout_toRightOf="@id/head"
+      			android:orientation="vertical" 
+      			android:layout_centerVertical="true">
+      			<TextView
+      				android:id="@+id/tv1"
+      				android:layout_width="wrap_content"
+      				android:layout_height="wrap_content"
+      				android:padding="3dp"
+      				android:text="@string/title_doc_name"
+      				android:textColor="#000"
+      				android:textSize="15sp" />
+      			<TextView
+      				android:id="@+id/tv2"
+      				android:layout_width="wrap_content"
+      				android:layout_height="wrap_content"
+      				android:padding="3dp"
+      				android:text="@string/explain_doc"
+      				android:textColor="@color/gray"
+      				android:textSize="13sp" />
+      			</LinearLayout>
+        </RelativeLayout>
+        
+        
+        </LinearLayout>
+    </ScrollView>
+ </LinearLayout>

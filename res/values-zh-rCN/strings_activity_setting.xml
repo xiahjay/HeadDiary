@@ -1,0 +1,14 @@
+<resources>
+
+    <!-- Strings related to login -->
+    
+    <string name="title_patient_name">王患者</string>
+    <string name="title_phone_num">手机号：13532223000</string>
+    <string name="title_associated_doc">关联医生</string>
+    <string name="title_auto_upload">同步功能</string>
+    <string name="title_language">语言选择</string>
+    <string name="title_chosen_language">中文</string>
+    <string name="choice_chinese">中文</string>
+    <string name="choice_english">English</string>
+    <string name="choice_system_default">系统默认</string>
+</resources>

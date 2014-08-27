@@ -1,0 +1,10 @@
+<resources>
+
+    <!-- Strings related to login -->
+    
+    <string name="title_patient_name">Jue Huang</string>
+    <string name="title_phone_num">Phone: 13732223810</string>
+    <string name="title_associated_doc">Associated Doctor</string>
+    <string name="title_auto_upload">Upload To Cloud</string>
+    <string name="title_language">Language</string>
+</resources>

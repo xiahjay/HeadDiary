@@ -1,0 +1,66 @@
+<resources>
+
+    <!-- Strings related to login -->
+    <string name="title_head_diary">头痛日志</string>
+    <string name="title_basic_info">基本信息（必填）</string>
+    <string name="title_additional_info">补充信息（选填）</string>
+    <string name="title_drug_info">用药记录</string>
+    <string name="select_start_time">开始时间</string>
+    <string name="select_end_time">结束时间</string>
+    <string name="select_position">头痛部位</string>
+    <string name="select_ache_type">疼痛性质</string>
+    <string name="select_ache_degree">头痛程度</string>
+    <string name="select_prodrome">头痛前1小时内出现症状</string>
+    <string name="select_companion">头痛伴随症状</string>
+    <string name="select_activity">活动是否加重头痛</string>
+    <string name="select_precipiating_factor">诱发头痛因素</string>
+    <string name="select_mitigating_factor">缓解头痛因素</string>
+    <string name="select_add_drug">添加止痛药物</string>
+    <string name="action_add_drug">添加</string>
+    <string name="action_confirm_save">确认并保存</string>
+    <string name="action_cancel_this_record">删除本次记录</string>
+    <string name="action_set_others_none">其余选无</string>
+    <string name="error_start_time">开始时间超过了当前时间，请重新确认</string>
+    <string name="action_ache_not_finished">头痛尚未结束</string>
+    <string name="error_end_time_early">头痛结束时间早于头痛开始时间，请重新确认</string>
+    <string name="error_end_time_late">头痛结束时间迟于当前时间，请重新确认</string>
+    <string name="error_no_input">您尚未选择答案</string>
+    <string name="error_incomplete_input">仍有一些选项您尚未回答</string>
+    <string name="error_degree_zero">头痛程度不能为0，请重新确认</string>
+    <string name="error_degree_invalid">头痛程度评分应是1~10之间的整数</string>
+    <string name="error_drug_maxnum">抱歉，已达到添加药物数量上限</string>
+    <string name="error_no_drug_name">尚未输入药物名称</string>
+    <string name="error_no_drug_quantity">尚未输入药物用量</string>
+    <string name="error_no_drug_effect">尚未选择药物效果</string>
+    <string name="ask_start_time">头痛开始时间？</string>
+    <string name="ask_end_time">头痛结束时间？</string>
+    <string name="ask_position">您的头痛部位？</string>
+    <string name="ask_position_detail">眼眶周围或太阳穴出现了头痛吗？</string>
+    <string name="ask_ache_type">疼痛的性质？</string>
+    <string name="ask_ache_degree">头痛的程度评分?\n（0不痛；10最痛）</string>
+    <string name="ask_activity">运动是否加重头痛？\n（如走路、爬楼）</string>
+    <string name="ask_prodrome">头痛前1小时内出现了？</string>
+    <string name="ask_companion">头痛时出现了？</string>
+    <string name="ask_precipiating_factor">诱发头痛的因素？</string>
+    <string name="ask_mitigating_factor">缓解头痛的因素？</string>
+    <string name="ask_drug">头痛时服用了止痛药？</string>
+    <string name="prompt_other_situation">其他情况（请注明）</string>
+    <string name="prompt_degree_rating">程度评分</string>
+    <string name="prompt_multiple_choice">(多选题，没有则不选)</string>
+    <string name="prompt_no_drug">未使用止痛药物，则不需添加</string>
+    <string name="unit_drug_piece">片</string>
+    <string name="prompt_drug_effect">服用止痛药2小时后头痛</string>
+    <string name="prompt_drug_name">药物名称</string>
+    <string name="prompt_drug_quantity">药物用量</string>
+    <string name="title_drug_name">药名</string>
+    <string name="title_drug_quantity">用量</string>
+    <string name="prompt_delete_success">删除成功</string>
+    <string name="prompt_save_success">保存成功,该头痛日志已同步上传，您的医生可以及时查看。本次头痛类型为：</string>
+    <string name="prompt_save_imcomplete">保存成功,但是该次头痛日志尚不完整，请尽快完成本次记录</string>
+    <string name="prompt_prodrome_choice_hint">请逐一核对是否出现以下头痛先兆</string>
+    <string name="prompt_companion_choice_hint">请逐一核对是否出现以下伴随症状</string>
+    
+    
+
+
+</resources>

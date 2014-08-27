@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_cellphone">Phone</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_register">Login</string>
+    <string name="action_exit">Exit</string>
+    <string name="login_progress_signing_in">Login…</string>
+    <string name="error_invalid_cellphone">Phone should contain 11 numbers</string>
+    <string name="error_incorrect_password">Invalidate Phone Number</string>
+    <string name="error_field_required">Please enter information</string>
+    <string name="error_incorrect_cellphone">No account with this phone</string>
+    <string name="error_cannot_connect_db">Cannot connect to the local database</string>
+    <string name="action_new_account">Register for a new account</string>
+
+</resources>

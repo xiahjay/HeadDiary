@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Strings related to login -->
+    
+    <string name="title_doc_name">Dr.Dong</string>
+    <string name="title_headache_assist">mAssit</string>
+    <string name="title_chat_time1">Last Afternoon</string>
+    <string name="title_chat_time2">15:45 pm</string>
+    <string name="explain_headache_assist"> Offer infomation and suggestions about therapy</string>
+    <string name="explain_doc">Expert of 301 General Hospital in Beijing</string>
+
+
+
+</resources>

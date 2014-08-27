@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- Strings related to login -->
+    <string name="title_document">头痛档案</string>
+    <string name="title_analysis">分析报告</string>
+    <string name="title_online_doc">在线医生</string>
+    <string name="title_setting">设置</string>
+    <string name="title_everydayfocus">每日焦点</string>
+    <string name="news_title">紧张型头痛的缓解方法？</string>
+    <string name="news_content">\t\t紧张性头痛是头痛患者中最常见的一种，故预防紧张性头痛尤为重要。因该病与长期焦虑、神经紧张、过度疲劳有关，故首先避免精神刺激，生活规律化，禁止烟、酒。长期处于不良工作姿势，使头、颈肩部肌肉持续收缩亦可出现该头痛，因而养成良好的生活习惯，适当进行体育锻炼是非常必要的。同时对于长期慢性该头痛患者，除进行心理治疗外，还可以配合使用镇静、止痛剂如安定、布洛芬等药物治疗。紧张性头痛是头痛患者中最常见的一种，故预防紧张性头痛尤为重要。因该病与长期焦虑、神经紧张、过度疲劳有关，故首先避免精神刺激，生活规律化，禁止烟、酒。长期处于不良工作姿势，使头、颈肩部肌肉持续收缩亦可出现该头痛，因而养成良好的生活习惯，适当进行体育锻炼是非常必要的。同时对于长期慢性该头痛患者，除进行心理治疗外，还可以配合使用镇静、止痛剂如安定、布洛芬等药物治疗。</string>
+    <string name="action_new_headache">记录一次新发头痛</string>
+    <string name="action_continue_headache">完成上一次头痛记录</string>
+    <string name="action_new_others">记录药物、就诊等信息</string>
+
+</resources>

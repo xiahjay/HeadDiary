@@ -1,0 +1,65 @@
+<resources>
+
+    <!-- Strings related to login -->
+    <string name="title_head_diary">Headache Diary</string>
+    <string name="title_basic_info">Basic Information</string>
+    <string name="title_additional_info">Detailed Information</string>
+    <string name="title_drug_info">Drug Inomation</string>
+    <string name="select_start_time">Start Time</string>
+    <string name="select_end_time">End Time</string>
+    <string name="select_position">Headache Position</string>
+    <string name="select_ache_type">Ache Type</string>
+    <string name="select_ache_degree">Ache Degree</string>
+    <string name="select_prodrome">1 hour Before Headache</string>
+    <string name="select_companion">During Headache</string>
+    <string name="select_activity">Activity Effect on Headache</string>
+    <string name="select_precipiating_factor">Precipiating factor</string>
+    <string name="select_mitigating_factor">Mitigating factor</string>
+    <string name="select_add_drug">Add Anodyne</string>
+    <string name="action_add_drug">Add</string>
+    <string name="action_confirm_save">Comfirm and Save</string>
+    <string name="action_cancel_this_record">Delete this Record</string>
+    <string name="action_set_others_none">Others None</string>
+    <string name="error_start_time">Invalid Start Time</string>
+    <string name="action_ache_not_finished">Going On</string>
+    <string name="error_end_time_early">Invalid End Time</string>
+    <string name="error_end_time_late">Invalid End Time</string>
+    <string name="error_no_input">There\'s no input.</string>
+    <string name="error_incomplete_input">Input is incomplete.</string>
+    <string name="error_degree_zero">Headache degree cannot be 0.</string>
+    <string name="error_degree_invalid">Headache degree should be integer between 1~10.</string>
+    <string name="error_drug_maxnum">Sorry, drug num reaches upper limit.</string>
+    <string name="error_no_drug_name">No Drug Name</string>
+    <string name="error_no_drug_quantity">No Drug Dosage</string>
+    <string name="error_no_drug_effect">No Drug Effect</string>
+    <string name="ask_start_time">When does headache start?</string>
+    <string name="ask_end_time">When does headache end?</string>
+    <string name="ask_position">Where\'s the headache?</string>
+    <string name="ask_position_detail">Is the pain aound eyes or temples?</string>
+    <string name="ask_ache_type">What\'s the type of ache?</string>
+    <string name="ask_ache_degree">How much is the pain?\n（0-No Pain 10-Most Pain）</string>
+    <string name="ask_activity">Will Activity aggrarevate headache?\n(eg.Walking or Climbing Stairs)</string>
+    <string name="ask_prodrome">What happens 1 hour before headache?</string>
+    <string name="ask_companion">What heappens during headache?</string>
+    <string name="ask_precipiating_factor">What factor might precipiate headache?</string>
+    <string name="ask_mitigating_factor">What factor might mitigate headache?</string>
+    <string name="ask_drug">Have you taken Anodyne during headache?</string>
+    <string name="prompt_other_situation">Others (Please write down)</string>
+    <string name="prompt_degree_rating">Degree</string>
+    <string name="prompt_multiple_choice">You can choose more than one or none.</string>
+    <string name="prompt_no_drug">No Anodyne.</string>
+    <string name="unit_drug_piece">Piece</string>
+    <string name="prompt_drug_effect">2 hours After taking anodyne </string>
+    <string name="prompt_drug_name">Drug Name</string>
+    <string name="prompt_drug_quantity">Drug Dosage</string>
+    <string name="title_drug_name">Drug Name</string>
+    <string name="title_drug_quantity">Drug Dosage</string>
+    <string name="prompt_delete_success">Delete Successfully!</string>
+    <string name="prompt_save_success">Save Successfully! This diary is uploaded automatically, and your associated doctor would go over it later.Your headache type is:</string>
+    <string name="prompt_save_imcomplete">Save Successfully but this diary is incomplete. Please complete it immediately after headache.</string>
+    <string name="prompt_prodrome_choice_hint">Uni = Unilateral; Bi = Bilateral</string>
+    <string name="prompt_companion_choice_hint">G = Gental; M = Moderate; S = Severe</string>
+    
+
+
+</resources>

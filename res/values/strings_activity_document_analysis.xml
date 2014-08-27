@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Strings related to login -->
+    
+    <string name="title_display">显示内容</string>
+    <string name="ans_display">头痛、用药、就诊</string>
+    <string name="title_time_period">筛选时间</string>
+    <string name="ans_time_period">2013年10月-11月 共6次头痛记录</string>
+    <string name="title_interval">持续时间</string>
+    <string name="title_info00">2013-11-11 中度头痛</string>
+    <string name="title_info01">持续时间：6小时15分</string>
+    <string name="title_info10">2013-11-11 止痛药：痛立停</string>
+    <string name="title_info11">服用方法：头痛后服用</string>
+    <string name="title_info20">2013-11-12 诊断结果：紧张型头痛</string>
+    <string name="title_info21">北京301解放军总医院 头痛门诊 董钊</string>
+    <string name="title_info30">2013-11-12 预防药：痛立停</string>
+    <string name="title_info31">服用方法：每日服用，每日3次，一次1片</string>
+
+
+
+</resources>

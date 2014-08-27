@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Strings related to login -->
+    
+    <string name="title_display">Display Content</string>
+    <string name="ans_display">HeadacheDiary</string>
+    <string name="title_time_period">Time Period</string>
+    <string name="ans_time_period">Oct~Nov,2013 Headache time: 6</string>
+    <string name="title_interval">Lasting Time</string>
+    <string name="title_info00">2013-11-11 Moderate Pain</string>
+    <string name="title_info01">Lasting Time: 6h 15m</string>
+    <string name="title_info10">2013-11-11 Codeine</string>
+    <string name="title_info11">Anodyne: Take 1 piece when suffering headache</string>
+    <string name="title_info20">2013-11-12 Migraine without aura</string>
+    <string name="title_info21">Dr.Dong: 301 General Hospital in Beijing</string>
+    <string name="title_info30">2013-11-12 Aspirin</string>
+    <string name="title_info31">Preventive: Take 3 times everyday, 1 piece/time</string>
+
+
+
+</resources>

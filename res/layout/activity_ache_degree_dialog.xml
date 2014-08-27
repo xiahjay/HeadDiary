@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/degree_linlayout_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="5dp"
+        android:padding="5dp"
+        android:text="@string/ask_ache_degree"
+        android:textSize="22sp" 
+        android:textColor="@color/orange"
+        android:gravity="center"/>
+    
+	<RelativeLayout  
+    	android:layout_width="270dp" 
+        android:layout_height="270dp"  
+        android:background="@drawable/dashboard0_10">  
+          
+		<TextView
+    	    android:id="@+id/degree_tv_category"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignParentTop="true"
+    	    android:layout_centerHorizontal="true"
+    	    android:layout_marginTop="100dp"
+    	    android:text="轻度" 
+    	    android:textSize="22sp"
+    	    android:textColor="@color/darkseagreen"/>
+      
+    	<ImageView  
+        	android:id="@+id/degree_iv_pointer"  
+        	android:layout_width="270dp"  
+        	android:layout_height="270dp"  
+        	android:layout_centerHorizontal="true"   
+        	android:src="@drawable/dashboard_pointer" />
+
+    	<ImageView
+    	    android:id="@+id/degree_iv_left"
+    	    android:layout_width="50dp"
+    	    android:layout_height="50dp"
+    	    android:layout_alignParentLeft="true"
+    	    android:layout_marginLeft="25dp"
+    	    android:layout_alignParentBottom="true"
+    	    android:layout_marginBottom="35dp"
+    	    android:src="@drawable/btn_left"
+    	    android:onClick="onClickRatingLeft" 
+    	    android:scaleType="center"/>
+    	
+
+
+    	<ImageView
+    	    android:id="@+id/degree_iv_right"
+    	    android:layout_width="50dp"
+    	    android:layout_height="50dp"
+    	    android:layout_alignParentRight="true"
+    	    android:layout_marginRight="25dp"
+    	    android:layout_alignParentBottom="true"
+    	    android:layout_marginBottom="35dp"
+    	    android:src="@drawable/btn_right"
+    	    android:onClick="onClickRatingRight" 
+    	    android:scaleType="center" />
+
+
+    	<EditText
+            android:id="@+id/degree_et_rating"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/prompt_degree_rating"
+            android:background="@color/darkseagreen"
+            android:textColor="@color/black"
+            android:padding="8dp"
+            android:ems="10"
+    	    android:inputType="number"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"> 
+    	</EditText>
+
+    	
+      
+	</RelativeLayout>  
+
+   <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="33dp"
+        android:layout_gravity="center_horizontal" >
+
+        <Button
+            android:id="@+id/degree_btn_cancel"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/btn_style_white"
+            android:gravity="center"
+            android:onClick="onClickCancel"
+            android:text="@string/action_cancel"
+            android:textColor="#333"
+            android:textSize="16sp" />
+        <Button
+            android:id="@+id/degree_btn_confirm"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/btn_style_green"
+            android:gravity="center"
+            android:onClick="onClickConfirm"
+            android:text="@string/action_confirm"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Strings related to login -->
+    
+    <string name="title_doc_name">董钊</string>
+    <string name="title_headache_assist">头痛助手</string>
+    <string name="title_chat_time1">昨天下午</string>
+    <string name="title_chat_time2">下午15:45</string>
+    <string name="explain_headache_assist">为您提供药物、就诊咨询和建议</string>
+    <string name="explain_doc">北京解放军301总医院 头痛门诊专家</string>
+
+
+
+</resources>
