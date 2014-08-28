@@ -11,6 +11,8 @@ import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.User;
 import com.example.headdiary.data.UserDAO;
 import com.example.headdiary.data.Config.MsgConfig;
+import com.example.headdiary.hddialog.StartTimeDialog;
+import com.example.headdiary.hddialog.StartTimeQuestion;
 import com.example.headdiary.util.AllExit;
 import com.example.headdiary.util.DBManager;
 import com.example.headdiary.util.NetWorkManager;
@@ -44,7 +46,7 @@ public class HomeActivity extends Activity {
 	private Button btnDiary,btnSynchronize;
 	private ProgressBar progressBar;
 	private static Boolean isSynchronizing=false;
-	private static Boolean synchonizeingAvaliable=true;
+	private static Boolean synchonizeingAvaliable=true;	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,15 +99,16 @@ public class HomeActivity extends Activity {
 	}  
 	
 	public void onClickNewHeadDiary(View v) {   
-		if (HeadacheDiaryDAO.getInstance().getIfLastDiaryComplete()){
+		if (HeadacheDiaryDAO.getInstance().getIfLastDiaryComplete()){			
 			HeadacheDiaryDAO.getInstance().setHeadacheDiarySelected(new HeadacheDiary());
+			Intent intent = new Intent (HomeActivity.this,StartTimeQuestion.class);	
+			startActivity(intent);
 		}
 		else{
 			HeadacheDiaryDAO.getInstance().setHeadacheDiarySelected((HeadacheDiary) HeadacheDiaryDAO.getInstance().getLastHeadacheDiary().clone());
-		}
-		
-		Intent intent = new Intent (HomeActivity.this,HeadDiaryFormActivity.class);	
-		startActivity(intent);	
+			Intent intent = new Intent (HomeActivity.this,HeadDiaryFormActivity.class);	
+			startActivity(intent);	
+		}	
 	}
 	
 	public void onClickSynchronize(View v){

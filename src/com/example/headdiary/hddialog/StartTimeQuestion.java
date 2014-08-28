@@ -2,24 +2,14 @@ package com.example.headdiary.hddialog;
 
 import java.util.Calendar;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MotionEvent;
+import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.headdiary.HomeActivity;
 import com.example.headdiary.R;
-import com.example.headdiary.R.id;
-import com.example.headdiary.R.layout;
-import com.example.headdiary.R.menu;
-import com.example.headdiary.R.string;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.util.TimeManager;
@@ -27,21 +17,28 @@ import com.speedven.pickview.widget.NumericWheelAdapter;
 import com.speedven.pickview.widget.OnWheelScrollListener;
 import com.speedven.pickview.widget.WheelView;
 
-public class StartTimeDialog extends Activity {
+public class StartTimeQuestion extends Activity {
 	private WheelView year;
 	private WheelView month;
 	private WheelView day;
 	private WheelView hour;
 	private WheelView mins;
 	private HeadacheDiary headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
-	long nowTimeinMs=0;
+	long nowTimeinMs=0;	
+	private Button btnCancel;
+	private Button btnConfirm;
+	
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_start_time_dialog);
+		setContentView(R.layout.activity_start_time_dialog);		
+		btnCancel=(Button)findViewById(R.id.start_btn_cancel);
+		btnCancel.setText("放弃");
 		
+		btnConfirm=(Button)findViewById(R.id.start_btn_confirm);
+		btnConfirm.setText("确定");
 		initDateTime();
 		
 	}
@@ -121,6 +118,9 @@ public class StartTimeDialog extends Activity {
 		}
 		else
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_start_time), Toast.LENGTH_SHORT).show();	
+		
+		Intent intent = new Intent (StartTimeQuestion.this,EndTimeQuestion.class);	
+		startActivity(intent);
 		
 		finish();
 	}

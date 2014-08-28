@@ -1,30 +1,21 @@
 package com.example.headdiary.hddialog;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.headdiary.HeadDiaryFormActivity;
 import com.example.headdiary.R;
-import com.example.headdiary.R.id;
-import com.example.headdiary.R.layout;
-import com.example.headdiary.R.menu;
-import com.example.headdiary.R.string;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-import android.view.Menu;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-public class ProdromeDialog extends Activity {
+public class ProdromeQuestion extends Activity {
 	private static final int RADIO_NUM=3;
 	private static final int CATEGORY_NUM=5;
 	private  RadioGroup[] radioGroup=new RadioGroup[CATEGORY_NUM];  
@@ -102,7 +93,9 @@ public class ProdromeDialog extends Activity {
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_incomplete_input), Toast.LENGTH_SHORT).show();
 		else
 			{
-			finish();			
+			finish();
+			Intent intent = new Intent (ProdromeQuestion.this,HeadDiaryFormActivity.class);	
+			startActivity(intent);
 			}
 	}
 	
@@ -118,3 +111,4 @@ public class ProdromeDialog extends Activity {
 	}
 
 }
+

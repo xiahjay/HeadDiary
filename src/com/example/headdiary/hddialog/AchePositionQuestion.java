@@ -1,28 +1,19 @@
 package com.example.headdiary.hddialog;
 
-import com.example.headdiary.R;
-import com.example.headdiary.R.id;
-import com.example.headdiary.R.layout;
-import com.example.headdiary.R.menu;
-import com.example.headdiary.R.string;
-import com.example.headdiary.data.HeadacheDiary;
-import com.example.headdiary.data.HeadacheDiaryDAO;
-import com.example.headdiary.data.StrConfig;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MotionEvent;
+import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class AchePositionDialog extends Activity {
+import com.example.headdiary.R;
+import com.example.headdiary.data.HeadacheDiary;
+import com.example.headdiary.data.HeadacheDiaryDAO;
+import com.example.headdiary.data.StrConfig;
+
+public class AchePositionQuestion extends Activity {
 	private static final int RADIO_NUM=3;
 	private  RadioGroup radioGroup;  
 	private  RadioButton[] radioBtn=new RadioButton[RADIO_NUM];
@@ -82,7 +73,9 @@ public class AchePositionDialog extends Activity {
 		else{
 			headacheDiary.setPosition(getAnsbyId(answer));
 			headacheDiary.setIfAroundEye(getAnsbyId2(answer2));
-			finish();			
+			finish();
+			Intent intent = new Intent (AchePositionQuestion.this,AcheTypeQuestion.class);	
+			startActivity(intent);
 		}
 	}
 	
@@ -101,3 +94,4 @@ public class AchePositionDialog extends Activity {
 	}
 
 }
+

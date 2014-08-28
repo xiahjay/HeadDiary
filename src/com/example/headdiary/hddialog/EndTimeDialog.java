@@ -2,6 +2,7 @@ package com.example.headdiary.hddialog;
 
 import java.util.Calendar;
 
+import com.example.headdiary.HomeActivity;
 import com.example.headdiary.R;
 import com.example.headdiary.R.id;
 import com.example.headdiary.R.layout;
@@ -16,6 +17,7 @@ import com.speedven.pickview.widget.WheelView;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -100,6 +102,8 @@ public class EndTimeDialog extends Activity {
 	public void onClickAcheNotFinished(View v){
 		headacheDiary.setEndTime(null);
 		finish();
+		Intent intent = new Intent (EndTimeDialog.this,AchePositionDialog.class);	
+		startActivity(intent);
 	}
 	
 	public void onClickConfirm(View v){
@@ -118,9 +122,9 @@ public class EndTimeDialog extends Activity {
 		else if (endTime.getTimeInMillis()<startTimeinMs+60000)	//要求至少有一分钟的时�?
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_end_time_early), Toast.LENGTH_SHORT).show();	
 		else
-			headacheDiary.setEndTime(TimeManager.getStrDateTime(endTime));
-
+			{headacheDiary.setEndTime(TimeManager.getStrDateTime(endTime));		
 		finish();
+			}
 	}
 	
 	/**

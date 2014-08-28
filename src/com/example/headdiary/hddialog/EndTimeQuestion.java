@@ -2,24 +2,13 @@ package com.example.headdiary.hddialog;
 
 import java.util.Calendar;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MotionEvent;
+import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.headdiary.HomeActivity;
 import com.example.headdiary.R;
-import com.example.headdiary.R.id;
-import com.example.headdiary.R.layout;
-import com.example.headdiary.R.menu;
-import com.example.headdiary.R.string;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.util.TimeManager;
@@ -27,7 +16,8 @@ import com.speedven.pickview.widget.NumericWheelAdapter;
 import com.speedven.pickview.widget.OnWheelScrollListener;
 import com.speedven.pickview.widget.WheelView;
 
-public class StartTimeDialog extends Activity {
+public class EndTimeQuestion extends Activity {
+
 	private WheelView year;
 	private WheelView month;
 	private WheelView day;
@@ -36,11 +26,10 @@ public class StartTimeDialog extends Activity {
 	private HeadacheDiary headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
 	long nowTimeinMs=0;
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_start_time_dialog);
+		setContentView(R.layout.activity_end_time_dialog);
 		
 		initDateTime();
 		
@@ -48,30 +37,32 @@ public class StartTimeDialog extends Activity {
 	
 	private void initDateTime(){
 		Calendar c;
-		if (headacheDiary.getStartTime()==null)
+		if (headacheDiary.getEndTime()==null)
 			c= Calendar.getInstance();
 		else {
-			c=TimeManager.parseStrDateTime(headacheDiary.getStartTime());
+			c=TimeManager.parseStrDateTime(headacheDiary.getEndTime());
 		}
+		
 		int curYear = c.get(Calendar.YEAR);
 		int curMonth = c.get(Calendar.MONTH);
 		int curDate = c.get(Calendar.DATE);
 		int curHour=c.get(Calendar.HOUR_OF_DAY);
 		int curMin=c.get(Calendar.MINUTE);
 		
-		year = (WheelView) findViewById(R.id.start_wheel_year);
+		
+		year = (WheelView) findViewById(R.id.end_wheel_year);
 		year.setAdapter(new NumericWheelAdapter(2000, 2099));
 		year.setLabel(this.getString(R.string.title_year));
 		year.setCyclic(true);
 		year.addScrollingListener(scrollListener);
 		
-		month = (WheelView) findViewById(R.id.start_wheel_month);
+		month = (WheelView) findViewById(R.id.end_wheel_month);
 		month.setAdapter(new NumericWheelAdapter(1, 12));
 		month.setLabel(this.getString(R.string.title_month));
 		month.setCyclic(true);
 		month.addScrollingListener(scrollListener);
 		
-		day = (WheelView) findViewById(R.id.start_wheel_day);
+		day = (WheelView) findViewById(R.id.end_wheel_day);
 		initDay(curYear,curMonth);
 		day.setLabel(this.getString(R.string.title_date));
 		day.setCyclic(true);
@@ -80,11 +71,11 @@ public class StartTimeDialog extends Activity {
 		month.setCurrentItem(curMonth);
 		day.setCurrentItem(curDate - 1);
 		
-		hour = (WheelView) findViewById(R.id.start_wheel_hour);
+		hour = (WheelView) findViewById(R.id.end_wheel_hour);
 		hour.setAdapter(new NumericWheelAdapter(0, 23));
 		hour.setLabel(this.getString(R.string.title_hour));
 		hour.setCyclic(true);
-		mins = (WheelView) findViewById(R.id.start_wheel_mins);
+		mins = (WheelView) findViewById(R.id.end_wheel_mins);
 		mins.setAdapter(new NumericWheelAdapter(0, 59));
 		mins.setLabel(this.getString(R.string.title_min));
 		mins.setCyclic(true);
@@ -97,32 +88,36 @@ public class StartTimeDialog extends Activity {
 		nowTimeinMs= Calendar.getInstance().getTimeInMillis();
 		
 	}
-
 	
-	public void onClickCancel(View v){
+	
+	public void onClickAcheNotFinished(View v){
+		headacheDiary.setEndTime(null);
 		finish();
+		Intent intent = new Intent (EndTimeQuestion.this,AchePositionQuestion.class);	
+		startActivity(intent);
 	}
 	
 	public void onClickConfirm(View v){
-		long endTimeinMs;
-		Calendar startTime=Calendar.getInstance();
-		startTime.set(year.getCurrentItem()+2000, month.getCurrentItem(), day.getCurrentItem()+1, hour.getCurrentItem(), mins.getCurrentItem(),0);
-		if (startTime.getTimeInMillis()<nowTimeinMs+60000){  //允许�?��钟以内的误差
-			headacheDiary.setStartTime(TimeManager.getStrDateTime(startTime));
-			
-			Calendar endTime=TimeManager.parseStrDateTime(headacheDiary.getEndTime());
-			if (endTime!=null){
-				endTimeinMs=endTime.getTimeInMillis();
-				if (endTimeinMs<startTime.getTimeInMillis()+60000){	//要求至少有一分钟的时�?
-					Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_end_time_early), Toast.LENGTH_SHORT).show();	
-					headacheDiary.setEndTime(null);
-				}
-			}
-		}
+		long startTimeinMs;
+		Calendar endTime=Calendar.getInstance();
+		endTime.set(year.getCurrentItem()+2000, month.getCurrentItem(), day.getCurrentItem()+1, hour.getCurrentItem(), mins.getCurrentItem(),0);
+
+		Calendar startTime=TimeManager.parseStrDateTime(headacheDiary.getStartTime());
+		if (startTime!=null)
+			startTimeinMs=startTime.getTimeInMillis();
 		else
-			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_start_time), Toast.LENGTH_SHORT).show();	
+			startTimeinMs=0;
 		
+		if (endTime.getTimeInMillis()>=nowTimeinMs+60000)  //允许�?��钟以内的误差
+			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_end_time_late), Toast.LENGTH_SHORT).show();	
+		else if (endTime.getTimeInMillis()<startTimeinMs+60000)	//要求至少有一分钟的时�?
+			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_end_time_early), Toast.LENGTH_SHORT).show();	
+		else
+			{headacheDiary.setEndTime(TimeManager.getStrDateTime(endTime));
+		Intent intent = new Intent (EndTimeQuestion.this,AchePositionQuestion.class);	
+		startActivity(intent);
 		finish();
+			}
 	}
 	
 	/**
@@ -192,3 +187,4 @@ public class StartTimeDialog extends Activity {
 	}
 
 }
+

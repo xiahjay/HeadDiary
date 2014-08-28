@@ -1,29 +1,20 @@
 package com.example.headdiary.hddialog;
 
-import com.example.headdiary.HomeActivity;
-import com.example.headdiary.R;
-import com.example.headdiary.R.id;
-import com.example.headdiary.R.layout;
-import com.example.headdiary.R.menu;
-import com.example.headdiary.R.string;
-import com.example.headdiary.data.HeadacheDiary;
-import com.example.headdiary.data.HeadacheDiaryDAO;
-import com.example.headdiary.data.StrConfig;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
-import android.view.MotionEvent;
+import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class AcheTypeDialog extends Activity {
+import com.example.headdiary.R;
+import com.example.headdiary.data.HeadacheDiary;
+import com.example.headdiary.data.HeadacheDiaryDAO;
+import com.example.headdiary.data.StrConfig;
+
+public class AcheTypeQuestion extends Activity {
 	private static final int RADIO_NUM=5;
 	private  RadioGroup radioGroup;  
 	private  RadioButton[] radioBtn=new RadioButton[RADIO_NUM];
@@ -93,7 +84,9 @@ public class AcheTypeDialog extends Activity {
 				headacheDiary.setTypeComment(etElse.getText().toString().trim());
 			else
 				headacheDiary.setTypeComment("");
-			finish();				
+			finish();	
+			Intent intent = new Intent (AcheTypeQuestion.this, AcheDegreeQuestion.class);	
+			startActivity(intent);
 		}
 		
 	}
@@ -106,3 +99,4 @@ public class AcheTypeDialog extends Activity {
 	}
 
 }
+

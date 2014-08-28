@@ -1,29 +1,20 @@
 package com.example.headdiary.hddialog;
 
-import com.example.headdiary.HeadDiaryFormActivity;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.headdiary.R;
-import com.example.headdiary.R.id;
-import com.example.headdiary.R.layout;
-import com.example.headdiary.R.menu;
-import com.example.headdiary.R.string;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-import android.view.Menu;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-public class CompanionDialog extends Activity {
+public class CompanionQuestion extends Activity {
 	private static final int RADIO_NUM=4;
 	private static final int CATEGORY_NUM=10;
 	private  RadioGroup[] radioGroup=new RadioGroup[CATEGORY_NUM];  
@@ -113,7 +104,9 @@ public class CompanionDialog extends Activity {
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_incomplete_input), Toast.LENGTH_SHORT).show();
 		else
 			{
-			finish();			
+			finish();
+			Intent intent = new Intent (CompanionQuestion.this,ProdromeQuestion.class);	
+			startActivity(intent);
 			}
 	}
 	
@@ -129,3 +122,4 @@ public class CompanionDialog extends Activity {
 	}
 
 }
+

@@ -1,6 +1,16 @@
 package com.example.headdiary;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import cn.w.song.widget.navigation.RollNavigationBar;
+import cn.w.song.widget.navigation.adapter.RollNavigationBarAdapter;
+import cn.w.song.widget.scroll.SlidePageView;
+import cn.w.song.widget.scroll.SlidePageView.OnPageViewChangedListener;
+
 
 import com.example.headdiary.data.HeadacheAnalysis;
 import com.example.headdiary.data.HeadacheDiaryDAO;
@@ -14,9 +24,14 @@ import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainAnalysisActivity extends Activity {
@@ -24,10 +39,74 @@ public class MainAnalysisActivity extends Activity {
 	private TextView tvFrequency,tvDuration,tvPosition,tvType,tvDegree,tvActivity,tvProdrome,tvCompanion,tvPrecipiating,tvMitigating,tvDrug;
 	private int[] textViewIdList={R.id.analysis_tv_frequency,R.id.analysis_tv_interval,R.id.analysis_tv_position,R.id.analysis_tv_ache_type,R.id.analysis_tv_ache_degree
 			,R.id.analysis_tv_activity,R.id.analysis_tv_prodrome,R.id.analysis_tv_companion,R.id.analysis_tv_precipiating,R.id.analysis_tv_mitigating,R.id.analysis_tv_drug};
+	//private String tag = "UIADemoActivity";
+	private String[] title = { "查看日志统计", "查看发展趋势" };
+	private int[] photo = { R.drawable.nav_menu_home, R.drawable.nav_menu_hot};
+	private int[] photoSelected = { R.drawable.nav_menu_home_selected,
+			R.drawable.nav_menu_hot_selected,};
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_analysis);
+		setContentView(R.layout.uiademo_ui);
+		/* 获取组件 */
+		final RollNavigationBar rnb = (RollNavigationBar) findViewById(R.id.uiademo_ui_RollNavigationBar);
+		final SlidePageView spv = (SlidePageView) findViewById(R.id.uiademo_ui_SlidePageView);
+		List<Map<String, Object>> list = new LinkedList<Map<String, Object>>();
+		final MyNavigationBarAdapter adapter = new MyNavigationBarAdapter(this,list);
+		/* 定制动态数据 */
+		
+		for (int i = 0; i < title.length; i++) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("title", title[i]);
+			map.put("photo", photo[i]);
+			map.put("photoSelected", photoSelected[i]);
+			list.add(map);
+		}
+		/* 设置滑动条的滑动时间，时间范围在0.1~1s，不在范围则默认0.1s */
+		rnb.setSelecterMoveContinueTime(0.1f);// 可以不设置，默认0.1s
+		/* 设置滑动条样式（图片） */
+		rnb.setSelecterDrawableSource(R.drawable.nav_menu_bg);// 必须
+		/* 设置导航栏的被选位置 */
+		rnb.setSelectedChildPosition(0);// 可以不设置
+
+		/* 导航栏扩展 */
+		rnb.setAdapter(adapter);// 必须
+		rnb.setNavigationBarListener(new RollNavigationBar.NavigationBarListener() {
+			/**
+			 * position 被选位置 view 为导航栏 event 移动事件
+			 */
+			@Override
+			public void onNavigationBarClick(int position, View view,
+					MotionEvent event) {
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:// 按下去时
+					spv.setCurrPagePosition(position);
+					spv.CurrPageScrollToScreenCenter();
+					break;
+				case MotionEvent.ACTION_MOVE:// 移动中
+
+					break;
+				case MotionEvent.ACTION_UP:// 抬手时
+
+					break;
+				}
+
+			}
+
+		});
+		
+		/* 滚动页面（正文）监听 */
+		spv.setOnPageViewChangedListener(new OnPageViewChangedListener() {
+
+			@Override
+			public void OnPageViewChanged(int currPagePosition,
+					View currPageView) {
+				rnb.setSelectedChildPosition(currPagePosition);
+				rnb.refreshView(adapter);
+			}
+		});
+	
 		initView();
 		refreshAnalysis();
 	}
@@ -245,4 +324,66 @@ public class MainAnalysisActivity extends Activity {
 		return result;
 	}
 
+	/**
+	 * 导航栏扩展
+	 * 
+	 * @author w.song
+	 * @version 1.0.1
+	 * @date 2012-4-22
+	 */
+	class MyNavigationBarAdapter extends RollNavigationBarAdapter {
+		private List<Map<String, Object>> list;
+		private LayoutInflater mInflater;
+
+		public MyNavigationBarAdapter(Activity activity,
+				List<Map<String, Object>> list) {
+			mInflater = LayoutInflater.from(activity);
+			this.list = list;
+		}
+
+		@Override
+		public int getCount() {
+			return list.size();
+		}
+
+		/**
+		 * 获取每个组件
+		 * 
+		 * @param position
+		 *            组件的位置
+		 * @param contextView
+		 *            组件
+		 * @param parent
+		 *            上层组件
+		 */
+		@Override
+		public View getView(int position, View contextView, ViewGroup parent) {
+			mInflater.inflate(R.layout.item, (ViewGroup) contextView);
+			RollNavigationBar rollNavigationBar = (RollNavigationBar) parent;
+			/* 获取组件 */
+			ImageView imageView = (ImageView) contextView
+					.findViewById(R.id.image_view);
+			TextView titleView = (TextView) contextView
+					.findViewById(R.id.title_view);
+
+			/* 获取参数 */
+			String title = "" + list.get(position).get("title");
+			int photo = (Integer) list.get(position).get("photo");
+			int photoSelected = (Integer) list.get(position).get(
+					"photoSelected");
+
+			/* 组件设置参数 */
+			// 区分选择与被选择图片
+			if (position == rollNavigationBar.getSelectedChildPosition()) {// 被选择
+				imageView.setBackgroundResource(photoSelected);
+			} else {// 没被选择
+				imageView.setBackgroundResource(photo);
+				titleView.setTextColor(Color.argb(0, 0xff, 0, 0));
+			}						
+			titleView.setText(title);
+
+			return contextView;
+		}
+
+	}
 }

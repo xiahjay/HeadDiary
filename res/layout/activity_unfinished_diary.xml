@@ -1,0 +1,138 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+ <!-- 头部的标题栏*********************************************************************** -->
+
+    <RelativeLayout
+        android:id="@+id/unfinishedDiary_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/title_bar" >
+
+        <Button
+            android:id="@+id/unfinishedDiary_btn_back"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_style_back"
+            android:text="@string/action_back"
+            android:textColor="#fff"
+            android:textSize="14sp" 
+            android:onClick="onClickBack"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/title_head_diary"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />        
+    </RelativeLayout>
+  <!-- 头部的标题栏结束*********************************************************************** -->
+   <ScrollView 
+    	android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    	android:scrollbarStyle="outsideOverlay" 
+    	android:layout_below="@id/unfinishedDiary_layout_top"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+    	
+   		<LinearLayout
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:orientation="vertical" >
+  <!-- 主要信息开始*********************************************************************** -->
+
+   			<LinearLayout
+   			    android:layout_width="fill_parent"
+   			    android:layout_height="170.0dip"
+   			    android:layout_margin="10.0dip"
+   			    android:background="@drawable/publish_input_bg"
+   			    android:orientation="vertical"
+   			    android:padding="10.0dip" >
+
+   			    <LinearLayout
+   			        android:layout_width="fill_parent"
+   			        android:layout_height="30.0dip"
+   			        android:layout_marginTop="4.0dip"
+   			        android:orientation="horizontal" >
+
+   			        <TextView
+   			            android:layout_width="66.0dip"
+   			            android:layout_height="fill_parent"
+   			            android:layout_weight="0.23"
+   			            android:gravity="center"
+   			            android:text="@string/diagnose_result_title"
+   			            android:textColor="#ff646464"
+   			            android:textSize="18.0sp" />
+   			    </LinearLayout>
+
+   			    <View
+   			        android:layout_width="wrap_content"
+   			        android:layout_height="4.0dip"
+   			        android:background="@drawable/slash_bg" />
+
+   			    <TextView
+   			        android:id="@+id/content_edit"
+   			        android:layout_width="fill_parent"
+   			        android:layout_height="110.0dip"
+   			        android:layout_marginTop="5.0dip"
+   			        android:background="#00ffffff"
+   			        android:gravity="top"
+   			        android:paddingLeft="10.0dip"
+   			        android:paddingRight="10.0dip"
+   			        android:textColor="#ff3c3c3c"
+   			        android:textColorHint="#ffc1c1c1"
+   			        android:textSize="14.0sp" />
+   			</LinearLayout>
+
+ <!-- 诊断结果结束*********************************************************************** -->    
+  <RelativeLayout
+        android:id="@+id/unfinishedDiary_relief_method_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"        
+        android:layout_below="@+id/unfinishedDiary_diagnose_result_title"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/diary_first_item"
+        android:clickable="true"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/relief_method_title"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:text="@string/relief_method_title"
+            android:textColor="#000"
+            android:textSize="17sp" />
+    </RelativeLayout> 
+
+
+   <RelativeLayout
+       android:id="@+id/unfinishedDiary_relief_method"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"      
+       android:layout_below="@+id/unfinishedDiary_relief_method_title"
+       android:background="@drawable/diary_last_item"
+       android:clickable="true"
+       android:gravity="center_vertical" >
+
+       <TextView
+           android:id="@+id/relief_method"
+           android:layout_width="120dp"
+           android:layout_height="wrap_content"
+           android:layout_centerVertical="true"
+           android:padding="8dp"           
+           android:textColor="#000"
+           android:textSize="17sp" />
+   </RelativeLayout>
+   
+   
+    </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

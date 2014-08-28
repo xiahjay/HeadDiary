@@ -50,8 +50,18 @@
             android:label="@string/title_activity_start_time_diaglog"
             android:theme="@style/MyDialogStyle" >
         </activity>
+         <activity
+            android:name="com.example.headdiary.hddialog.StartTimeQuestion"
+            android:label="@string/title_activity_start_time_diaglog"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
         <activity
             android:name="com.example.headdiary.hddialog.EndTimeDialog"
+            android:label="@string/title_activity_end_time_dialog"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+         <activity
+            android:name="com.example.headdiary.hddialog.EndTimeQuestion"
             android:label="@string/title_activity_end_time_dialog"
             android:theme="@style/MyDialogStyle" >
         </activity>
@@ -60,8 +70,18 @@
             android:label="@string/title_activity_ache_position_dialog"
             android:theme="@style/MyDialogStyle" >
         </activity>
+         <activity
+            android:name="com.example.headdiary.hddialog.AchePositionQuestion"
+            android:label="@string/title_activity_ache_position_dialog"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
         <activity
             android:name="com.example.headdiary.hddialog.AcheTypeDialog"
+            android:label="@string/title_activity_ache_type_dialog"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+         <activity
+            android:name="com.example.headdiary.hddialog.AcheTypeQuestion"
             android:label="@string/title_activity_ache_type_dialog"
             android:theme="@style/MyDialogStyle" >
         </activity>
@@ -71,7 +91,17 @@
             android:theme="@style/MyDialogStyle" >
         </activity>
         <activity
+            android:name="com.example.headdiary.hddialog.AcheDegreeQuestion"
+            android:label="@string/title_activity_ache_degree"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+        <activity
             android:name="com.example.headdiary.hddialog.ActivityAggravateDialog"
+            android:label="@string/title_activity_activity_aggravate_dialog"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+         <activity
+            android:name="com.example.headdiary.hddialog.ActivityAggravateQuestion"
             android:label="@string/title_activity_activity_aggravate_dialog"
             android:theme="@style/MyDialogStyle" >
         </activity>
@@ -80,8 +110,18 @@
             android:label="@string/title_activity_prodrome_dialog"
             android:theme="@style/MyDialogStyle" >
         </activity>
+         <activity
+            android:name="com.example.headdiary.hddialog.ProdromeQuestion"
+            android:label="@string/title_activity_prodrome_dialog"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
         <activity
             android:name="com.example.headdiary.hddialog.CompanionDialog"
+            android:label="@string/title_activity_companion0_diaglog"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+        <activity
+            android:name="com.example.headdiary.hddialog.CompanionQuestion"
             android:label="@string/title_activity_companion0_diaglog"
             android:theme="@style/MyDialogStyle" >
         </activity>
@@ -118,6 +158,10 @@
         </activity>
         <activity
             android:name="com.example.headdiary.MainAnalysisActivity"
+            android:label="@string/title_activity_main_analysis" >
+        </activity>
+          <activity
+            android:name="com.example.headdiary.UIADemoActivity"
             android:label="@string/title_activity_main_analysis" >
         </activity>
         <activity

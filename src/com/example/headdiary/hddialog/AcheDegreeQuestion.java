@@ -1,34 +1,24 @@
 package com.example.headdiary.hddialog;
 
-import com.example.headdiary.R;
-import com.example.headdiary.R.id;
-import com.example.headdiary.R.layout;
-import com.example.headdiary.R.menu;
-import com.example.headdiary.R.string;
-import com.example.headdiary.data.HeadacheDiary;
-import com.example.headdiary.data.HeadacheDiaryDAO;
-import com.example.headdiary.data.StrConfig;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AcheDegreeDialog extends Activity {
+import com.example.headdiary.R;
+import com.example.headdiary.data.HeadacheDiary;
+import com.example.headdiary.data.HeadacheDiaryDAO;
+import com.example.headdiary.data.StrConfig;
+
+public class AcheDegreeQuestion extends Activity {
 
 	private EditText etRating;
 	private TextView tvCategory;
@@ -173,9 +163,12 @@ public class AcheDegreeDialog extends Activity {
 				Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_degree_invalid), Toast.LENGTH_SHORT).show();
 			else{
 				headacheDiary.setDegree(rating);
-				finish();				
+				finish();
+				Intent intent = new Intent (AcheDegreeQuestion.this,ActivityAggravateQuestion.class);	
+				startActivity(intent);
 			}	
 		}
 
 	}
 }
+
