@@ -63,6 +63,7 @@
     <string name="prompt_companion_choice_hint">请逐一核对是否出现以下伴随症状</string>
     <string name="relief_method_title">缓解方法</string>
     <string name="diagnose_result_title">诊断结果</string>
+    <string name="existed_infor">已填写信息</string>
     
 
 

@@ -48,8 +48,8 @@
   <!-- 主要信息开始*********************************************************************** -->
 
    			<LinearLayout
-   			    android:layout_width="fill_parent"
-   			    android:layout_height="170.0dip"
+   			    android:layout_width="wrap_content"
+   			    android:layout_height="150.0dip"
    			    android:layout_margin="10.0dip"
    			    android:background="@drawable/publish_input_bg"
    			    android:orientation="vertical"
@@ -77,9 +77,9 @@
    			        android:background="@drawable/slash_bg" />
 
    			    <TextView
-   			        android:id="@+id/content_edit"
+   			        android:id="@+id/un_diagnose_result"
    			        android:layout_width="fill_parent"
-   			        android:layout_height="110.0dip"
+   			        android:layout_height="80.0dip"
    			        android:layout_marginTop="5.0dip"
    			        android:background="#00ffffff"
    			        android:gravity="top"
@@ -91,48 +91,304 @@
    			</LinearLayout>
 
  <!-- 诊断结果结束*********************************************************************** -->    
+  <LinearLayout
+   			    android:layout_width="fill_parent"
+   			    android:layout_height="150.0dip"
+   			    android:layout_margin="10.0dip"
+   			    android:background="@drawable/publish_input_bg"
+   			    android:orientation="vertical"
+   			    android:padding="10.0dip" >
+
+   			    <LinearLayout
+   			        android:layout_width="fill_parent"
+   			        android:layout_height="30.0dip"
+   			        android:layout_marginTop="4.0dip"
+   			        android:orientation="horizontal" >
+
+   			        <TextView
+   			            android:layout_width="66.0dip"
+   			            android:layout_height="fill_parent"
+   			            android:layout_weight="0.23"
+   			            android:gravity="center"
+   			            android:text="@string/relief_method_title"
+   			            android:textColor="#ff646464"
+   			            android:textSize="18.0sp" />
+   			    </LinearLayout>
+
+   			    <View
+   			        android:layout_width="wrap_content"
+   			        android:layout_height="4.0dip"
+   			        android:background="@drawable/slash_bg" />
+
+   			    <TextView
+   			        android:id="@+id/un_relief_method"
+   			        android:layout_width="fill_parent"
+   			        android:layout_height="80.0dip"
+   			        android:layout_marginTop="5.0dip"
+   			        android:background="#00ffffff"
+   			        android:gravity="top"
+   			        android:paddingLeft="10.0dip"
+   			        android:paddingRight="10.0dip"
+   			        android:textColor="#ff3c3c3c"
+   			        android:textColorHint="#ffc1c1c1"
+   			        android:textSize="14.0sp" />
+   			</LinearLayout>
+   <!-- 缓解方法结束*********************************************************************** -->
+
   <RelativeLayout
-        android:id="@+id/unfinishedDiary_relief_method_title"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"        
-        android:layout_below="@+id/unfinishedDiary_diagnose_result_title"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/diary_first_item"
-        android:clickable="true"
-        android:gravity="center_vertical" >
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/relief_method_title"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:padding="8dp"
-            android:text="@string/relief_method_title"
-            android:textColor="#000"
-            android:textSize="17sp" />
-    </RelativeLayout> 
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBottom="@id/newdiary_iv_head"
+          android:layout_marginLeft="15dp"
+          android:layout_toRightOf="@id/newdiary_iv_head"
+          android:text="@string/existed_infor"
+          android:textAppearance="?android:attr/textAppearanceMedium"
+          android:textColor="@color/orange" />
+  </RelativeLayout>
+            		
+            		<RelativeLayout
+						android:id="@+id/unfinished_rlayout_start_time"
+            		    android:layout_width="fill_parent"
+            		    android:layout_height="wrap_content"
+            		    android:layout_marginTop="5dp"
+            		    android:background="@drawable/diary_first_item"
+            		    android:clickable="true"
+            		    android:gravity="center_vertical" 
+            		    android:onClick="onClickStartTime">
 
+            		    <TextView
+            		        android:id="@+id/unfinished_tv_title1"
+            		        android:layout_width="120dp"
+            		        android:layout_height="wrap_content"
+            		        android:layout_centerVertical="true"
+            		        android:padding="8dp"
+            		        android:text="@string/select_start_time"
+            		        android:textColor="#000"
+            		        android:textSize="17sp" />
+            		    
+            		    <TextView
+            		        android:id="@+id/unfinished_tv_start_time"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:padding="8dp"
+            		        android:layout_toRightOf="@id/unfinished_tv_title1"
+            		        android:layout_marginLeft="40dp"
+            		        android:layout_toLeftOf="@+id/unfinished_arrow1"
+            		        android:layout_centerVertical="true"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"
+            		        android:gravity="right"/>
 
-   <RelativeLayout
-       android:id="@+id/unfinishedDiary_relief_method"
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"      
-       android:layout_below="@+id/unfinishedDiary_relief_method_title"
-       android:background="@drawable/diary_last_item"
-       android:clickable="true"
-       android:gravity="center_vertical" >
+            		    <ImageView
+            		        android:id="@id/unfinished_arrow1"
+            		        android:layout_width="wrap_content"
+            		        android:layout_height="wrap_content"
+            		        android:layout_alignParentRight="true"
+            		        android:layout_centerVertical="true"
+            		        android:clickable="true"
+            		        android:scaleType="matrix"
+            		        android:src="@drawable/diary_arrow" />
 
-       <TextView
-           android:id="@+id/relief_method"
-           android:layout_width="120dp"
-           android:layout_height="wrap_content"
-           android:layout_centerVertical="true"
-           android:padding="8dp"           
-           android:textColor="#000"
-           android:textSize="17sp" />
-   </RelativeLayout>
-   
-   
+            		</RelativeLayout>
+     				      				
+      				<RelativeLayout
+      				    android:id="@+id/unfinished_rlayout_position"
+            			android:layout_width="fill_parent"
+            			android:layout_height="wrap_content"
+            			android:gravity="center_vertical"
+            			android:background="@drawable/diary_item"
+            			android:onClick="onClickAchePosition" >
+            			<TextView
+            			    android:id="@+id/unfinished_tv_title3"
+        					android:layout_width="120dp" 
+        					android:layout_height="wrap_content"
+        					android:layout_centerVertical="true"
+        					android:padding="8dp" 
+        					android:text="@string/select_position"
+        					android:textSize="17sp"		
+							android:textColor="#000" />      
+						<TextView
+            		        android:id="@+id/unfinished_tv_position"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:padding="8dp"
+            		        android:layout_toRightOf="@id/unfinished_tv_title3"
+            		        android:layout_marginLeft="40dp"
+            		        android:layout_centerVertical="true"
+            		        android:layout_toLeftOf="@+id/unfinished_arrow3"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"
+            		        android:gravity="right"/> 
+						<ImageView
+						    android:id="@id/unfinished_arrow3"
+            				android:layout_width="wrap_content"
+        					android:layout_height="wrap_content"        	     	
+        					android:scaleType="matrix"
+        					android:layout_centerVertical="true"
+        					android:layout_alignParentRight="true"
+        					android:src="@drawable/diary_arrow" /> 					
+      				</RelativeLayout>
+      				
+      				<RelativeLayout
+      				    android:id="@+id/unfinished_rlayout_ache_type"
+            			android:layout_width="fill_parent"
+            			android:layout_height="wrap_content"
+            			android:gravity="center_vertical"
+            			android:onClick="onClickAcheType" 
+            			android:background="@drawable/diary_item" >
+            			<TextView
+        					android:id="@+id/unfinished_tv_title4"
+        					android:layout_width="120dp" 
+        					android:layout_height="wrap_content"
+        					android:layout_centerVertical="true"
+        					android:padding="8dp" 
+        					android:text="@string/select_ache_type"
+        					android:textSize="17sp"		
+							android:textColor="#000" />  
+						<TextView
+            		        android:id="@+id/unfinished_tv_ache_type"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:padding="8dp"
+            		        android:layout_toRightOf="@id/unfinished_tv_title4"
+            		        android:layout_marginLeft="40dp"
+            		        android:layout_centerVertical="true"
+            		        android:layout_toLeftOf="@+id/unfinished_arrow4"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"
+            		        android:gravity="right"/>     
+						<ImageView
+						    android:id="@id/unfinished_arrow4"
+            				android:layout_width="wrap_content"
+        					android:layout_height="wrap_content"        	     	
+        					android:scaleType="matrix"
+        					android:layout_centerVertical="true"
+        					android:layout_alignParentRight="true"
+        					android:src="@drawable/diary_arrow" /> 					
+      				</RelativeLayout>
+      				
+      				<RelativeLayout
+      				    android:id="@+id/unfinished_rlayout_ache_degree"
+            			android:layout_width="fill_parent"
+            			android:layout_height="wrap_content"
+            			android:gravity="center_vertical"
+            			android:onClick="onClickAcheDegree"
+            			android:background="@drawable/diary_item" >
+            			<TextView
+        					android:id="@+id/unfinished_tv_title5"
+        					android:layout_width="120dp" 
+        					android:layout_height="wrap_content"
+        					android:layout_centerVertical="true"
+        					android:padding="8dp" 
+        					android:text="@string/select_ache_degree"
+        					android:textSize="17sp"		
+							android:textColor="#000" /> 
+						<TextView
+            		        android:id="@+id/unfinished_tv_ache_degree"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:padding="8dp"
+            		        android:layout_toRightOf="@id/unfinished_tv_title5"
+            		        android:layout_marginLeft="40dp"
+            		        android:layout_centerVertical="true"
+            		        android:layout_toLeftOf="@+id/unfinished_arrow5"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"
+            		        android:gravity="right"/> 
+						<ImageView
+						    android:id="@id/unfinished_arrow5"
+            				android:layout_width="wrap_content"
+        					android:layout_height="wrap_content"        	     	
+        					android:scaleType="matrix"
+        					android:layout_centerVertical="true"
+        					android:layout_alignParentRight="true"
+        					android:src="@drawable/diary_arrow" />      					
+      				</RelativeLayout>
+      				
+      				<RelativeLayout
+      				    android:id="@+id/unfinished_rlayout_activity"
+            			android:layout_width="fill_parent"
+            			android:layout_height="wrap_content"
+            			android:gravity="center_vertical"
+            			android:onClick="onClickActivity"
+            			android:background="@drawable/diary_item" >
+            			<TextView
+        					android:id="@+id/unfinished_tv_title6"
+        					android:layout_width="wrap_content" 
+        					android:layout_height="wrap_content"
+        					android:layout_centerVertical="true"
+        					android:padding="8dp" 
+        					android:text="@string/select_activity"
+        					android:textSize="17sp"		
+							android:textColor="#000" /> 
+						<TextView
+            		        android:id="@+id/unfinished_tv_activity"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:padding="8dp"
+            		        android:layout_toRightOf="@id/unfinished_tv_title6"
+            		        android:layout_marginLeft="40dp"
+            		        android:layout_centerVertical="true"
+            		        android:layout_toLeftOf="@+id/unfinished_arrow6"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"
+            		        android:gravity="right"/> 
+						<ImageView
+						    android:id="@id/unfinished_arrow6"
+            				android:layout_width="wrap_content"
+        					android:layout_height="wrap_content"        	     	
+        					android:scaleType="matrix"
+        					android:layout_centerVertical="true"
+        					android:layout_alignParentRight="true"
+        					android:src="@drawable/diary_arrow" />      					
+      				</RelativeLayout>
+      				
+      				
+      				<RelativeLayout
+      				    android:id="@+id/unfinished_rlayout_companion"
+            			android:layout_width="match_parent"
+            			android:layout_height="wrap_content"           			
+            			android:clickable="true"
+            			android:background="@drawable/diary_last_item" 
+            			android:onClick="onClickCompanion"
+            			android:paddingBottom="6dp">
+            			<TextView
+        					android:id="@+id/unfinished_tv_title8"
+        					android:layout_width="wrap_content"  
+        					android:layout_height="wrap_content"
+        					android:layout_marginRight="25dp"
+        					android:paddingTop="8dp"
+        					android:paddingLeft="8dp"
+        					android:paddingBottom="2dp"
+        					android:text="@string/select_companion"
+        					android:textSize="17sp"		
+							android:textColor="#000" />  
+						<TextView
+            		        android:id="@+id/unfinished_tv_companion"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:layout_below="@id/unfinished_tv_title8"
+            		        android:layout_marginRight="25dp"
+            		        android:paddingLeft="8dp"
+            		        android:paddingBottom="2dp"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/orange"/>     
+						<ImageView
+						    android:id="@+id/unfinished_arrow7"
+            				android:layout_width="wrap_content"
+        					android:layout_height="wrap_content"        	     	
+        					android:scaleType="matrix"
+        					android:layout_centerVertical="true"
+        					android:layout_alignParentRight="true"
+        					android:src="@drawable/diary_arrow" /> 				
+      				</RelativeLayout>
+      				
+      				  
+    <!-- 主要信息结束*********************************************************************** -->
     </LinearLayout>
     </ScrollView>
 </RelativeLayout>

@@ -7,7 +7,7 @@
     
 	<!-- 头部的标题栏*********************************************************************** -->
 
-  <!--   <RelativeLayout
+   <RelativeLayout
         android:id="@+id/analysis_layout_top"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -34,86 +34,10 @@
             android:textStyle="bold" />
         
 
-    </RelativeLayout> --> 
+    </RelativeLayout> 
 
 
-    <!--   <LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"  >
-		
-        <RelativeLayout
-      		android:id="@+id/analysis_rlayout_period"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center_vertical"
-            android:background="@drawable/diary_single_item"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:onClick="onClickPeriod">
-            
-            <TextView
-                android:id="@+id/analysis_tv_time"
-        		android:layout_width="wrap_content" 
-        		android:layout_height="wrap_content"
-        		android:layout_centerVertical="true"
-        		android:padding="8dp" 
-        		android:text="三个月"
-        		android:textSize="13sp"		
-				android:textColor="#000" />  
-			<TextView
-                android:id="@+id/analysis_tv_record"
-            	android:layout_width="match_parent"
-            	android:layout_height="wrap_content"
-            	android:padding="6dp"
-            	android:layout_toRightOf="@id/analysis_tv_time"
-            	android:layout_centerVertical="true"
-            	android:layout_toLeftOf="@+id/analysis_arrow1"
-            	android:textSize="13sp" 
-            	android:text="3次"
-            	android:textColor="@color/orange"
-            	android:gravity="right"/>    
-			<ImageView
-			    android:id="@id/analysis_arrow1"
-            	android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"        	     	
-        		android:scaleType="matrix"
-        		android:layout_centerVertical="true"
-        		android:layout_alignParentRight="true"
-        		android:src="@drawable/diary_arrow" /> 					
-      	</RelativeLayout>
- 			
- 		<RelativeLayout
-      		android:id="@+id/analysis_rlayout_style"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:background="@drawable/diary_single_item"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:onClick="onClickStyle">
-            
-            <TextView
-                android:id="@+id/analysis_tv_style"
-        		android:layout_width="wrap_content" 
-        		android:layout_height="wrap_content"
-        		android:layout_centerVertical="true"
-        		android:padding="8dp" 
-        		android:text="列表"
-        		android:textSize="13sp"		
-				android:textColor="#000" />  
-  
-			<ImageView
-			    android:id="@+id/analysis_arrow2"
-            	android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"        	     	
-        		android:scaleType="matrix"
-        		android:layout_centerVertical="true"
-        		android:layout_alignParentRight="true"
-        		android:src="@drawable/diary_arrow" /> 					
-      </RelativeLayout>
-	</LinearLayout>-->
+     
 	
     <!-- 主内容界面 *********************************************************************** -->
     

@@ -101,7 +101,7 @@ public class HomeActivity extends Activity {
 	public void onClickNewHeadDiary(View v) {   
 		if (HeadacheDiaryDAO.getInstance().getIfLastDiaryComplete()){			
 			HeadacheDiaryDAO.getInstance().setHeadacheDiarySelected(new HeadacheDiary());
-			Intent intent = new Intent (HomeActivity.this,StartTimeQuestion.class);	
+			Intent intent = new Intent (HomeActivity.this,UnfinishedDiaryActivity.class);	
 			startActivity(intent);
 		}
 		else{

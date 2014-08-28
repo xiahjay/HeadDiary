@@ -42,6 +42,10 @@
             android:label="@string/title_activity_home" >
         </activity>
         <activity
+            android:name="com.example.headdiary.UnfinishedDiaryActivity"
+            android:label="@string/title_activity_home" >
+        </activity>
+        <activity
             android:name="com.example.headdiary.HeadDiaryFormActivity"
             android:label="@string/title_activity_new_head_diary" >
         </activity>
