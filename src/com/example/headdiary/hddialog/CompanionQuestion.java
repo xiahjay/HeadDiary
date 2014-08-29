@@ -104,9 +104,7 @@ public class CompanionQuestion extends Activity {
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_incomplete_input), Toast.LENGTH_SHORT).show();
 		else
 			{
-			finish();
-			Intent intent = new Intent (CompanionQuestion.this,ProdromeQuestion.class);	
-			startActivity(intent);
+			finish();			
 			}
 	}
 	

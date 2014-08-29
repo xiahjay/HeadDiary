@@ -119,7 +119,7 @@ public class StartTimeQuestion extends Activity {
 		else
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_start_time), Toast.LENGTH_SHORT).show();	
 		
-		Intent intent = new Intent (StartTimeQuestion.this,EndTimeQuestion.class);	
+		Intent intent = new Intent (StartTimeQuestion.this,AchePositionQuestion.class);	
 		startActivity(intent);
 		
 		finish();

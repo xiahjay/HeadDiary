@@ -87,7 +87,8 @@ public class DBManager {
 		}
 		else{
 			HeadacheDiaryDAO.getInstance().setLastHeadacheDiary(headacheDiary);
-			hint="保存成功!日志尚不完整，记得及时补全";
+			headacheDiary.makeAidDiagnosis();
+			hint="保存成功!日志尚不完整，记得及时补全"+headacheDiary.getStrAidDiagnosis();
 		}
 		
 		Gson gson=new Gson();
