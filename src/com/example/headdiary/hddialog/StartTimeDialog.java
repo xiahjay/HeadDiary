@@ -20,6 +20,7 @@ import com.example.headdiary.R.id;
 import com.example.headdiary.R.layout;
 import com.example.headdiary.R.menu;
 import com.example.headdiary.R.string;
+import com.example.headdiary.UnfinishedDiaryActivity;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.util.TimeManager;
@@ -35,6 +36,7 @@ public class StartTimeDialog extends Activity {
 	private WheelView mins;
 	private HeadacheDiary headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
 	long nowTimeinMs=0;
+	private UnfinishedDiaryActivity mUnfinishedDiaryActivity;
 	
 	
 	@Override
@@ -100,7 +102,7 @@ public class StartTimeDialog extends Activity {
 
 	
 	public void onClickCancel(View v){
-		finish();
+		finish();		
 	}
 	
 	public void onClickConfirm(View v){

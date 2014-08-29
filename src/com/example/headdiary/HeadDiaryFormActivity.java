@@ -58,7 +58,7 @@ public class HeadDiaryFormActivity extends Activity {
 		R.id.newdiary_tv_drug0,R.id.newdiary_tv_drug1,R.id.newdiary_tv_drug2,R.id.newdiary_tv_drug3,R.id.newdiary_tv_drug4	
 	};
 	
-	private TextView tvStartTime,tvEndTime,tvPosition,tvType,tvDegree,tvActivity,tvProdrome,tvCompanion,tvPrecipiating,tvMitigating;
+	private TextView tvStartTime,tvEndTime,tvPosition,tvType,tvDegree,tvActivity,tvCompanion,tvPrecipiating,tvMitigating,tvDiagnoseResult;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,11 +74,11 @@ public class HeadDiaryFormActivity extends Activity {
 		tvPosition=(TextView)findViewById(R.id.newdiary_tv_position);
 		tvType=(TextView)findViewById(R.id.newdiary_tv_ache_type);
 		tvDegree=(TextView)findViewById(R.id.newdiary_tv_ache_degree);
-		tvActivity=(TextView)findViewById(R.id.newdiary_tv_activity);
-		tvProdrome=(TextView)findViewById(R.id.newdiary_tv_prodrome);
+		tvActivity=(TextView)findViewById(R.id.newdiary_tv_activity);		
 		tvCompanion=(TextView)findViewById(R.id.newdiary_tv_companion);
 		tvPrecipiating=(TextView)findViewById(R.id.newdiary_tv_precipiating);
 		tvMitigating=(TextView)findViewById(R.id.newdiary_tv_mitigating);
+		tvDiagnoseResult=(TextView)findViewById(R.id.newdiary_diagnose_result);
 		
 		for (int i=0;i<DRUG_MAX_NUM;i++){
 			tvDrug[i]=(TextView)findViewById(tvDrugID[i]);
@@ -299,6 +299,11 @@ public class HeadDiaryFormActivity extends Activity {
 		String mText,tempstr;
 		int ans,i,length;
 		
+		//diagnose result
+				headacheDiary.makeAidDiagnosis();
+				String diagnoseResult=headacheDiary.getStrAidDiagnosis();
+				tvDiagnoseResult.setText(diagnoseResult);
+		
 		//StartTime
 		String startTime=headacheDiary.getStartTime();
 		if (startTime!=null)
@@ -352,7 +357,7 @@ public class HeadDiaryFormActivity extends Activity {
     	tvActivity.setText(activity);
     		
     	//Prodrome
-    	String prodrome="";
+    	/*String prodrome="";
     	Boolean completeProdromeFlag=true;
     	for (i=0;i<StrConfig.HDProdromeCategory.length;i++){
     		ans=headacheDiary.getProdrome(i);
@@ -383,7 +388,7 @@ public class HeadDiaryFormActivity extends Activity {
     	}
     	else{
     		tvProdrome.setVisibility(View.GONE);
-    	}
+    	}*/
     	
     	//Companion
     	String companion="";

@@ -135,7 +135,17 @@
             android:theme="@style/MyDialogStyle" >
         </activity>
         <activity
+            android:name="com.example.headdiary.hddialog.MitigatingQuestion"
+            android:label="@string/title_activity_mitigating_dialog"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+        <activity
             android:name="com.example.headdiary.hddialog.PrecipiatingDialog"
+            android:label="@string/title_activity_precipiating_dialog"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
+         <activity
+            android:name="com.example.headdiary.hddialog.PrecipiatingQuestion"
             android:label="@string/title_activity_precipiating_dialog"
             android:theme="@style/MyDialogStyle" >
         </activity>

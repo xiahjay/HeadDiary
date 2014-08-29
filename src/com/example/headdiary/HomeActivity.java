@@ -106,7 +106,7 @@ public class HomeActivity extends Activity {
 		}
 		else{
 			HeadacheDiaryDAO.getInstance().setHeadacheDiarySelected((HeadacheDiary) HeadacheDiaryDAO.getInstance().getLastHeadacheDiary().clone());
-			Intent intent = new Intent (HomeActivity.this,HeadDiaryFormActivity.class);	
+			Intent intent = new Intent (HomeActivity.this,UnfinishedDiaryActivity.class);	
 			startActivity(intent);	
 		}	
 	}

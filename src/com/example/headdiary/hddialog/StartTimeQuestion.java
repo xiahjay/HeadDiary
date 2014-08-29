@@ -5,10 +5,12 @@ import java.util.Calendar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.headdiary.HomeActivity;
 import com.example.headdiary.R;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
@@ -35,13 +37,24 @@ public class StartTimeQuestion extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start_time_dialog);		
 		btnCancel=(Button)findViewById(R.id.start_btn_cancel);
-		btnCancel.setText("放弃");
+		btnCancel.setText("放弃记录");
 		
 		btnConfirm=(Button)findViewById(R.id.start_btn_confirm);
 		btnConfirm.setText("确定");
 		initDateTime();
 		
 	}
+	
+	@Override  
+	public boolean onKeyDown(int keyCode, KeyEvent event) {  
+	    if(keyCode == KeyEvent.KEYCODE_BACK){  
+	        //捕捉返回键
+	    	finish();
+			Intent intent = new Intent (StartTimeQuestion.this,HomeActivity.class);	
+			startActivity(intent);}
+            return true;
+	    
+	    } 
 	
 	private void initDateTime(){
 		Calendar c;
@@ -98,6 +111,8 @@ public class StartTimeQuestion extends Activity {
 	
 	public void onClickCancel(View v){
 		finish();
+		Intent intent = new Intent (StartTimeQuestion.this,HomeActivity.class);	
+		startActivity(intent);
 	}
 	
 	public void onClickConfirm(View v){

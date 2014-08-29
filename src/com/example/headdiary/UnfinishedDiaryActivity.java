@@ -18,6 +18,7 @@ import com.example.headdiary.hddialog.ActivityAggravateDialog;
 import com.example.headdiary.hddialog.AddDrugDialog;
 import com.example.headdiary.hddialog.CompanionDialog;
 import com.example.headdiary.hddialog.EndTimeDialog;
+import com.example.headdiary.hddialog.EndTimeQuestion;
 import com.example.headdiary.hddialog.MitigatingDialog;
 import com.example.headdiary.hddialog.PrecipiatingDialog;
 import com.example.headdiary.hddialog.ProdromeDialog;
@@ -54,8 +55,15 @@ public class UnfinishedDiaryActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_unfinished_diary);
-		Intent intent = new Intent (UnfinishedDiaryActivity.this,StartTimeQuestion.class);	
-		startActivity(intent);
+		//Boolean ifComplete=headacheDiary.getIfComplete();
+		if (HeadacheDiaryDAO.getInstance().getIfLastDiaryComplete())
+		{Intent intent = new Intent (UnfinishedDiaryActivity.this,StartTimeQuestion.class);	
+		startActivity(intent);}
+		else {
+			Intent intent = new Intent (UnfinishedDiaryActivity.this,EndTimeQuestion.class);	
+			startActivity(intent);
+		}
+		
 		headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
 		findView();
 	}
@@ -73,8 +81,11 @@ public class UnfinishedDiaryActivity extends Activity {
 	@Override
 	public void onResume() {
 	    super.onResume();  // Always call the superclass method first
-	          
+	    if(headacheDiary.getEndTime()!=null)
+	    {finish();}
 	    getMyDiaryInfo(); 
+	    
+	    
 	}
 	
 	@Override  
@@ -99,8 +110,9 @@ public class UnfinishedDiaryActivity extends Activity {
 	}
 	
 	public void onClickSave(View v){
-		if (HeadacheDiaryDAO.getInstance().getIfSelectedDiaryChanged())
+		//if (HeadacheDiaryDAO.getInstance().getIfSelectedDiaryChanged())
 			saveAndBack();
+		//else {finish();}
 	}
 	
 	public void onClickStartTime(View v){
@@ -219,9 +231,12 @@ public class UnfinishedDiaryActivity extends Activity {
 		String mText,tempstr;
 		int ans,i,length;
 		//diagnose result
+		Boolean ifComplete=headacheDiary.getIfComplete();
+		if(ifComplete){
+			
 		headacheDiary.makeAidDiagnosis();
 		String diagnoseResult=headacheDiary.getStrAidDiagnosis();
-		tvDiagnoseResult.setText(diagnoseResult);
+		tvDiagnoseResult.setText(diagnoseResult);}
 		//StartTime
 		String startTime=headacheDiary.getStartTime();
 		if (startTime!=null)

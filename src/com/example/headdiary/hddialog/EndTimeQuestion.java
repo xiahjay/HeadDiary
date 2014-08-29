@@ -93,8 +93,7 @@ public class EndTimeQuestion extends Activity {
 	public void onClickAcheNotFinished(View v){
 		headacheDiary.setEndTime(null);
 		finish();
-		Intent intent = new Intent (EndTimeQuestion.this,AchePositionQuestion.class);	
-		startActivity(intent);
+		
 	}
 	
 	public void onClickConfirm(View v){
@@ -114,7 +113,7 @@ public class EndTimeQuestion extends Activity {
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_end_time_early), Toast.LENGTH_SHORT).show();	
 		else
 			{headacheDiary.setEndTime(TimeManager.getStrDateTime(endTime));
-		Intent intent = new Intent (EndTimeQuestion.this,AchePositionQuestion.class);	
+		Intent intent = new Intent (EndTimeQuestion.this,PrecipiatingQuestion.class);	
 		startActivity(intent);
 		finish();
 			}
