@@ -1,5 +1,6 @@
 package com.example.headdiary.hddialog;
 
+import com.example.headdiary.HeadDiaryFormActivity;
 import com.example.headdiary.R;
 import com.example.headdiary.R.id;
 import com.example.headdiary.R.layout;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,6 +49,18 @@ public class PrecipiatingQuestion extends Activity {
 
 	}
 
+	@Override  
+	public boolean onKeyDown(int keyCode, KeyEvent event) {  
+	    if(keyCode == KeyEvent.KEYCODE_BACK){  
+	        //²¶×½·µ»Ø¼ü
+	    	Intent intent = new Intent (PrecipiatingQuestion.this,HeadDiaryFormActivity.class);	
+			startActivity(intent);
+			finish();
+			}
+            return true;
+	    
+	    } 
+	
 	private void initView(){
 		//checkbox and editbox
 		etElse=(EditText)findViewById(R.id.precipiating_et_else);
@@ -83,7 +97,9 @@ public class PrecipiatingQuestion extends Activity {
 
 	}
 	
-	public void onClickCancel(View v){
+	public void onClickCancel(View v){		
+		Intent intent = new Intent (PrecipiatingQuestion.this,HeadDiaryFormActivity.class);	
+		startActivity(intent);
 		finish();
 	}
 	

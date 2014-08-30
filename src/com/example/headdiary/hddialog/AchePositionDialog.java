@@ -71,6 +71,7 @@ public class AchePositionDialog extends Activity {
 	
 	public void onClickCancel(View v){
 		finish();
+		
 	}
 	
 	public void onClickConfirm(View v){

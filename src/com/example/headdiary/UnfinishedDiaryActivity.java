@@ -28,6 +28,7 @@ import com.example.headdiary.util.AllExit;
 import com.example.headdiary.util.DBManager;
 import com.example.headdiary.util.TimeManager;
 import com.example.headdiary.util.ToastManager;
+import com.example.headdiary.ActivityManager;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -65,7 +66,7 @@ public class UnfinishedDiaryActivity extends Activity {
 		}
 		
 		headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
-		findView();
+		findView();		
 	}
 	private void findView() {
 		// TODO Auto-generated method stub
@@ -83,7 +84,8 @@ public class UnfinishedDiaryActivity extends Activity {
 	    super.onResume();  // Always call the superclass method first
 	    if(headacheDiary.getEndTime()!=null)
 	    {finish();}
-	    getMyDiaryInfo(); 
+	    getMyDiaryInfo();
+	    //ActivityManager.getInstance().addActivity(this);
 	    
 	    
 	}
@@ -231,12 +233,11 @@ public class UnfinishedDiaryActivity extends Activity {
 		String mText,tempstr;
 		int ans,i,length;
 		//diagnose result
-		Boolean ifComplete=headacheDiary.getIfComplete();
-		if(ifComplete){
-			
+		//Boolean ifComplete=headacheDiary.getIfComplete();
+		//if(ifComplete){			
 		headacheDiary.makeAidDiagnosis();
 		String diagnoseResult=headacheDiary.getStrAidDiagnosis();
-		tvDiagnoseResult.setText(diagnoseResult);}
+		tvDiagnoseResult.setText(diagnoseResult);
 		//StartTime
 		String startTime=headacheDiary.getStartTime();
 		if (startTime!=null)

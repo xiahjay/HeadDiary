@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.headdiary.ActivityManager;
 import com.example.headdiary.HomeActivity;
 import com.example.headdiary.R;
+import com.example.headdiary.UnfinishedDiaryActivity;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.util.TimeManager;
@@ -29,6 +31,7 @@ public class StartTimeQuestion extends Activity {
 	long nowTimeinMs=0;	
 	private Button btnCancel;
 	private Button btnConfirm;
+	private UnfinishedDiaryActivity mUnfinishedDiaryActivity;
 	
 	
 	
@@ -38,9 +41,9 @@ public class StartTimeQuestion extends Activity {
 		setContentView(R.layout.activity_start_time_dialog);		
 		btnCancel=(Button)findViewById(R.id.start_btn_cancel);
 		btnCancel.setText("放弃记录");
-		
 		btnConfirm=(Button)findViewById(R.id.start_btn_confirm);
-		btnConfirm.setText("确定");
+		btnConfirm.setText("下一步");
+		
 		initDateTime();
 		
 	}
@@ -50,8 +53,12 @@ public class StartTimeQuestion extends Activity {
 	    if(keyCode == KeyEvent.KEYCODE_BACK){  
 	        //捕捉返回键
 	    	finish();
-			Intent intent = new Intent (StartTimeQuestion.this,HomeActivity.class);	
-			startActivity(intent);}
+	    	Intent intent = new Intent();  
+			intent.setClass(StartTimeQuestion.this, HomeActivity.class);  
+			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//设置不要刷新将要跳到的界面  
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以关掉所要到的界面中间的activity  
+			startActivity(intent);  
+			}
             return true;
 	    
 	    } 
@@ -110,9 +117,14 @@ public class StartTimeQuestion extends Activity {
 
 	
 	public void onClickCancel(View v){
-		finish();
-		Intent intent = new Intent (StartTimeQuestion.this,HomeActivity.class);	
-		startActivity(intent);
+		finish();	
+		Intent intent = new Intent();  
+		intent.setClass(StartTimeQuestion.this, HomeActivity.class);  
+		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//设置不要刷新将要跳到的界面  
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以关掉所要到的界面中间的activity  
+		startActivity(intent);  
+		//ActivityManager.getInstance().exit();
+		//mUnfinishedDiaryActivity.finish();
 	}
 	
 	public void onClickConfirm(View v){

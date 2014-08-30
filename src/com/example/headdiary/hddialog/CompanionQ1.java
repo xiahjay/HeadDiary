@@ -3,76 +3,44 @@ package com.example.headdiary.hddialog;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.headdiary.HomeActivity;
 import com.example.headdiary.R;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
 
-public class CompanionQuestion extends Activity {
+public class CompanionQ1 extends Activity {
 	private static final int RADIO_NUM=4;
-	private static final int CATEGORY_NUM=10;
+	private static final int CATEGORY_NUM=2;
 	private  RadioGroup[] radioGroup=new RadioGroup[CATEGORY_NUM];  
 	private  RadioButton[][] radioBtn=new RadioButton[CATEGORY_NUM][RADIO_NUM];
 	private static final int[] radioGroupID={
-		R.id.companion_radioGroup0,R.id.companion_radioGroup1,R.id.companion_radioGroup2,R.id.companion_radioGroup3,
-		R.id.companion_radioGroup4,R.id.companion_radioGroup5,R.id.companion_radioGroup6,R.id.companion_radioGroup7,
-		R.id.companion_radioGroup8,R.id.companion_radioGroup9
+		R.id.companion_radioGroup0_q1,R.id.companion_radioGroup1_q1
 		};
 	private static final int[][] radioID={
-		{R.id.companion_radio0_0,R.id.companion_radio0_1,R.id.companion_radio0_2,R.id.companion_radio0_3},
-		{R.id.companion_radio1_0,R.id.companion_radio1_1,R.id.companion_radio1_2,R.id.companion_radio1_3},
-		{R.id.companion_radio2_0,R.id.companion_radio2_1,R.id.companion_radio2_2,R.id.companion_radio2_3},
-		{R.id.companion_radio3_0,R.id.companion_radio3_1,R.id.companion_radio3_2,R.id.companion_radio3_3},
-		{R.id.companion_radio4_0,R.id.companion_radio4_1,R.id.companion_radio4_2,R.id.companion_radio4_3},
-		{R.id.companion_radio5_0,R.id.companion_radio5_1,R.id.companion_radio5_2,R.id.companion_radio5_3},
-		{R.id.companion_radio6_0,R.id.companion_radio6_1,R.id.companion_radio6_2,R.id.companion_radio6_3},
-		{R.id.companion_radio7_0,R.id.companion_radio7_1,R.id.companion_radio7_2,R.id.companion_radio7_3},
-		{R.id.companion_radio8_0,R.id.companion_radio8_1,R.id.companion_radio8_2,R.id.companion_radio8_3},
-		{R.id.companion_radio9_0,R.id.companion_radio9_1,R.id.companion_radio9_2,R.id.companion_radio9_3}
+		{R.id.companion_radio0_0_q1,R.id.companion_radio0_1_q1,R.id.companion_radio0_2_q1,R.id.companion_radio0_3_q1},
+		{R.id.companion_radio1_0_q1,R.id.companion_radio1_1_q1,R.id.companion_radio1_2_q1,R.id.companion_radio1_3_q1},
 		};
 	
 	private TextView[] tv=new TextView[CATEGORY_NUM];
 	private static final int[] tvID={
-		R.id.companion_tv0,R.id.companion_tv1,R.id.companion_tv2,R.id.companion_tv3,
-		R.id.companion_tv4,R.id.companion_tv5,R.id.companion_tv6,R.id.companion_tv7,
-		R.id.companion_tv8,R.id.companion_tv9
+		R.id.companion_tv0_q1,R.id.companion_tv1_q1
 		};
-	private Button btnConfirm;
 	
 	private HeadacheDiary headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_companion_dialog);
-		btnConfirm=(Button)findViewById(R.id.companion_btn_confirm);
-		btnConfirm.setText("完成");
+		setContentView(R.layout.activity_companion_q1);
+		
 		initView();
 	}
-	
-	@Override  
-	public boolean onKeyDown(int keyCode, KeyEvent event) {  
-	    if(keyCode == KeyEvent.KEYCODE_BACK){  
-	        //捕捉返回键
-	    	finish();
-	    	Intent intent = new Intent();  
-			intent.setClass(CompanionQuestion.this, HomeActivity.class);  
-			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//设置不要刷新将要跳到的界面  
-			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以关掉所要到的界面中间的activity  
-			startActivity(intent);  
-			}
-            return true;
-	    
-	    } 
 	
 	private void initView(){
 		//RadioGroup & TextView

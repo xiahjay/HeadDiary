@@ -13,6 +13,7 @@ import com.example.headdiary.data.StrConfig;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,6 +43,18 @@ public class MitigatingQuestion extends Activity {
 
 	}
 
+	@Override  
+	public boolean onKeyDown(int keyCode, KeyEvent event) {  
+	    if(keyCode == KeyEvent.KEYCODE_BACK){  
+	        //²¶×½·µ»Ø¼ü
+	    	Intent intent = new Intent (MitigatingQuestion.this,HeadDiaryFormActivity.class);	
+			startActivity(intent);
+			finish();
+			}
+            return true;
+	    
+	    } 
+	
 	private void initView(){
 		//checkbox and editbox
 		etElse=(EditText)findViewById(R.id.mitigating_et_else);
@@ -79,6 +92,8 @@ public class MitigatingQuestion extends Activity {
 	}
 	
 	public void onClickCancel(View v){
+		Intent intent = new Intent (MitigatingQuestion.this,HeadDiaryFormActivity.class);	
+		startActivity(intent);
 		finish();
 	}
 	

@@ -129,6 +129,11 @@
             android:label="@string/title_activity_companion0_diaglog"
             android:theme="@style/MyDialogStyle" >
         </activity>
+          <activity
+            android:name="com.example.headdiary.hddialog.CompanionQ1"
+            android:label="@string/title_activity_companion0_diaglog"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
         <activity
             android:name="com.example.headdiary.hddialog.MitigatingDialog"
             android:label="@string/title_activity_mitigating_dialog"
