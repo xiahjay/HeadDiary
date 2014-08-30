@@ -99,6 +99,11 @@ public class CompanionDialog extends Activity {
 		}
 	}
 	
+	public void onClickBefore(View v){
+		
+		finish();
+	}
+	
 	public void onClickConfirm(View v){
 		int i,answer,value;
 		Boolean flag=true;//flag=false, the input is incomplete.

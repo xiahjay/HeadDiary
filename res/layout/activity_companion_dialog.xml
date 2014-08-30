@@ -623,10 +623,20 @@
         android:layout_marginBottom="15dp"
         android:layout_marginTop="33dp"
         android:layout_centerHorizontal="true" >
-
+        <Button
+            android:id="@+id/companion_btn_before"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/btn_style_white"
+            android:gravity="center"
+            android:onClick="onClickBefore"
+            android:text="@string/companion_before"
+            android:textColor="#333"
+            android:textSize="16sp" />
         <Button
             android:id="@+id/companion_btn_cancel"
-            android:layout_width="120dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:background="@drawable/btn_style_white"
@@ -637,7 +647,7 @@
             android:textSize="16sp" />
         <Button
             android:id="@+id/companion_btn_confirm"
-            android:layout_width="120dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:background="@drawable/btn_style_green"

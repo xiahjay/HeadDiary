@@ -47,6 +47,7 @@ public class CompanionQuestion extends Activity {
 		R.id.companion_tv8,R.id.companion_tv9
 		};
 	private Button btnConfirm;
+	private Button btnBefore;
 	
 	private HeadacheDiary headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
 	
@@ -56,6 +57,8 @@ public class CompanionQuestion extends Activity {
 		setContentView(R.layout.activity_companion_dialog);
 		btnConfirm=(Button)findViewById(R.id.companion_btn_confirm);
 		btnConfirm.setText("完成");
+		btnBefore=(Button)findViewById(R.id.companion_btn_before);
+		btnBefore.setText("上一步");
 		initView();
 	}
 	
@@ -108,6 +111,12 @@ public class CompanionQuestion extends Activity {
 				headacheDiary.setCompanion(i, 0);
 			}
 		}
+	}
+	
+public void onClickBefore(View v){
+	Intent intent = new Intent (CompanionQuestion.this,ActivityAggravateQuestion.class);	
+	startActivity(intent);
+		finish();
 	}
 	
 	public void onClickConfirm(View v){
