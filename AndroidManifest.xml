@@ -179,6 +179,10 @@
             android:name="com.example.headdiary.MainAnalysisActivity"
             android:label="@string/title_activity_main_analysis" >
         </activity>
+         <activity
+            android:name="com.example.headdiary.GraphicActivity"
+            android:label="@string/title_activity_main_analysis" >
+        </activity>
           <activity
             android:name="com.example.headdiary.UIADemoActivity"
             android:label="@string/title_activity_main_analysis" >

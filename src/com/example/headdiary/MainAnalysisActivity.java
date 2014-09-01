@@ -6,6 +6,8 @@ import com.example.headdiary.data.HeadacheAnalysis;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
 import com.example.headdiary.data.UserDAO;
+import com.example.headdiary.hddialog.AchePositionQuestion;
+import com.example.headdiary.hddialog.StartTimeQuestion;
 import com.example.headdiary.util.DocumentAdapter;
 import com.example.headdiary.util.TimeManager;
 
@@ -14,6 +16,7 @@ import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -83,7 +86,10 @@ public class MainAnalysisActivity extends Activity {
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						if (UserDAO.getInstance().getAnalysisStyle()!=which){
-							UserDAO.getInstance().setAnalysisStyle(which);
+							UserDAO.getInstance().setListStyle(which);
+							Intent intent = new Intent (MainAnalysisActivity.this,GraphicActivity.class);	
+							startActivity(intent);
+							finish();
 						}
 						dialog.dismiss();
 					}

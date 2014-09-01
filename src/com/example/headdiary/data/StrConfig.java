@@ -44,6 +44,7 @@ public class StrConfig {
 	public static String TimePeriod[];
 	public static String DocumentStyle[];
 	public static String AnalysisStyle[];
+	public static String GraphicStyle[];
 	//temp
 	public static String analysisAnsArray[];
 	public static String msgArray1[];
@@ -106,6 +107,7 @@ public class StrConfig {
 			TimePeriod=new String[]{"一月内","三月内","近半年","全部"};
 			DocumentStyle=new String[]{"列表","日历"};
 			AnalysisStyle=new String[]{"统计表","趋势图"};
+			GraphicStyle=new String[]{"趋势图","统计表"};
 			
 			
 			//temp

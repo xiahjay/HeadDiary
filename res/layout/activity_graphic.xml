@@ -1,0 +1,433 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"   
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+    
+    <!-- 头部的标题栏*********************************************************************** -->
+
+   <RelativeLayout
+        android:id="@+id/graphic_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/title_bar" >
+
+        <Button
+            android:id="@+id/graphic_btn_back"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_style_back"
+            android:text="@string/action_back"
+            android:textColor="#fff"
+            android:textSize="14sp" 
+            android:onClick="onClickBack"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/title_analysis"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        
+
+    </RelativeLayout> 
+ <!-- 头部的标题栏结束*********************************************************************** -->    
+      <LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="44dp"  >
+		
+        <RelativeLayout
+      		android:id="@+id/graphic_rlayout_period"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:background="@drawable/diary_single_item"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            
+            <TextView
+                android:id="@+id/graphic_tv_time"
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:layout_centerVertical="true"
+        		android:padding="8dp" 
+        		android:text="三个月"
+        		android:textSize="13sp"		
+				android:textColor="#000" />  
+			<TextView
+                android:id="@+id/graphic_tv_record"
+            	android:layout_width="match_parent"
+            	android:layout_height="wrap_content"
+            	android:padding="6dp"
+            	android:layout_toRightOf="@id/graphic_tv_time"
+            	android:layout_centerVertical="true"
+            	android:layout_toLeftOf="@+id/graphic_arrow1"
+            	android:textSize="13sp" 
+            	android:text="3次"
+            	android:textColor="@color/orange"
+            	android:gravity="right"/>    
+			<ImageView
+			    android:id="@id/graphic_arrow1"
+            	android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"        	     	
+        		android:scaleType="matrix"
+        		android:layout_centerVertical="true"
+        		android:layout_alignParentRight="true"
+        		android:src="@drawable/diary_arrow" /> 					
+      	</RelativeLayout>
+ 			
+ 		<RelativeLayout
+      		android:id="@+id/graphic_rlayout_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:background="@drawable/diary_single_item"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="onClickStyle">
+            
+            <TextView
+                android:id="@+id/graphic_tv_style"
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:layout_centerVertical="true"
+        		android:padding="8dp" 
+        		android:text="列表"
+        		android:textSize="13sp"		
+				android:textColor="#000" />  
+  
+			<ImageView
+			    android:id="@+id/graphic_arrow2"
+            	android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"        	     	
+        		android:scaleType="matrix"
+        		android:layout_centerVertical="true"
+        		android:layout_alignParentRight="true"
+        		android:src="@drawable/diary_arrow" /> 					
+      </RelativeLayout>
+	</LinearLayout>  
+<!-- ****表格内容开始************************************************************************************ -->
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="98dp"
+        android:foregroundGravity="center_horizontal" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp" >
+<!-- **内容一开始***************************************************************************************** -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/templl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"                     
+                    android:layout_marginLeft="20dp">
+
+                   
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="7dp" >
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="时间-疼痛程度"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                        
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">                       
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/line_cross" />
+                        <ImageView
+                            android:id="@+id/arrow1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:layout_alignParentRight="true"
+                            android:background="@drawable/arrow1" />
+                         </LinearLayout>
+                        
+                        <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView                           
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前显示日期: "
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/text1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2014-09-01"
+                            android:textColor="@color/blue"
+                            android:textSize="15sp" />
+                        </LinearLayout>
+                     </LinearLayout>
+                  
+                     
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linechart1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:visibility="gone" 
+                     android:orientation="vertical">
+               </LinearLayout>
+            </LinearLayout>
+<!-- **内容一结束***************************************************************************************** -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/windll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="20dp" >
+                  
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="7dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="时间-疼痛持续时间"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">                       
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/line_cross" />
+                        <ImageView
+                            android:id="@+id/arrow2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/arrow1" />
+                         </LinearLayout>
+
+                        <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView                           
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前显示日期: "
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2014-09-01"
+                            android:textColor="@color/blue"
+                            android:textSize="15sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linechart2"
+                    android:layout_width="wrap_content"                   
+                    android:visibility="gone"
+                    android:layout_height="200dp"
+                    android:orientation="vertical" >
+                </LinearLayout>
+            </LinearLayout>
+<!-- ***内容2结束*************************************************************************************** -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/rainll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="20dp"  >
+                   
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="7dp" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="每月-疼痛次数"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">                       
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/line_cross" />
+                        <ImageView
+                            android:id="@+id/arrow3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/arrow1" />
+                         </LinearLayout>
+
+                         <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView                           
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前截止月份: "
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/text3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8月"
+                            android:textColor="@color/blue"
+                            android:textSize="15sp" />
+                      </LinearLayout>
+                      
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linechart3"
+                    android:layout_width="wrap_content"                  
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:layout_height="120dp" >
+                </LinearLayout>
+                
+            </LinearLayout>
+<!-- *内容三结束*************************************************************************************** -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/wetll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                     android:layout_marginLeft="20dp" >
+              
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="7dp" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="每月-止痛药服用天数"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                       <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">                       
+                        <ImageView                            
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/line_cross" />
+                        <ImageView
+                            android:id="@+id/arrow4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/arrow1" />
+                         </LinearLayout>
+                         
+                        <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView                           
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前截止月份: "
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/text4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8月"
+                            android:textColor="@color/blue"
+                            android:textSize="15sp" />
+                      </LinearLayout>
+                      
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linechart4"
+                    android:layout_width="wrap_content"                   
+                    android:visibility="gone" 
+                    android:orientation="vertical"
+                    android:layout_height="120dp">
+               </LinearLayout>
+               
+            </LinearLayout>
+<!-- *内容四结束*************************************************************************************** -->  
+            
+     </LinearLayout>             
+    </ScrollView>
+
+</RelativeLayout>

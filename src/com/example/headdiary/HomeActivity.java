@@ -154,8 +154,13 @@ public class HomeActivity extends Activity {
 	public void onClickAnalysis(View v) {   
 		if (isLoadingData())
 			return;
-		Intent intent = new Intent (HomeActivity.this,MainAnalysisActivity.class);			
-		startActivity(intent);	
+		if(UserDAO.getInstance().getListStyle()==0)
+		{Intent intent = new Intent (HomeActivity.this,MainAnalysisActivity.class);			
+		startActivity(intent);}
+		if(UserDAO.getInstance().getListStyle()==1)
+		{Intent intent = new Intent (HomeActivity.this,GraphicActivity.class);			
+		startActivity(intent);}
+			
 	}
 	
 	public void onClickOnlineDoctor(View v) {  

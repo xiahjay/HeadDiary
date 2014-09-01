@@ -61,8 +61,8 @@
     <string name="prompt_save_imcomplete">保存成功,但是该次头痛日志尚不完整，请尽快完成本次记录</string>
     <string name="prompt_prodrome_choice_hint">请逐一核对是否出现以下头痛先兆</string>
     <string name="prompt_companion_choice_hint">请逐一核对是否出现以下伴随症状</string>
-    <string name="relief_method_title">缓解方法</string>
-    <string name="diagnose_result_title">诊断结果</string>
+    <string name="relief_method_title">临床指南依据</string>
+    <string name="diagnose_result_title">缓解方法建议</string>
     <string name="existed_infor">已填写信息</string>
     <string name="companion_before">取消</string>
     

@@ -5,13 +5,14 @@ import java.util.Date;
 
 public class UserDAO {
 	private static UserDAO mInstance;
-	private int timePeriod,documentStyle,analysisStyle,language;
+	private int timePeriod,documentStyle,analysisStyle,graphicStyle,language,listStyle;
 	private User user,loginUser,registerUser;
 	private Boolean loginFromWeb;
 	
 	public UserDAO(){
 		timePeriod=3;
-		documentStyle=analysisStyle=language=0;
+		listStyle=documentStyle=analysisStyle=language=0;
+		graphicStyle=1;
 		loginFromWeb=false;
 	}
 	
@@ -39,8 +40,20 @@ public class UserDAO {
 		this.timePeriod = timePeriod;
 	}
 
+	public int getListStyle() {
+		return listStyle;
+	}
+
+	public void setListStyle(int listStyle) {
+		this.listStyle = listStyle;
+	}
+	
 	public int getDocumentStyle() {
 		return documentStyle;
+	}
+	
+	public int getGraphicStyle() {
+		return graphicStyle;
 	}
 
 	public void setDocumentStyle(int documentStyle) {
