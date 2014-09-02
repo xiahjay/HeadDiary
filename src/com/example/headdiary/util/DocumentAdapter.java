@@ -60,7 +60,7 @@ public class DocumentAdapter extends BaseAdapter{
             viewHolder.icon = (ImageView) v.findViewById(R.id.listitem_document_icon);
             v.setTag(viewHolder);
         }
-
+		
 		// fill data
 	    DocumentViewHolder holder = (DocumentViewHolder) v.getTag();
 	    holder.firstLine.setText((CharSequence) mDataArrayList.get(position).get(ArrayKey_FirstLine));

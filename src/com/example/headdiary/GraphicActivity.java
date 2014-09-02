@@ -2,6 +2,8 @@ package com.example.headdiary;
 
 
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Timer;
@@ -26,6 +28,7 @@ import com.example.headdiary.data.UserDAO;
 import com.example.headdiary.hddialog.AchePositionQuestion;
 import com.example.headdiary.hddialog.SelectMonthDialog;
 import com.example.headdiary.hddialog.StartTimeQuestion;
+import com.example.headdiary.util.TimeManager;
 
 
 
@@ -65,10 +68,15 @@ public class GraphicActivity extends Activity {
 	    private XYSeries series2;  
 	    private XYMultipleSeriesDataset mDataset2;  
 	    private GraphicalView chart2; 
+	    private XYSeries series3;  
+	    private XYMultipleSeriesDataset mDataset3;  
+	    private GraphicalView chart3; 
 	    private XYMultipleSeriesRenderer renderer1;  
 	    private XYMultipleSeriesRenderer renderer2; 
+	    private XYMultipleSeriesRenderer renderer3; 
 	    private Context context1; 
 	    private Context context2; 
+	    private Context context3;
 	    private TextView tvStyle;
 	    private Dialog dialog;
 		private RadioGroup radiogroup;
@@ -94,6 +102,8 @@ public class GraphicActivity extends Activity {
         mDataset1 = new XYMultipleSeriesDataset();
         series2 = new XYSeries(title); 
         mDataset2 = new XYMultipleSeriesDataset();
+        series3 = new XYSeries(title); 
+        mDataset3 = new XYMultipleSeriesDataset();
         tvStyle=(TextView)findViewById(R.id.graphic_tv_style);
 		tvStyle.setText(StrConfig.AnalysisStyle[1]);
 		tvRecord=(TextView)findViewById(R.id.graphic_tv_record);
@@ -115,6 +125,7 @@ public class GraphicActivity extends Activity {
     	 tvRecord.setText(month);
     	 initGraph1();
     	 initGraph2();
+    	 initGraph3();
     }
  
     private void init(){
@@ -225,7 +236,7 @@ public class GraphicActivity extends Activity {
        
         
         
-        ArrayList<Graphic> getDegree = getDegreeByDay();
+        ArrayList<Graphic> getDegree = getGraphicByDay();
        
         int[] monthDegree=new int[31];
         for (int i=0;i<getDegree.size();i++){
@@ -235,14 +246,9 @@ public class GraphicActivity extends Activity {
         	Log.i("day"+i, "day="+Integer.parseInt(tDegree.getDate()));
         }
         for (int i=0;i<monthDegree.length;i++){
-        	series1.add(i, monthDegree[i]);
-        	//Log.i("result"+i, Integer.toString(monthDegree[i]));
+        	series1.add(i, monthDegree[i]);        	
         }
-        	
-        
-        //创建一个数据集的实例，这个数据集将被用来创建图表  
-       // mDataset1 = new XYMultipleSeriesDataset(); 
-        //series1 = new XYSeries(title);
+        	              
           
         //将点集添加到这个数据集中  
         mDataset1.addSeries(series1);  
@@ -259,11 +265,11 @@ public class GraphicActivity extends Activity {
         //生成图表  
         chart1 = ChartFactory.getLineChartView(context1, mDataset1, renderer1);  
           
-        //将图表添加到布局中去  
+        //先将原来的布局去掉，再加入新的布局
         layout.removeAllViewsInLayout();
         layout.addView(chart1, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));  
           }   
-    
+
     private void initGraph2() {
 		// TODO Auto-generated method stub
     	context2 = getApplicationContext();  
@@ -272,49 +278,90 @@ public class GraphicActivity extends Activity {
         //series = new XYSeries(title); 
         mDataset2.removeSeries(series2);
         series2.clear();
-       
-        //这个类用来放置曲线上的所有点，是一个点的集合，根据这些点画出曲线         
-        //ArrayList<Float> weightList= new  ArrayList<Float>();
-       // String id= WeightDAO.getInstance().getUseId();
-        //weightList=mUserDataManager.getWeightData(id);
+        
        
         
-        for(int i=0; i<24; i++){  
-        	float x=i;
-        	float y;
-        	if(i==3){
-        	  y=8;
-             	}
-        	else if(i==10){
-        	  y=10;
-        	}
-        	else{
-        	 y=0;
-        	}
-        	series2.add(x, y);
-        	}
         
-        //创建一个数据集的实例，这个数据集将被用来创建图表  
-       // mDataset = new XYMultipleSeriesDataset();  
+        ArrayList<Graphic> getDuration = getGraphicByDay();
+       
+        int[] monthDuration=new int[31];
+        for (int i=0;i<getDuration.size();i++){
+        	Graphic tDegree= getDuration.get(i);
+        	
+        	monthDuration[Integer.parseInt(tDegree.getDate())]=(int) tDegree.getInterval();
+        	Log.i("day"+i, "day="+Integer.parseInt(tDegree.getDate()));
+        }
+        for (int i=0;i<monthDuration.length;i++){
+        	series2.add(i, monthDuration[i]);        	
+        }
+        	              
           
         //将点集添加到这个数据集中  
         mDataset2.addSeries(series2);  
+        Log.d("addSeries", "addSeries Method is executed");
           
         //以下都是曲线的样式和属性等等的设置，renderer相当于一个用来给图表做渲染的句柄  
         int color = Color.BLUE;  
-        BarChart.Type type = BarChart.Type.DEFAULT;
         PointStyle style = PointStyle.DIAMOND;  
         renderer2 = buildRenderer(color, style, true);  
           
         //设置好图表的样式  
-        setChartSettings(renderer2, "X", "Y", 0, 12, 0, 10, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer2, "X", "Y", 0, 31, 0, 24, Color.BLACK, Color.BLACK);  
           
         //生成图表  
-        chart2 = ChartFactory.getBarChartView(context2, mDataset2, renderer2,type);  
+        chart2 = ChartFactory.getLineChartView(context2, mDataset2, renderer2);  
           
-        //将图表添加到布局中去  
+        //先将原来的布局去掉，再加入新的布局
+        layout.removeAllViewsInLayout();
         layout.addView(chart2, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));  
           }   
+    
+    private void initGraph3() {
+		// TODO Auto-generated method stub
+    	context3 = getApplicationContext();  
+        
+       LinearLayout layout = (LinearLayout)findViewById(R.id.linechart3);  
+        //series = new XYSeries(title); 
+        mDataset3.removeSeries(series3);
+        series3.clear();
+        
+       
+        ArrayList<Graphic> getDegree = getGraphicByDay();
+        
+        int[] monthDegree=new int[31];
+        for (int i=0;i<getDegree.size();i++){
+        	Graphic tDegree= getDegree.get(i);
+        	
+        	monthDegree[Integer.parseInt(tDegree.getDate())]=tDegree.getDegree();
+        	Log.i("day"+i, "day="+Integer.parseInt(tDegree.getDate()));
+        }
+        for (int i=0;i<monthDegree.length;i++){
+        	series3.add(i, monthDegree[i]);        	
+        }
+        	              
+          
+        //将点集添加到这个数据集中  
+        mDataset3.addSeries(series3);  
+        Log.d("addSeries", "addSeries Method is executed");
+          
+        //以下都是曲线的样式和属性等等的设置，renderer相当于一个用来给图表做渲染的句柄  
+        BarChart.Type type = BarChart.Type.DEFAULT;
+        int color = Color.BLUE;  
+        PointStyle style = PointStyle.DIAMOND;  
+        renderer3 = buildRenderer(color, style, true);  
+          
+        //设置好图表的样式  
+        setChartSettings(renderer3, "X", "Y", 0, 31, 0, 24, Color.BLACK, Color.BLACK);  
+          
+        //生成图表  
+        chart3 = ChartFactory.getBarChartView(context3, mDataset3, renderer3,type);  
+          
+        //先将原来的布局去掉，再加入新的布局
+        layout.removeAllViewsInLayout();
+        layout.addView(chart3, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));  
+          }   
+    
+    
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -426,29 +473,38 @@ public class GraphicActivity extends Activity {
 		startActivity(intent);	
     }
     
-    private ArrayList<Graphic> getDegreeByDay(){
+    private ArrayList<Graphic> getGraphicByDay(){
     	ArrayList<HeadacheDiary> headacheDiaries=HeadacheDiaryDAO.getInstance().getDocumentHDiaryList();
     	String month=UserDAO.getInstance().getSelectMonth();
    	    month=month.substring(0,7);
-   	 Log.i("monthjym", "month="+month);
+   	  Log.i("monthjym", "month="+month);
    	    ArrayList<Graphic> graphics = new  ArrayList<Graphic>() ;
    	   
     	for(int i=0;i<headacheDiaries.size();i++){
     		HeadacheDiary headacheDiary=headacheDiaries.get(i);
     		String startTime=headacheDiary.getStartTime();        
-    		 String startTimeShort=startTime.substring(0,7);
+    		String startTimeShort=startTime.substring(0,7);
+    		Calendar end, start;
+    		 
     		 
     	// Log.i("startTImejym"+i, "tday="+startTimeShort);
    		 
     		if(startTimeShort.equals(month)){
     		  String tDay = startTime.substring(8,10); 
     		  Log.i("startTImejym"+i, "tday="+tDay);
-    		  Graphic addGraphic = new Graphic(headacheDiary.getDegree(), tDay);
-    		  graphics.add(addGraphic);
-    		 // dayList.add(tDay);
-    		 // degreeList.add( headacheDiary.getDegree());
-    		  Log.i("graphicday"+i, "addGraphic.getDate()"+addGraphic.getDate());
-    		
+    		  //Graphic addGraphic = new Graphic(headacheDiary.getDegree(), tDay);
+    		  //graphics.add(addGraphic);
+      		 // Log.i("graphicday"+i, "addGraphic.getDate()"+addGraphic.getDate());
+    		//读取头痛程度结束
+      		String endTime=headacheDiary.getEndTime();  
+      		end=TimeManager.parseStrDateTime(endTime);
+      		start=TimeManager.parseStrDateTime(startTime);
+      		long interval = end.getTimeInMillis()-start.getTimeInMillis();
+      		long hour= interval/3600000;
+      		
+      		Graphic addGraphic = new Graphic(headacheDiary.getDegree(), tDay,hour);
+  		    graphics.add(addGraphic);
+      		
     		}
     		
     		
