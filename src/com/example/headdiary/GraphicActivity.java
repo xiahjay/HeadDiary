@@ -16,6 +16,11 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+
+import com.example.headdiary.data.Graphic;
+import com.example.headdiary.data.HeadacheAnalysis;
+import com.example.headdiary.data.HeadacheDiary;
+import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
 import com.example.headdiary.data.UserDAO;
 import com.example.headdiary.hddialog.AchePositionQuestion;
@@ -68,6 +73,8 @@ public class GraphicActivity extends Activity {
 	    private Dialog dialog;
 		private RadioGroup radiogroup;
 		private TextView tvRecord;
+		//ArrayList<String> dayList= new  ArrayList<String>();
+		//ArrayList<Integer> degreeList= new  ArrayList<Integer>();
 		
 	   // private TextView tvMonth; 
 	   
@@ -91,6 +98,7 @@ public class GraphicActivity extends Activity {
 		tvStyle.setText(StrConfig.AnalysisStyle[1]);
 		tvRecord=(TextView)findViewById(R.id.graphic_tv_record);
 		
+		
 		//tvMonth=(TextView)findViewById(R.id.aa);
 		//tvMonth.setText(StrConfig.MonthStyle[7]);
         
@@ -101,11 +109,12 @@ public class GraphicActivity extends Activity {
     protected void onResume(){
     	super.onResume();
     	Log.d("onResume", "onResume Method is executed");
-    	initGraph1();
-    	 initGraph2();
+    	
     	 String month=UserDAO.getInstance().getSelectMonth();
     	 month=month.substring(0,7);
     	 tvRecord.setText(month);
+    	 initGraph1();
+    	 initGraph2();
     }
  
     private void init(){
@@ -212,29 +221,32 @@ public class GraphicActivity extends Activity {
         //series = new XYSeries(title); 
         mDataset1.removeSeries(series1);
         series1.clear();
-       
-        //这个类用来放置曲线上的所有点，是一个点的集合，根据这些点画出曲线         
-        //ArrayList<Float> weightList= new  ArrayList<Float>();
-       // String id= WeightDAO.getInstance().getUseId();
-        //weightList=mUserDataManager.getWeightData(id);
+        
        
         
-        for(int i=0; i<24; i++){        	
-        	float a=i;
-        	float b;
-        	if(a<10)
-        	{ b=a;}
-        	else {
-        	 b = 8;
-        	}
-        	series1.add(a, b);
-        	}
+        
+        ArrayList<Graphic> getDegree = getDegreeByDay();
+       
+        int[] monthDegree=new int[31];
+        for (int i=0;i<getDegree.size();i++){
+        	Graphic tDegree= getDegree.get(i);
+        	
+        	monthDegree[Integer.parseInt(tDegree.getDate())]=tDegree.getDegree();
+        	Log.i("day"+i, "day="+Integer.parseInt(tDegree.getDate()));
+        }
+        for (int i=0;i<monthDegree.length;i++){
+        	series1.add(i, monthDegree[i]);
+        	//Log.i("result"+i, Integer.toString(monthDegree[i]));
+        }
+        	
         
         //创建一个数据集的实例，这个数据集将被用来创建图表  
-       // mDataset = new XYMultipleSeriesDataset();  
+       // mDataset1 = new XYMultipleSeriesDataset(); 
+        //series1 = new XYSeries(title);
           
         //将点集添加到这个数据集中  
         mDataset1.addSeries(series1);  
+        Log.d("addSeries", "addSeries Method is executed");
           
         //以下都是曲线的样式和属性等等的设置，renderer相当于一个用来给图表做渲染的句柄  
         int color = Color.BLUE;  
@@ -242,12 +254,13 @@ public class GraphicActivity extends Activity {
         renderer1 = buildRenderer(color, style, true);  
           
         //设置好图表的样式  
-        setChartSettings(renderer1, "X", "Y", 0, 24, 0, 10, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer1, "X", "Y", 0, 31, 0, 10, Color.BLACK, Color.BLACK);  
           
         //生成图表  
         chart1 = ChartFactory.getLineChartView(context1, mDataset1, renderer1);  
           
         //将图表添加到布局中去  
+        layout.removeAllViewsInLayout();
         layout.addView(chart1, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));  
           }   
     
@@ -294,7 +307,7 @@ public class GraphicActivity extends Activity {
         renderer2 = buildRenderer(color, style, true);  
           
         //设置好图表的样式  
-        setChartSettings(renderer2, "X", "Y", 0, 24, 0, 10, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer2, "X", "Y", 0, 12, 0, 10, Color.BLACK, Color.BLACK);  
           
         //生成图表  
         chart2 = ChartFactory.getBarChartView(context2, mDataset2, renderer2,type);  
@@ -368,8 +381,11 @@ public class GraphicActivity extends Activity {
         renderer.setYLabelsAlign(Align.RIGHT);  
         renderer.setPointSize((float) 8);  
         renderer.setShowLegend(false);  
-        renderer.setPanLimits(new double[]{0,31,0,200});
-        renderer.setZoomLimits(new double[]{0,31,0,200});
+        //renderer.setPanLimits(new double[]{0,31,0,200});
+       // renderer.setZoomLimits(new double[]{0,12,0,10});
+        renderer.setClickEnabled(false);
+        renderer.setZoomButtonsVisible(false);
+        renderer.setFitLegend(false);
         
     }  
     
@@ -409,6 +425,46 @@ public class GraphicActivity extends Activity {
     	Intent intent = new Intent (GraphicActivity.this,SelectMonthDialog.class);	
 		startActivity(intent);	
     }
+    
+    private ArrayList<Graphic> getDegreeByDay(){
+    	ArrayList<HeadacheDiary> headacheDiaries=HeadacheDiaryDAO.getInstance().getDocumentHDiaryList();
+    	String month=UserDAO.getInstance().getSelectMonth();
+   	    month=month.substring(0,7);
+   	 Log.i("monthjym", "month="+month);
+   	    ArrayList<Graphic> graphics = new  ArrayList<Graphic>() ;
+   	   
+    	for(int i=0;i<headacheDiaries.size();i++){
+    		HeadacheDiary headacheDiary=headacheDiaries.get(i);
+    		String startTime=headacheDiary.getStartTime();        
+    		 String startTimeShort=startTime.substring(0,7);
+    		 
+    	// Log.i("startTImejym"+i, "tday="+startTimeShort);
+   		 
+    		if(startTimeShort.equals(month)){
+    		  String tDay = startTime.substring(8,10); 
+    		  Log.i("startTImejym"+i, "tday="+tDay);
+    		  Graphic addGraphic = new Graphic(headacheDiary.getDegree(), tDay);
+    		  graphics.add(addGraphic);
+    		 // dayList.add(tDay);
+    		 // degreeList.add( headacheDiary.getDegree());
+    		  Log.i("graphicday"+i, "addGraphic.getDate()"+addGraphic.getDate());
+    		
+    		}
+    		
+    		
+    		
+    	}
+    	
+    	
+    	return graphics;
+    	
+    	
+    	
+    	
+    	
+    	
+    }
+    
     
     }
     

@@ -56,13 +56,13 @@ public class XYMultipleSeriesRenderer extends DefaultRenderer {
   /** The Y axis text labels. Y轴的文本标签。*/
   private Map<Integer, Map<Double, String>> mYTextLabels = new LinkedHashMap<Integer, Map<Double, String>>();
   /** A flag for enabling or not the pan on the X axis. 一个标记,使X轴上的平移。(X轴是否被平移)*/
-  private boolean mPanXEnabled = true;
+  private boolean mPanXEnabled = false;
   /** A flag for enabling or not the pan on the Y axis. 一个标记,使Y轴上的平移。(Y轴是否被平移)*/
-  private boolean mPanYEnabled = true;
+  private boolean mPanYEnabled = false;
   /** A flag for enabling or not the zoom on the X axis. 一个标记,使X轴上的缩放。(X轴是否被缩放)*/
-  private boolean mZoomXEnabled = true;
+  private boolean mZoomXEnabled = false;
   /** A flag for enabling or not the zoom on the Y axis . 一个标记,使Y轴上的缩放。(Y轴是否被缩放)*/
-  private boolean mZoomYEnabled = true;
+  private boolean mZoomYEnabled = false;
   /** The spacing between bars, in bar charts. 在条形图中，俩条形图之间的间距。*/
   private double mBarSpacing = 0;
   /** The margins colors. 边缘的颜色。*/
