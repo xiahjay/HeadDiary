@@ -3,6 +3,7 @@ package com.example.headdiary;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,11 +18,16 @@ import org.achartengine.renderer.XYSeriesRenderer;
 
 import com.example.headdiary.data.StrConfig;
 import com.example.headdiary.data.UserDAO;
+import com.example.headdiary.hddialog.AchePositionQuestion;
+import com.example.headdiary.hddialog.SelectMonthDialog;
+import com.example.headdiary.hddialog.StartTimeQuestion;
 
 
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,8 +41,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 
@@ -56,6 +65,11 @@ public class GraphicActivity extends Activity {
 	    private Context context1; 
 	    private Context context2; 
 	    private TextView tvStyle;
+	    private Dialog dialog;
+		private RadioGroup radiogroup;
+		private TextView tvRecord;
+		
+	   // private TextView tvMonth; 
 	   
 	     
 	      
@@ -75,6 +89,10 @@ public class GraphicActivity extends Activity {
         mDataset2 = new XYMultipleSeriesDataset();
         tvStyle=(TextView)findViewById(R.id.graphic_tv_style);
 		tvStyle.setText(StrConfig.AnalysisStyle[1]);
+		tvRecord=(TextView)findViewById(R.id.graphic_tv_record);
+		
+		//tvMonth=(TextView)findViewById(R.id.aa);
+		//tvMonth.setText(StrConfig.MonthStyle[7]);
         
         
     }
@@ -85,6 +103,9 @@ public class GraphicActivity extends Activity {
     	Log.d("onResume", "onResume Method is executed");
     	initGraph1();
     	 initGraph2();
+    	 String month=UserDAO.getInstance().getSelectMonth();
+    	 month=month.substring(0,7);
+    	 tvRecord.setText(month);
     }
  
     private void init(){
@@ -358,8 +379,7 @@ public class GraphicActivity extends Activity {
     
     public void onClickStyle(View v){
 		new AlertDialog.Builder(this)
-		.setTitle("显示方式")
-		
+		.setTitle("显示方式")		
 		.setSingleChoiceItems(StrConfig.AnalysisStyle, UserDAO.getInstance().getGraphicStyle(),
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
@@ -372,7 +392,24 @@ public class GraphicActivity extends Activity {
 						dialog.dismiss();
 					}
 		}).show();
+		
 	}	
+   /*public void onClickRight(View v){
+    if(UserDAO.getInstance().getMonth()<12)	{
+    	int a=UserDAO.getInstance().getMonth();
+    	UserDAO.getInstance().setMonth(a+1);    	
+    	tvMonth.setText(StrConfig.MonthStyle[a+1]);
+       }
+    else 
+    	tvMonth.setText(StrConfig.MonthStyle[11]);
     
+    }*/
+    public void onClickMonth(View v){
+    	
+    	Intent intent = new Intent (GraphicActivity.this,SelectMonthDialog.class);	
+		startActivity(intent);	
+    }
     
-}
+    }
+    
+

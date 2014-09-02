@@ -54,6 +54,11 @@
             android:label="@string/title_activity_start_time_diaglog"
             android:theme="@style/MyDialogStyle" >
         </activity>
+        <activity
+            android:name="com.example.headdiary.hddialog.SelectMonthDialog"
+            android:label="@string/title_activity_start_time_diaglog"
+            android:theme="@style/MyDialogStyle" >
+        </activity>
          <activity
             android:name="com.example.headdiary.hddialog.StartTimeQuestion"
             android:label="@string/title_activity_start_time_diaglog"

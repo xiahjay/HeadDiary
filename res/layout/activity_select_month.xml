@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/start_linlayout_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:background="@drawable/dialog_bg"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:padding="5dp"
+            android:textColor="@color/orange"
+            android:textSize="22sp"
+            android:text="请选择月份" 
+            android:layout_marginBottom="15dp"
+            android:gravity="center"/> 
+            
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <com.speedven.pickview.widget.WheelView
+                android:id="@+id/select_wheel_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" 
+                android:padding="5dp"/>
+
+            <com.speedven.pickview.widget.WheelView
+                android:id="@+id/select_wheel_month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" 
+                android:padding="5dp"/>
+
+           
+        </LinearLayout>
+        
+       
+        
+		<LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"           
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="15dp"
+            android:layout_gravity="center_horizontal"
+             >
+            <Button
+              android:id="@+id/select_btn_cancel"
+              android:layout_width="120dp"
+              android:layout_height="wrap_content"
+              android:layout_marginRight="5dp"
+              android:text="@string/action_cancel"
+              android:textSize="16sp"
+              android:textColor="#333"
+              android:background="@drawable/btn_style_white"
+              android:gravity="center"
+              android:onClick="onClickCancel"             
+              />
+             
+            <Button
+              android:id="@+id/select_btn_confirm"
+              android:layout_width="120dp"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="5dp"
+              android:text="@string/action_confirm"
+              android:textSize="16sp"
+              android:textColor="#fff"
+              android:background="@drawable/btn_style_green"
+              android:gravity="center"
+              android:onClick="onClickConfirm"
+              />
+             
+            
+        </LinearLayout>
+
+    </LinearLayout>
+

@@ -45,6 +45,7 @@ public class StrConfig {
 	public static String DocumentStyle[];
 	public static String AnalysisStyle[];
 	public static String GraphicStyle[];
+	public static String MonthStyle[];
 	//temp
 	public static String analysisAnsArray[];
 	public static String msgArray1[];
@@ -107,6 +108,7 @@ public class StrConfig {
 			TimePeriod=new String[]{"一月内","三月内","近半年","全部"};
 			DocumentStyle=new String[]{"列表","日历"};
 			AnalysisStyle=new String[]{"统计表","趋势图"};
+			MonthStyle=new String[]{"2014年1月","2014年2月","2014年3月","2014年4月","2014年5月","2014年6月","2014年7月","2014年8月","2014年9月","2014年10月","2014年11月","2014年12月"};
 			GraphicStyle=new String[]{"趋势图","统计表"};
 			
 			
@@ -192,6 +194,7 @@ public class StrConfig {
 			TimePeriod=new String[]{"本月","近三月","近半年","全部"};
 			DocumentStyle=new String[]{"列表","日历"};
 			AnalysisStyle=new String[]{"统计表","趋势图"};
+			MonthStyle=new String[]{"2014年1月","2014年2月","2014年3月","2014年4月","2014年5月","2014年6月","2014年7月","2014年8月","2014年9月","2014年10月","2014年11月","2014年12月"};
 			
 			//temp
 			analysisAnsArray=new String[]{

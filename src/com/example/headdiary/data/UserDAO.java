@@ -3,17 +3,24 @@ package com.example.headdiary.data;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.security.auth.PrivateCredentialPermission;
+
+import android.R.string;
+
 public class UserDAO {
 	private static UserDAO mInstance;
-	private int timePeriod,documentStyle,analysisStyle,graphicStyle,language,listStyle;
+	private int timePeriod,documentStyle,analysisStyle,graphicStyle,language,listStyle,monthStyle;
 	private User user,loginUser,registerUser;
 	private Boolean loginFromWeb;
+	private String selectMonth;
 	
 	public UserDAO(){
 		timePeriod=3;
 		listStyle=documentStyle=analysisStyle=language=0;
+		monthStyle=7;
 		graphicStyle=1;
 		loginFromWeb=false;
+		selectMonth="2014-09";
 	}
 	
 	public static UserDAO getInstance(){
@@ -39,7 +46,23 @@ public class UserDAO {
 	public void setTimePeriod(int timePeriod) {
 		this.timePeriod = timePeriod;
 	}
+	
+	public int getMonth() {
+		return monthStyle;
+	}
 
+	public void setMonth(int monthStyle) {
+		this.monthStyle = monthStyle;
+	}
+
+	public String getSelectMonth() {
+		return selectMonth;
+	}
+
+	public void setSelectMonth(String selectMonth) {
+		this.selectMonth = selectMonth;
+	}
+	
 	public int getListStyle() {
 		return listStyle;
 	}
