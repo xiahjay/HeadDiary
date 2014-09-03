@@ -233,12 +233,12 @@ public class GraphicActivity extends Activity {
         mDataset1.removeSeries(series1);
         series1.clear();
         
-       
+       int xSeries = getXSeriesRange();
         
         
         ArrayList<Graphic> getDegree = getGraphicByDay();
        
-        int[] monthDegree=new int[31];
+        int[] monthDegree=new int[xSeries];
         for (int i=0;i<getDegree.size();i++){
         	Graphic tDegree= getDegree.get(i);
         	
@@ -246,7 +246,8 @@ public class GraphicActivity extends Activity {
         	Log.i("day"+i, "day="+Integer.parseInt(tDegree.getDate()));
         }
         for (int i=0;i<monthDegree.length;i++){
-        	series1.add(i, monthDegree[i]);        	
+        	if(i!=0)
+        	{series1.add(i, monthDegree[i]); }       	
         }
         	              
           
@@ -258,9 +259,15 @@ public class GraphicActivity extends Activity {
         int color = Color.BLUE;  
         PointStyle style = PointStyle.DIAMOND;  
         renderer1 = buildRenderer(color, style, true);  
-          
+        
+        int xRange=31;
+        if(xSeries==29){
+        	xRange=29;
+        }
+        
+        
         //设置好图表的样式  
-        setChartSettings(renderer1, "X", "Y", 0, 31, 0, 10, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer1, "X", "Y", 0,xRange, 0, 10, Color.BLACK, Color.BLACK);  
           
         //生成图表  
         chart1 = ChartFactory.getLineChartView(context1, mDataset1, renderer1);  
@@ -279,12 +286,12 @@ public class GraphicActivity extends Activity {
         mDataset2.removeSeries(series2);
         series2.clear();
         
-       
+        int xSeries = getXSeriesRange();
         
         
         ArrayList<Graphic> getDuration = getGraphicByDay();
        
-        int[] monthDuration=new int[31];
+        int[] monthDuration=new int[xSeries];
         for (int i=0;i<getDuration.size();i++){
         	Graphic tDegree= getDuration.get(i);
         	
@@ -292,7 +299,9 @@ public class GraphicActivity extends Activity {
         	Log.i("day"+i, "day="+Integer.parseInt(tDegree.getDate()));
         }
         for (int i=0;i<monthDuration.length;i++){
-        	series2.add(i, monthDuration[i]);        	
+        	if(i!=0){
+        	series2.add(i, monthDuration[i]);  }
+        	
         }
         	              
           
@@ -304,9 +313,14 @@ public class GraphicActivity extends Activity {
         int color = Color.BLUE;  
         PointStyle style = PointStyle.DIAMOND;  
         renderer2 = buildRenderer(color, style, true);  
+        //做一个简单的设置，防止大月时横坐标出现32的尴尬
+        int xRange=31;
+        if(xSeries==29){
+        	xRange=29;
+        }
           
         //设置好图表的样式  
-        setChartSettings(renderer2, "X", "Y", 0, 31, 0, 24, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer2, "X", "Y", 0, xRange, 0, 25, Color.BLACK, Color.BLACK);  
           
         //生成图表  
         chart2 = ChartFactory.getLineChartView(context2, mDataset2, renderer2);  
@@ -415,8 +429,8 @@ public class GraphicActivity extends Activity {
         renderer.setGridColor(Color.GRAY);  
         renderer.setXLabels(20);  
         renderer.setYLabels(10);  
-        renderer.setXTitle("日期"); 
-        renderer.setYTitle("体重");  
+        renderer.setXTitle(" "); 
+        renderer.setYTitle(" ");  
         renderer.setMarginsColor(Color.argb(0, 0xff, 0, 0));        
         renderer.setBackgroundColor(Color.WHITE);
         //renderer.setMarginsColor(Color.GRAY);
@@ -509,16 +523,24 @@ public class GraphicActivity extends Activity {
     		
     		
     		
-    	}
+              }
     	
     	
     	return graphics;
     	
-    	
-    	
-    	
-    	
-    	
+    	    }
+    
+    private int getXSeriesRange(){
+    	int xSeries=32;
+        String month=UserDAO.getInstance().getSelectMonth();
+        int a=Integer.parseInt(month.substring(5,7));
+        if(a==4||a==6||a==9||a==11){
+        	xSeries=31;
+        }else if (a==2){
+        	xSeries=29;
+        }
+          	
+    	return xSeries;
     }
     
     
