@@ -7,6 +7,7 @@ import com.example.headdiary.R.id;
 import com.example.headdiary.R.layout;
 import com.example.headdiary.R.menu;
 import com.example.headdiary.R.string;
+import com.example.headdiary.data.Diagnose;
 import com.example.headdiary.data.Drug;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
@@ -50,8 +51,8 @@ import android.widget.Toast;
 //display headacheDiarySelected in HeadacheDiaryDAO
 public class UnfinishedDiaryActivity extends Activity {
 	private HeadacheDiary headacheDiary;	
-	private TextView tvStartTime,tvPosition,tvType,tvDegree,tvActivity,tvCompanion,tvDiagnoseResult;
-	
+	private TextView tvStartTime,tvPosition,tvType,tvDegree,tvActivity,tvCompanion,tvDiagnoseResult, tvGuidelines;
+	Boolean flag=true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,8 +67,42 @@ public class UnfinishedDiaryActivity extends Activity {
 		}
 		
 		headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
-		findView();		
+		findView();	
+		initLayout();
 	}
+	
+	
+	private void initLayout() {
+		// TODO Auto-generated method stub
+		final TextView tv = (TextView)findViewById(R.id.un_guidelines);
+		final ImageView arrow = (ImageView) findViewById(R.id.un_arrow_all);
+		  //tv.setMovementMethod(ScrollingMovementMethod.getInstance());
+		 tv .setOnClickListener(new View.OnClickListener() {
+			
+			 @Override         
+			 public void onClick(View v) {
+			  //do something
+				 //Log.i("tv.getLineCount()",tv.getHeight()+"");
+				   if(flag){
+				    
+				     flag = false;
+				     arrow.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow2));
+				     tv.setEllipsize(null); // 展开
+				     tv.setSingleLine(flag);
+				    }else {
+				     flag = true;
+				     tv.setEllipsize(android.text.TextUtils.TruncateAt.END);  // 收缩
+				     tv.setLines(4);
+				     arrow.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow1));
+				    }
+				
+				// tv.setEllipsize(android.text.TextUtils.TruncateAt.END);
+				 //tv.setLines(4);
+			          }
+			      });			      			        		    	   
+			   
+	}
+	
 	private void findView() {
 		// TODO Auto-generated method stub
 		tvStartTime=(TextView)findViewById(R.id.unfinished_tv_start_time);		
@@ -77,6 +112,7 @@ public class UnfinishedDiaryActivity extends Activity {
 		tvActivity=(TextView)findViewById(R.id.unfinished_tv_activity);		
 		tvCompanion=(TextView)findViewById(R.id.unfinished_tv_companion);		
 		tvDiagnoseResult=(TextView)findViewById(R.id.un_diagnose_result);	
+		tvGuidelines=(TextView)findViewById(R.id.un_guidelines);
 	}
 
 	@Override
@@ -233,11 +269,18 @@ public class UnfinishedDiaryActivity extends Activity {
 		String mText,tempstr;
 		int ans,i,length;
 		//diagnose result
-		//Boolean ifComplete=headacheDiary.getIfComplete();
-		//if(ifComplete){			
 		headacheDiary.makeAidDiagnosis();
 		String diagnoseResult=headacheDiary.getStrAidDiagnosis();
-		tvDiagnoseResult.setText(diagnoseResult);
+		//StrConfig.HDSecondaryClassification[AidDiagnosis]
+		
+    //diagnose suggestion and guidelines
+		Diagnose diagnose = DBManager.getDiagnoseInfor(headacheDiary.getAidDiagnosis());
+		String suggestion = diagnose.getSuggestion();
+		String finalDiagnoseResult = diagnoseResult+"\n"+"建议的缓解方法为:"+suggestion;
+		tvDiagnoseResult.setText(finalDiagnoseResult);
+		
+		String guidelines = diagnose.getGuidelines();
+		tvGuidelines.setText(guidelines);
 		//StartTime
 		String startTime=headacheDiary.getStartTime();
 		if (startTime!=null)
