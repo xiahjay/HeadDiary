@@ -51,7 +51,9 @@
    		<LinearLayout
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
-        	android:orientation="vertical" >
+        	android:orientation="vertical"
+        	android:id="@+id/diary_form" >
+        	"
            
   <!--   头痛基本信息素等 ********************************************************************   -->
    <LinearLayout
@@ -100,26 +102,38 @@
  <!-- 诊断结果结束*********************************************************************** -->    
   <LinearLayout
    			    android:layout_width="fill_parent"
-   			    android:layout_height="150.0dip"
+   			    android:layout_height="wrap_content"
    			    android:layout_margin="10.0dip"
+   			    android:id="@+id/layout_guidelinesFrame"
    			    android:background="@drawable/publish_input_bg"
    			    android:orientation="vertical"
    			    android:padding="10.0dip" >
 
    			    <LinearLayout
+   			        android:id= "@+id/layout_guidelines"
    			        android:layout_width="fill_parent"
    			        android:layout_height="30.0dip"
    			        android:layout_marginTop="4.0dip"
-   			        android:orientation="horizontal" >
+   			        android:orientation="horizontal">
 
    			        <TextView
    			            android:layout_width="66.0dip"
-   			            android:layout_height="fill_parent"
+   			            android:layout_height="wrap_content"
    			            android:layout_weight="0.23"
    			            android:gravity="center"
    			            android:text="@string/relief_method_title"
    			            android:textColor="#ff646464"
    			            android:textSize="18.0sp" />
+
+   			        <ImageView
+   			            android:layout_marginTop="6dp"
+   			            android:id="@+id/arrow_all"
+   			            android:layout_width="wrap_content"
+   			            android:layout_height="wrap_content"
+   			            android:layout_alignParentRight="true"
+   			            android:gravity="center_vertical"
+   			            android:background="@drawable/arrow1" />
+   			        
    			    </LinearLayout>
 
    			    <View
@@ -130,7 +144,7 @@
    			    <TextView
    			        android:id="@+id/newdiary_guidelines"
    			        android:layout_width="fill_parent"
-   			        android:layout_height="80.0dip"
+   			        android:layout_height="wrap_content"
    			        android:layout_marginTop="5.0dip"
    			        android:background="#00ffffff"
    			        android:gravity="top"
@@ -138,8 +152,11 @@
    			        android:paddingRight="10.0dip"
    			        android:textColor="#ff3c3c3c"
    			        android:textColorHint="#ffc1c1c1"
-   			        android:textSize="14.0sp" />
-   			</LinearLayout>-
+   			        android:textSize="14.0sp" 
+   			        android:lines="4"
+   			        android:ellipsize="end"/>
+   			        
+   			</LinearLayout>
 
 
   <!--   缓解方法结束 ********************************************************************   -->

@@ -142,9 +142,9 @@
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_alignBottom="@id/newdiary_iv_head"
+         
           android:layout_marginLeft="15dp"
-          android:layout_toRightOf="@id/newdiary_iv_head"
+         
           android:text="@string/existed_infor"
           android:textAppearance="?android:attr/textAppearanceMedium"
           android:textColor="@color/orange" />

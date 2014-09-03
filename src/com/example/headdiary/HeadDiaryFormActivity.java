@@ -41,6 +41,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,13 +61,52 @@ public class HeadDiaryFormActivity extends Activity {
 	};
 	
 	private TextView tvStartTime,tvEndTime,tvPosition,tvType,tvDegree,tvActivity,tvCompanion,tvPrecipiating,tvMitigating,tvDiagnoseResult, tvGuidelines;
+	Boolean flag=true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_head_diary_form);
 		headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
 		findView();
+		initLayout();
+							    	 			  	
 	}
+	
+	
+
+	private void initLayout() {
+		// TODO Auto-generated method stub
+		final TextView tv = (TextView)findViewById(R.id.newdiary_guidelines);
+		  //tv.setMovementMethod(ScrollingMovementMethod.getInstance());
+		 tv .setOnClickListener(new View.OnClickListener() {
+			
+			 @Override         
+			 public void onClick(View v) {
+			  //do something
+				 //Log.i("tv.getLineCount()",tv.getHeight()+"");
+				   if(flag){
+				    
+				     flag = false;
+				     
+				     tv.setEllipsize(null); // Õ¹¿ª
+				     tv.setSingleLine(flag);
+				    }else {
+				     flag = true;
+				     tv.setEllipsize(android.text.TextUtils.TruncateAt.END);  // ÊÕËõ
+				     tv.setLines(4);
+				    }
+				
+				// tv.setEllipsize(android.text.TextUtils.TruncateAt.END);
+				 //tv.setLines(4);
+			          }
+			      });
+			       
+			        	 
+			    	   
+			   
+	}
+	
+
 
 	private void findView() {
 		// TODO Auto-generated method stub
