@@ -77,6 +77,7 @@ public class HeadDiaryFormActivity extends Activity {
 	private void initLayout() {
 		// TODO Auto-generated method stub
 		final TextView tv = (TextView)findViewById(R.id.newdiary_guidelines);
+		final ImageView arrow = (ImageView) findViewById(R.id.arrow_all);
 		  //tv.setMovementMethod(ScrollingMovementMethod.getInstance());
 		 tv .setOnClickListener(new View.OnClickListener() {
 			
@@ -87,13 +88,14 @@ public class HeadDiaryFormActivity extends Activity {
 				   if(flag){
 				    
 				     flag = false;
-				     
+				     arrow.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow2));
 				     tv.setEllipsize(null); // Õ¹¿ª
 				     tv.setSingleLine(flag);
 				    }else {
 				     flag = true;
 				     tv.setEllipsize(android.text.TextUtils.TruncateAt.END);  // ÊÕËõ
 				     tv.setLines(4);
+				     arrow.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow1));
 				    }
 				
 				// tv.setEllipsize(android.text.TextUtils.TruncateAt.END);
