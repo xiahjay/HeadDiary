@@ -10,10 +10,12 @@ import java.util.List;
 
 import javax.security.auth.PrivateCredentialPermission;
 
+
 import com.example.headdiary.MainActivity;
 import com.example.headdiary.MainDocumentActivity;
 import com.example.headdiary.R.string;
 import com.example.headdiary.data.Config;
+import com.example.headdiary.data.Diagnose;
 import com.example.headdiary.data.Drug;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
@@ -544,6 +546,7 @@ public class DBManager {
 		return headacheDiary;
 	}
 
+	
 	public static void updateAllHeadDiary(ArrayList<HeadacheDiary> hDiaryList) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db;
@@ -599,4 +602,23 @@ public class DBManager {
 		}
 		db.close();
 	}
+
+	public static Diagnose getDiagnoseInfor(int dignoseId){
+		
+		SQLiteDatabase db;
+		Diagnose diagnose=null;
+		
+		db= openDB(DBConfig.DB_FULLNAME);
+		Cursor mCursor=db.query(DBConfig.DB_TABLENAME,null, "DiagnoseId='"+dignoseId+"'", null, null, null, null);
+		if (mCursor!=null && mCursor.moveToFirst()){	
+			String suggestion = mCursor.getString(mCursor.getColumnIndex(DBConfig.DB_SUGGESTION));
+		    String guidelines = mCursor.getString(mCursor.getColumnIndex(DBConfig.DB_GUIDELINES));	
+		    diagnose = new Diagnose("", suggestion, guidelines);
+		}
+
+		db.close();
+		
+		return diagnose;
+	}
+
 }

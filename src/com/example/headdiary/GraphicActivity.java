@@ -71,13 +71,22 @@ public class GraphicActivity extends Activity {
 	    private XYSeries series3;  
 	    private XYMultipleSeriesDataset mDataset3;  
 	    private GraphicalView chart3; 
+	    private XYSeries series4;  
+	    private XYMultipleSeriesDataset mDataset4;  
+	    private GraphicalView chart4; 
 	    private XYMultipleSeriesRenderer renderer1;  
 	    private XYMultipleSeriesRenderer renderer2; 
 	    private XYMultipleSeriesRenderer renderer3; 
+	    private XYMultipleSeriesRenderer renderer4; 
 	    private Context context1; 
 	    private Context context2; 
 	    private Context context3;
+	    private Context context4;
 	    private TextView tvStyle;
+	    private TextView textTitle;
+	    private TextView text2;
+	    private TextView text3;
+	    private TextView text4;
 	    private Dialog dialog;
 		private RadioGroup radiogroup;
 		private TextView tvRecord;
@@ -104,9 +113,15 @@ public class GraphicActivity extends Activity {
         mDataset2 = new XYMultipleSeriesDataset();
         series3 = new XYSeries(title); 
         mDataset3 = new XYMultipleSeriesDataset();
+        series4 = new XYSeries(title); 
+        mDataset4 = new XYMultipleSeriesDataset();
         tvStyle=(TextView)findViewById(R.id.graphic_tv_style);
 		tvStyle.setText(StrConfig.AnalysisStyle[1]);
 		tvRecord=(TextView)findViewById(R.id.graphic_tv_record);
+		textTitle=(TextView)findViewById(R.id.text_title);
+		text2=(TextView)findViewById(R.id.text2);
+		text3=(TextView)findViewById(R.id.text3);
+		text4=(TextView)findViewById(R.id.text4);
 		
 		
 		//tvMonth=(TextView)findViewById(R.id.aa);
@@ -123,9 +138,15 @@ public class GraphicActivity extends Activity {
     	 String month=UserDAO.getInstance().getSelectMonth();
     	 month=month.substring(0,7);
     	 tvRecord.setText(month);
+    	 HeadacheAnalysis[] headacheAnalysisList=HeadacheDiaryDAO.getInstance().getHeadacheAnalysisList();
+    	 HeadacheAnalysis headacheAnalysis = headacheAnalysisList[3];
+    	 String frequency=TimeManager.getStrDate(headacheAnalysis.getStartAnalysisTime())+" ~ "+TimeManager.getStrDate(headacheAnalysis.getEndAnalysisTime());
+    	 textTitle.setText(frequency);
+    	 text2.setText(frequency);
     	 initGraph1();
     	 initGraph2();
     	 initGraph3();
+    	 initGraph4();
     }
  
     private void init(){
@@ -368,6 +389,44 @@ public class GraphicActivity extends Activity {
         layout.addView(chart3, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));  
           }   
     
+    private void initGraph4() {
+		// TODO Auto-generated method stub
+    	context4 = getApplicationContext();  
+        
+       LinearLayout layout = (LinearLayout)findViewById(R.id.linechart4);  
+        //series = new XYSeries(title); 
+        mDataset4.removeSeries(series4);
+        series4.clear();
+              
+        
+        int[] drugFrequency=getDrugFrequency();
+      
+        for (int i=0;i<drugFrequency.length;i++){
+        	series4.add(i, drugFrequency[i]);        	
+        }
+        	              
+          
+        //将点集添加到这个数据集中  
+        mDataset4.addSeries(series4);  
+        Log.d("addSeries", "addSeries Method is executed");
+          
+        //以下都是曲线的样式和属性等等的设置，renderer相当于一个用来给图表做渲染的句柄  
+        BarChart.Type type = BarChart.Type.DEFAULT;
+        int color = Color.BLUE;  
+        PointStyle style = PointStyle.DIAMOND;  
+        renderer4 = buildRenderer(color, style, true);  
+          
+        //设置好图表的样式  
+        setChartSettings(renderer4, "X", "Y", 1, 12, 0, 10, Color.BLACK, Color.BLACK);  
+          
+        //生成图表  
+        chart4 = ChartFactory.getBarChartView(context4, mDataset4, renderer4,type);  
+          
+        //先将原来的布局去掉，再加入新的布局
+        layout.removeAllViewsInLayout();
+        layout.addView(chart4, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));  
+          }   
+    
     
     
     @Override
@@ -543,6 +602,27 @@ public class GraphicActivity extends Activity {
     	
     	
     	return monthList;
+    }
+    
+    private int[] getDrugFrequency(){
+    	int[] drugFruquency = new int[12];
+    	ArrayList<HeadacheDiary> headacheDiaries=HeadacheDiaryDAO.getInstance().getDocumentHDiaryList();
+    	String month=UserDAO.getInstance().getSelectMonth();
+    	month=month.substring(0,4);
+    	for(int i=0;i<headacheDiaries.size();i++){
+       		HeadacheDiary headacheDiary=headacheDiaries.get(i);
+       		String startTime=headacheDiary.getStartTime();
+    		String startTimeShort=startTime.substring(0,4);
+    		int length=headacheDiary.getDrugListSize();
+    		if(startTimeShort.equals(month) && length!=0){
+    			 int getMonth = Integer.parseInt(startTime.substring(5,7));
+    			 drugFruquency[getMonth]= drugFruquency[getMonth]+1;
+    			
+    		}
+       		
+    	
+    	}
+    	return drugFruquency;
     }
     
     private int getXSeriesRange(){

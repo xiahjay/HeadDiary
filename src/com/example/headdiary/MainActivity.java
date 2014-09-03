@@ -36,6 +36,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		
+		
 		//deleteDB(DBConfig.DB_FULLNAME);
 		importDB(DBConfig.DB_FULLNAME);
 

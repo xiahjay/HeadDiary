@@ -12,6 +12,10 @@ public class Config {
 	    public static final String DB_PATH = "/sdcard";
 	    public static final String DB_NAME = "headdiary.db"; //保存的数据库文件名
 	    public static final String DB_FULLNAME = DB_PATH + "/" + DB_NAME;
+	    public static final String DB_TABLENAME = "DiagnoseResult";
+	    public static final String DB_SUGGESTION = "MitigationSuggestion";
+	    public static final String DB_GUIDELINES = "Guidelines";
+	    
 	    
 	    //DB TABLE & COLUMN
         public static final String TB_UserInfo = "UserInfo";

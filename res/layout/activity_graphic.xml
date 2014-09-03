@@ -112,12 +112,16 @@
         		android:src="@drawable/diary_arrow" /> 					
       </RelativeLayout>
 	</LinearLayout>  
+	
+      
+                     
+ 		
 <!-- ****表格内容开始************************************************************************************ -->
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="98dp"
+        android:layout_marginTop="104dp"
         android:foregroundGravity="center_horizontal" >
 
         <LinearLayout
@@ -139,37 +143,41 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"                     
-                    android:layout_marginLeft="20dp">
+                    android:layout_marginLeft="20dp" >
 
                    
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                       
                         android:paddingTop="7dp" >
                         
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="时间-疼痛程度"
+                            android:text="时间-疼痛程度 (单位：日期-疼痛等级)"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                         
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">                       
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/line_cross" />
-                        <ImageView
-                            android:id="@+id/arrow1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                             android:layout_alignParentRight="true"
-                            android:background="@drawable/arrow1" />
-                         </LinearLayout>
+                           
+                            android:orientation="horizontal" >
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/line_cross" />
+
+                            <ImageView
+                                android:id="@+id/arrow1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"                                
+                                android:background="@drawable/arrow1" />
+                        </LinearLayout>
                         
                         <LinearLayout
                         android:layout_width="wrap_content"
@@ -178,12 +186,12 @@
                         <TextView                           
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="当前显示日期: "
+                            android:text="当前记录范围: "
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/text1"
+                            android:id="@+id/text_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2014-09-01"
@@ -226,7 +234,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="时间-疼痛持续时间"
+                            android:text="时间-疼痛持续时间 (单位；日期-小时)"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -253,7 +261,7 @@
                         <TextView                           
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="当前显示日期: "
+                            android:text="当前记录范围: "
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -299,7 +307,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="每月-疼痛次数"
+                            android:text="每月-疼痛次数 (单位：月份-次数)"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -326,7 +334,7 @@
                         <TextView                           
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="当前截止月份: "
+                            android:text="当前记录范围: "
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -374,7 +382,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="每月-止痛药服用天数"
+                            android:text="每月-服药用天数 (单位：月份-天数)"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -401,7 +409,7 @@
                         <TextView                           
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="当前截止月份: "
+                            android:text="当前记录范围: "
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -422,7 +430,7 @@
                     android:layout_width="wrap_content"                   
                     android:visibility="gone" 
                     android:orientation="vertical"
-                    android:layout_height="120dp">
+                    android:layout_height="200dp">
                </LinearLayout>
                
             </LinearLayout>

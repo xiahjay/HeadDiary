@@ -128,7 +128,7 @@
    			        android:background="@drawable/slash_bg" />
 
    			    <TextView
-   			        android:id="@+id/newdiary_relief_method"
+   			        android:id="@+id/newdiary_guidelines"
    			        android:layout_width="fill_parent"
    			        android:layout_height="80.0dip"
    			        android:layout_marginTop="5.0dip"

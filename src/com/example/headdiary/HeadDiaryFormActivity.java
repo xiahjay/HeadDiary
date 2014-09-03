@@ -7,6 +7,7 @@ import com.example.headdiary.R.id;
 import com.example.headdiary.R.layout;
 import com.example.headdiary.R.menu;
 import com.example.headdiary.R.string;
+import com.example.headdiary.data.Diagnose;
 import com.example.headdiary.data.Drug;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
@@ -58,7 +59,7 @@ public class HeadDiaryFormActivity extends Activity {
 		R.id.newdiary_tv_drug0,R.id.newdiary_tv_drug1,R.id.newdiary_tv_drug2,R.id.newdiary_tv_drug3,R.id.newdiary_tv_drug4	
 	};
 	
-	private TextView tvStartTime,tvEndTime,tvPosition,tvType,tvDegree,tvActivity,tvCompanion,tvPrecipiating,tvMitigating,tvDiagnoseResult;
+	private TextView tvStartTime,tvEndTime,tvPosition,tvType,tvDegree,tvActivity,tvCompanion,tvPrecipiating,tvMitigating,tvDiagnoseResult, tvGuidelines;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -79,6 +80,8 @@ public class HeadDiaryFormActivity extends Activity {
 		tvPrecipiating=(TextView)findViewById(R.id.newdiary_tv_precipiating);
 		tvMitigating=(TextView)findViewById(R.id.newdiary_tv_mitigating);
 		tvDiagnoseResult=(TextView)findViewById(R.id.newdiary_diagnose_result);
+		tvGuidelines=(TextView)findViewById(R.id.newdiary_guidelines);
+		
 		
 		for (int i=0;i<DRUG_MAX_NUM;i++){
 			tvDrug[i]=(TextView)findViewById(tvDrugID[i]);
@@ -115,7 +118,7 @@ public class HeadDiaryFormActivity extends Activity {
 	}
 	
 	public void onClickSave(View v){
-		if (HeadacheDiaryDAO.getInstance().getIfSelectedDiaryChanged())
+		//if (HeadacheDiaryDAO.getInstance().getIfSelectedDiaryChanged())
 			saveAndBack();
 	}
 	
@@ -302,7 +305,17 @@ public class HeadDiaryFormActivity extends Activity {
 		//diagnose result
 				headacheDiary.makeAidDiagnosis();
 				String diagnoseResult=headacheDiary.getStrAidDiagnosis();
-				tvDiagnoseResult.setText(diagnoseResult);
+				//StrConfig.HDSecondaryClassification[AidDiagnosis]
+				
+		//diagnose suggestion and guidelines
+				Diagnose diagnose = DBManager.getDiagnoseInfor(headacheDiary.getAidDiagnosis());
+				String suggestion = diagnose.getSuggestion();
+				String finalDiagnoseResult = diagnoseResult+"\n"+"建议的缓解方法为:"+suggestion;
+				tvDiagnoseResult.setText(finalDiagnoseResult);
+				
+				String guidelines = diagnose.getGuidelines();
+				tvGuidelines.setText(guidelines);
+				
 		
 		//StartTime
 		String startTime=headacheDiary.getStartTime();
