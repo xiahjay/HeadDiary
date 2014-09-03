@@ -267,7 +267,7 @@ public class GraphicActivity extends Activity {
         
         
         //设置好图表的样式  
-        setChartSettings(renderer1, "X", "Y", 0,xRange, 0, 10, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer1, "X", "Y", 1,xRange, 0, 10, Color.BLACK, Color.BLACK);  
           
         //生成图表  
         chart1 = ChartFactory.getLineChartView(context1, mDataset1, renderer1);  
@@ -320,7 +320,7 @@ public class GraphicActivity extends Activity {
         }
           
         //设置好图表的样式  
-        setChartSettings(renderer2, "X", "Y", 0, xRange, 0, 25, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer2, "X", "Y", 1, xRange, 0, 25, Color.BLACK, Color.BLACK);  
           
         //生成图表  
         chart2 = ChartFactory.getLineChartView(context2, mDataset2, renderer2);  
@@ -338,17 +338,10 @@ public class GraphicActivity extends Activity {
         //series = new XYSeries(title); 
         mDataset3.removeSeries(series3);
         series3.clear();
+              
         
-       
-        ArrayList<Graphic> getDegree = getGraphicByDay();
-        
-        int[] monthDegree=new int[31];
-        for (int i=0;i<getDegree.size();i++){
-        	Graphic tDegree= getDegree.get(i);
-        	
-        	monthDegree[Integer.parseInt(tDegree.getDate())]=tDegree.getDegree();
-        	Log.i("day"+i, "day="+Integer.parseInt(tDegree.getDate()));
-        }
+        int[] monthDegree=getMonthFrequency();
+      
         for (int i=0;i<monthDegree.length;i++){
         	series3.add(i, monthDegree[i]);        	
         }
@@ -365,7 +358,7 @@ public class GraphicActivity extends Activity {
         renderer3 = buildRenderer(color, style, true);  
           
         //设置好图表的样式  
-        setChartSettings(renderer3, "X", "Y", 0, 31, 0, 24, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer3, "X", "Y", 1, 12, 0, 10, Color.BLACK, Color.BLACK);  
           
         //生成图表  
         chart3 = ChartFactory.getBarChartView(context3, mDataset3, renderer3,type);  
@@ -529,6 +522,28 @@ public class GraphicActivity extends Activity {
     	return graphics;
     	
     	    }
+    
+    private int[] getMonthFrequency(){
+    	int[] monthList=new int[13];
+    	ArrayList<HeadacheDiary> headacheDiaries=HeadacheDiaryDAO.getInstance().getDocumentHDiaryList();
+    	String month=UserDAO.getInstance().getSelectMonth();
+   	    month=month.substring(0,4);
+   	 for(int i=0;i<headacheDiaries.size();i++){
+   		HeadacheDiary headacheDiary=headacheDiaries.get(i);
+		String startTime=headacheDiary.getStartTime();
+		String startTimeShort=startTime.substring(0,4);
+		if(startTimeShort.equals(month)){
+		  int getMonth = Integer.parseInt(startTime.substring(5,7));
+		  monthList[getMonth]= monthList[getMonth]+1;
+			
+		}
+   		 
+			
+   	 }
+    	
+    	
+    	return monthList;
+    }
     
     private int getXSeriesRange(){
     	int xSeries=32;
