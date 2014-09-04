@@ -4,15 +4,25 @@ public class Drug implements Cloneable{
 
 	private String Name;
 	private String Quantity;
+	private String QuantityUnit;
 	private int Effect; //HDDrugEffect[effect]
 	
 	public Drug() {
 		// TODO Auto-generated constructor stub
 		Name="";
 		Quantity="";
+		QuantityUnit="";
 		Effect=0;
 	}
 	
+	public String getQuantityUnit() {
+		return QuantityUnit;
+	}
+
+	public void setQuantityUnit(String quantityUnit) {
+		QuantityUnit = quantityUnit;
+	}
+
 	public void setName(String name){
 		Name=name;
 	}

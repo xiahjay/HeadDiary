@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:hint="@string/prompt_drug_name"
+        android:hint="选择药物"
         android:background="#A4D3EE"
         android:textColor="@color/black"
         android:textSize="18sp"

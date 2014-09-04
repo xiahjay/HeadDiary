@@ -3,25 +3,59 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/lightblue"
-    android:orientation="vertical"  >
+    android:orientation="vertical"  
+    android:focusable="false">
+    
+  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal">  
+
+    <EditText
+        android:id="@+id/enter_drug"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:background="@color/white"       
+        android:layout_marginLeft="5dp" 
+        android:layout_marginTop="5dp" 
+        android:hint="添加新药物"
+        android:textColor="@color/black"
+        android:textSize="18sp" 
+        android:layout_weight="0.4"/>
+    
+    <Button
+        android:id="@+id/add_drug"
+        android:layout_width="20dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="5dp" 
+        android:layout_marginRight="5dp"
+        android:layout_weight="0.21"
+        android:gravity="center"
+        android:text="添加"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>
 
    <ListView 
+          android:layout_marginTop="50dp"
 		    android:id="@+id/drug_ListView"		    		   		      
 			android:layout_width="match_parent"
-	    	android:layout_height="200dp"	
+	    	android:layout_height="160dp"	
 	    	android:background="#bbe0f5"    	
 	    	android:cacheColorHint="@color/black"
        		android:fadeScrollbars="false" 
        		android:divider="@color/white"   
-			android:dividerHeight="0.2dp" />
+			android:dividerHeight="0.2dp" 
+			android:clickable="true"/>
    
-            <ImageView
+            <!--  <ImageView
                 android:id="@+id/arrow_pop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"                
                 android:background="@drawable/arrow2"
                 android:layout_marginLeft="125dp"
-                android:layout_marginTop="220dp"
-                android:gravity="center_horizontal" />
+                android:layout_marginTop="180dp"
+                android:gravity="center_horizontal" />-->
 
 </RelativeLayout>
