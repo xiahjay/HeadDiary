@@ -111,6 +111,8 @@ public class DBManager {
 		args.put(DBConfig.COL_HDiary_MitigatingComment, headacheDiary.getMitigatingComment());
 		args.put(DBConfig.COL_HDiary_DrugList, gson.toJson(headacheDiary.getDrugList()));
 		args.put(DBConfig.COL_HDiary_AidDiagnosis, headacheDiary.getAidDiagnosis());
+		args.put(DBConfig.COL_HDiary_RecordTime, TimeManager.getStrDateTime());
+		
 		
 		if (ifInsert){
 			//½øÐÐInsert	
