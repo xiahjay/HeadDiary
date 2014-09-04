@@ -35,21 +35,33 @@
         android:paddingRight="15dp"> 
     </EditText>
     
-	<EditText
-        android:id="@+id/drug_et_quantity"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/prompt_drug_quantity"
-        android:background="#A4D3EE"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"> 
-    </EditText>
+        android:layout_height="wrap_content" >
 
+        <EditText
+            android:id="@+id/drug_et_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#A4D3EE"
+            android:hint="@string/prompt_drug_quantity"
+            android:paddingBottom="8dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_weight="0.6"  >
+        </EditText>
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4" />
+
+    </LinearLayout>
   
 	<TextView
         android:id="@+id/drug_tv_effect"

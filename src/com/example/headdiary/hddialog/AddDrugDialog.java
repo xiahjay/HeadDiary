@@ -11,17 +11,25 @@ import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
 
 import android.os.Bundle;
+import android.R.anim;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddDrugDialog extends Activity {
@@ -32,12 +40,57 @@ public class AddDrugDialog extends Activity {
 	private int choice;//choice=0~4 means modify the drugs already exists choice=5 means add new drug
 	private EditText etName,etQuantity;
 	private HeadacheDiary headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
+	private PopupWindow popupwindow;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_drug_dialog);
+		setContentView(R.layout.activity_add_drug_dialog);				
 		initView();
+		//button = (Button) findViewById(R.id.button1);
+		//button.setOnClickListener(this);
+	}
+	
+	
+
+	
+	public void initmPopupWindowView() {
+
+		// // 获取自定义布局文件pop.xml的视图
+		View customView = getLayoutInflater().inflate(R.layout.popview_item,
+				null, false);
+		// 创建PopupWindow实例,200,150分别是宽度和高度
+		popupwindow = new PopupWindow(customView, 500, 480);
+		// 设置动画效果 [R.style.AnimationFade 是自己事先定义好的]
+		popupwindow.setAnimationStyle(R.style.AnimationFade);
+		// 自定义view添加触摸事件
+		customView.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (popupwindow != null && popupwindow.isShowing()) {
+					popupwindow.dismiss();
+					popupwindow = null;
+				}
+
+				return false;
+			}
+		});
+
+		/** 在这里可以实现自定义视图的功能 */
+		ListView drugList = (ListView) customView.findViewById(R.id.drug_ListView);
+		//TextView tx =(TextView)findViewById(android.R.id.text1);
+		//tx.setTextColor(Color.BLACK);
+		//Button btton3 = (Button) customView.findViewById(R.id.button3);
+		//Button btton4 = (Button) customView.findViewById(R.id.button4);
+		//btton2.setOnClickListener(this);
+		//btton3.setOnClickListener(this);
+		//btton4.setOnClickListener(this);
+		String[] data={"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
+		ArrayAdapter<String> aaData = new ArrayAdapter<String>(this,
+				R.layout.simple_drug_items, data);
+		
+		drugList.setAdapter(aaData);	
 	}
 	
 	private void initView(){
@@ -57,6 +110,35 @@ public class AddDrugDialog extends Activity {
 		}
 		
 		etName=(EditText)findViewById(R.id.drug_et_name);
+		etName .setOnClickListener(new View.OnClickListener() {
+			
+			 @Override         
+			 public void onClick(View v) {
+			  //do something
+
+
+					switch (v.getId()) {
+					case R.id.drug_et_name:
+						if (popupwindow != null&&popupwindow.isShowing()) {
+							popupwindow.dismiss();
+							return;
+						} else {
+							initmPopupWindowView();
+							popupwindow.showAsDropDown(v, 0, 5);
+						}
+						break;
+					default:
+						break;
+					}
+
+				
+			          }
+			      });
+		
+		
+		
+		
+		
 		etQuantity=(EditText)findViewById(R.id.drug_et_quantity);
 		
 		if (choice<5 && headacheDiary.getDrugInList(choice)!=null){
