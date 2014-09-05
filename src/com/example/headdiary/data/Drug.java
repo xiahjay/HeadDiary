@@ -5,6 +5,7 @@ public class Drug implements Cloneable{
 	private String Name;
 	private String Quantity;
 	private String QuantityUnit;
+	private String recordTime;
 	private int Effect; //HDDrugEffect[effect]
 	
 	public Drug() {
@@ -15,6 +16,14 @@ public class Drug implements Cloneable{
 		Effect=0;
 	}
 	
+	public String getRecordTime() {
+		return recordTime;
+	}
+
+	public void setRecordTime(String recordTime) {
+		this.recordTime = recordTime;
+	}
+
 	public String getQuantityUnit() {
 		return QuantityUnit;
 	}

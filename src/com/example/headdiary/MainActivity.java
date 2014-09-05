@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 		
 		
 		
-		//deleteDB(DBConfig.DB_FULLNAME);
+	    //deleteDB(DBConfig.DB_FULLNAME);
 		importDB(DBConfig.DB_FULLNAME);
 
 		new Handler().postDelayed(new Runnable(){

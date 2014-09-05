@@ -1,5 +1,7 @@
 package com.example.headdiary.hddialog;
 
+import java.util.ArrayList;
+
 import com.example.headdiary.R;
 import com.example.headdiary.R.id;
 import com.example.headdiary.R.layout;
@@ -9,6 +11,8 @@ import com.example.headdiary.data.Drug;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
+import com.example.headdiary.util.DBManager;
+import com.example.headdiary.util.TimeManager;
 
 import android.os.Bundle;
 import android.R.anim;
@@ -97,7 +101,14 @@ public class AddDrugDialog extends Activity{
 			      });
 		
 		//设置 Listview
-		final String[] data={"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
+		ArrayList<String> drugName = DBManager.getDruglistFromDB();		
+		final String[] data= new String[drugName.size()];
+		Log.i("drugsize", "drugsize="+drugName.size());
+		for(int i=0; i<data.length; i++){
+			data[i]=drugName.get(i);
+			Log.i("data", "data="+i);
+		}
+		
 		ArrayAdapter<String> aaData = new ArrayAdapter<String>(this,
 				R.layout.simple_drug_items, data);
 		
@@ -107,7 +118,7 @@ public class AddDrugDialog extends Activity{
           public void onItemClick(AdapterView<?> arg0,View arg1, int arg2,   
                   long arg3) {   
                //do something
-          	 Log.i("data", "data="+data[2]);
+          	 Log.i("arg2", "arg2="+arg2);
           	eText.setText(data[arg2]);
           	popupwindow.dismiss();
 			popupwindow = null;
@@ -212,6 +223,8 @@ public class AddDrugDialog extends Activity{
 		newDrug.setName(name);
 		newDrug.setQuantity(quantity);
 		newDrug.setEffect(getAnsbyId(answer));
+		newDrug.setRecordTime(TimeManager.getStrDateTime());
+		 Log.i("time", "data="+newDrug.getRecordTime());
 		if (choice<5 && headacheDiary.getDrugInList(choice)!=null) //修改原有的记录
 			headacheDiary.setDrugInList(choice, newDrug);
 		else

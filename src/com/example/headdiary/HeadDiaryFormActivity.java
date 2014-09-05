@@ -1,5 +1,6 @@
 package com.example.headdiary;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.example.headdiary.R;
@@ -321,6 +322,8 @@ public class HeadDiaryFormActivity extends Activity {
 	
 	private void saveAndBack(){
 		headacheDiary.setRecordTime(TimeManager.getStrDateTime());
+		ArrayList<Drug> druglist = headacheDiary.getDrugList();
+		DBManager.saveDruglistToDB(druglist);
 		String hint=DBManager.saveHDiaryToDB(headacheDiary);
 		ToastManager.showShortToast(hint);
     	this.finish();

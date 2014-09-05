@@ -613,6 +613,7 @@ public class DBManager {
 		if (mCursor!=null && mCursor.moveToFirst()){	
 			String suggestion = mCursor.getString(mCursor.getColumnIndex(DBConfig.DB_SUGGESTION));
 		    String guidelines = mCursor.getString(mCursor.getColumnIndex(DBConfig.DB_GUIDELINES));	
+		   
 		    diagnose = new Diagnose("", suggestion, guidelines);
 		}
 
@@ -621,4 +622,47 @@ public class DBManager {
 		return diagnose;
 	}
 
+	public static void saveDruglistToDB(ArrayList<Drug> druglist){
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor;
+		for(int i=0; i<druglist.size(); i++){
+		Boolean flag = true;
+		cursor = db.query("DrugInfor", null,"DrugName='"+druglist.get(i).getName()+"'", null,null,null,null);
+		if(cursor!=null && cursor.moveToFirst()){
+			flag = false;
+			String recTime = druglist.get(i).getRecordTime();
+			String sql ="update DrugInfor set RecordTime='"+recTime+"' where DrugName='"+druglist.get(i).getName()+"'";
+			db.execSQL(sql);			
+		    }
+		if (flag){
+			
+			String sql ="insert into DrugInfor (UserId, DrugName, RecordTime) values('"+UserDAO.getInstance().getUser().getUserId()+"','"+druglist.get(i).getName()+"','"+druglist.get(i).getRecordTime()+"')";
+			db.execSQL(sql);
+			
+			Log.i("UserId", "UserId="+UserDAO.getInstance().getUser().getUserId());
+			Log.i("DrugName", "DrugName="+druglist.get(i).getName());
+			Log.i("RecordTime", "RecordTime="+druglist.get(i).getRecordTime());
+		    }
+					
+		}		
+		
+		db.close();
+	}
+	
+	public static ArrayList<String> getDruglistFromDB() {
+	   ArrayList<String> druglist = new ArrayList<String>();
+	   SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+	   Cursor cursor;
+	   String sql ="select * from DrugInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"' order by RecordTime desc";
+	   cursor=db.rawQuery(sql,null);
+	   if(cursor!=null && cursor.moveToFirst())
+	   do{
+		  druglist.add(cursor.getString(cursor.getColumnIndex("DrugName")));
+	   }while (cursor.moveToNext());
+		
+	   db.close();
+		return druglist;
+	}
+	
+	
 }
