@@ -41,10 +41,10 @@
 
         <EditText
             android:id="@+id/drug_et_quantity"
-            android:layout_width="79dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_weight="0.02"
+            android:layout_weight="0.01"
             android:background="#A4D3EE"
             android:hint="@string/prompt_drug_quantity"
             android:paddingBottom="8dp"
@@ -55,33 +55,37 @@
             android:textSize="18sp" >
 
         </EditText>
-       
-        <RelativeLayout
+
+        <!--  <RelativeLayout
             android:id="@+id/drug_unit"
-            android:layout_width="wrap_content"
+            android:layout_width="91dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
+            android:layout_weight="0.00"
             android:background="@drawable/diary_single_item"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical"
+            android:onClick="onClickUnit" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/text_unit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/imageView1"
                 android:layout_centerVertical="true"
+                 android:layout_weight="0.6"
                 android:padding="8dp"
-                android:text="规格"
+                android:text="单位"
                 android:textColor="#000"
                 android:textSize="18sp" />
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/textView1"
                 android:scaleType="matrix"
                 android:src="@drawable/diary_arrow" />
-        </RelativeLayout>
+        </RelativeLayout>-->
 
     </LinearLayout>
   

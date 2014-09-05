@@ -47,7 +47,7 @@ public class AddDrugDialog extends Activity{
 	private int choice;//choice=0~4 means modify the drugs already exists choice=5 means add new drug
 	private EditText etName,etQuantity;
 	private HeadacheDiary headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
-	private PopupWindow popupwindow;
+	private PopupWindow popupwindow;	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -129,8 +129,9 @@ public class AddDrugDialog extends Activity{
 		
 		popupwindow.setFocusable(true);
 	}
+		
 	
-	private void initView(){
+ 	private void initView(){
 		Drug tempDrug;
 		
 		Intent intent=getIntent();
@@ -191,8 +192,7 @@ public class AddDrugDialog extends Activity{
 			radioGroup.check(-1);
 		
 	}
-	
-	
+				
 	public void onClickCancel(View v){
 		if (choice<5 && headacheDiary.getDrugInList(choice)!=null)
 			headacheDiary.removeDrugInList(choice);
