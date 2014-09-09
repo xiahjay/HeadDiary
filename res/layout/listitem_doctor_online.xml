@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip" 
+    android:background="@drawable/mm_listitem">
+
+    <ImageView
+        android:id="@+id/listitem_doctor_icon"
+        android:layout_width="60dp"
+        android:layout_height="fill_parent"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="6dip"
+       android:src="@drawable/img_doctor" />
+
+    <TextView
+        android:id="@+id/listitem_doctor_secondLine"
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/listitem_doctor_icon"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="不要过度使用止痛药！"
+        android:textSize="12sp"
+        android:textColor="@color/gray" />
+
+    <TextView
+        android:id="@+id/listitem_doctor_fistLine"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/listitem_doctor_secondLine"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toRightOf="@id/listitem_doctor_icon"
+        android:gravity="center_vertical"
+        android:text="张医生    2014-1-10 10:36 "
+        android:textSize="16sp"
+        android:textColor="@color/black" />
+
+</RelativeLayout>

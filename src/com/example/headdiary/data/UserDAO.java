@@ -1,9 +1,15 @@
 package com.example.headdiary.data;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.security.auth.PrivateCredentialPermission;
+
+import com.example.headdiary.util.DBManager;
+import com.example.headdiary.util.DocumentAdapter;
+import com.example.headdiary.util.MessageAdapter;
 
 import android.R.string;
 
@@ -13,6 +19,7 @@ public class UserDAO {
 	private User user,loginUser,registerUser;
 	private Boolean loginFromWeb;
 	private String selectMonth;
+	private ArrayList<Suggestion> suggestionList;
 	
 	public UserDAO(){
 		timePeriod=3;
@@ -127,6 +134,28 @@ public class UserDAO {
 		this.loginFromWeb = loginFromWeb;
 	}
 
+	public ArrayList<Suggestion> getDocumentHDiaryList() {
+		if (suggestionList==null)
+			DBManager.getSuggestionlistFromDB();
+		return suggestionList;
+	}
 	
+	public ArrayList<HashMap<String, Object>> getSuggestionListForDisplay(ArrayList<Suggestion> suggestionList){
+		ArrayList<HashMap<String, Object>> resultList=new ArrayList<HashMap<String, Object>>();
+		HashMap<String, Object> map;
+		String content, suggestionTime;
+		for(Suggestion suggestion:suggestionList){
+			content= suggestion.getSuggestion();
+			suggestionTime= suggestion.getSuggestionTime();
+			map=new HashMap<String, Object>();			
+			map.put(MessageAdapter.ArrayKey_FirstLine, content);
+			map.put(MessageAdapter.ArrayKey_SecondLine, "’≈“Ω…˙ "+suggestionTime);
+			resultList.add(map);
+			
+		}
+		
+		
+		return resultList;
+	}
 	
 }

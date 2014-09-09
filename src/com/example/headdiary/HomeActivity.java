@@ -20,6 +20,7 @@ import com.example.headdiary.util.ToastManager;
 import com.example.headdiary.util.WebServiceManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.igexin.sdk.PushManager;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -54,6 +55,7 @@ public class HomeActivity extends Activity {
 		AllExit.getInstance().addActivity(this);
 		setContentView(R.layout.activity_home);
 		init();	
+		
 	}
 
 	private void init(){
@@ -164,7 +166,7 @@ public class HomeActivity extends Activity {
 	}
 	
 	public void onClickOnlineDoctor(View v) {  
-		Intent intent = new Intent (HomeActivity.this,MainDoctorActivity.class);			
+		Intent intent = new Intent (HomeActivity.this,DoctorOnlineActivity.class);			
 		startActivity(intent);	
 	}
 	

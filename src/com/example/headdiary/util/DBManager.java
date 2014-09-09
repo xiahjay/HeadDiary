@@ -20,6 +20,7 @@ import com.example.headdiary.data.Drug;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
+import com.example.headdiary.data.Suggestion;
 import com.example.headdiary.data.User;
 import com.example.headdiary.data.UserDAO;
 import com.example.headdiary.data.Config.DBConfig;
@@ -662,6 +663,15 @@ public class DBManager {
 		
 	   db.close();
 		return druglist;
+	}
+
+	public static ArrayList<Suggestion> getSuggestionlistFromDB() {
+		// TODO Auto-generated method stub
+		ArrayList<Suggestion> suggestionList = null;
+		
+		
+		
+		return suggestionList;
 	}
 	
 	

@@ -7,14 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
 
-import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
-import com.example.headdiary.data.User;
 import com.example.headdiary.data.UserDAO;
 import com.example.headdiary.data.Config.DBConfig;
-import com.example.headdiary.util.AllExit;
 import com.example.headdiary.util.DBManager;
-import com.example.headdiary.util.ToastManager;
+import com.igexin.sdk.PushManager;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,9 +30,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		
+		setContentView(R.layout.activity_main);				
 		
 	    //deleteDB(DBConfig.DB_FULLNAME);
 		importDB(DBConfig.DB_FULLNAME);
@@ -58,7 +53,7 @@ public class MainActivity extends Activity {
 			}
 		}, 1000);//1000
 		
-		
+		PushManager.getInstance().initialize(this.getApplicationContext());
 	}
 
 	@Override
