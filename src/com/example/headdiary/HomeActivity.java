@@ -43,7 +43,7 @@ import android.widget.TextView;
 public class HomeActivity extends Activity {
 	static ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 	static ExecutorService singleThreadExecutorForSynchronize = Executors.newSingleThreadExecutor();
-	private TextView tvNewsContent;
+	private TextView tvNewsContent, tvUnread;
 	private Button btnDiary,btnSynchronize;
 	private ProgressBar progressBar;
 	private static Boolean isSynchronizing=false;
@@ -64,6 +64,14 @@ public class HomeActivity extends Activity {
 		btnDiary=(Button)findViewById(R.id.home_btn_new_headache);
 		btnSynchronize=(Button)findViewById(R.id.home_btn_synchronize);
 		progressBar=(ProgressBar)findViewById(R.id.home_progressBar);
+		tvUnread =  (TextView)findViewById(R.id.main_tab_unread_tv);  
+		if(UserDAO.getInstance().getUnreadSuggestion()==0){
+		  tvUnread.setVisibility(View.GONE);
+		}
+		else{
+		tvUnread.setVisibility(View.VISIBLE);	
+		tvUnread.setText(Integer.toString(UserDAO.getInstance().getUnreadSuggestion()));
+		}
 	}
 
 	public void onResume() {

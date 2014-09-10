@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.example.headdiary.R;
+import com.example.headdiary.data.UserDAO;
 
+import android.R.integer;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -67,7 +69,8 @@ public class MessageAdapter extends BaseAdapter{
 	    DocumentViewHolder holder = (DocumentViewHolder) v.getTag();
 	    holder.firstLine.setText((CharSequence) mDataArrayList.get(position).get(ArrayKey_FirstLine));
 	    holder.secondLine.setText((CharSequence) mDataArrayList.get(position).get(ArrayKey_SecondLine));
-	    if(position<2){
+	    int unRead = UserDAO.getInstance().getUnreadSuggestion();
+	    if(position<unRead){
 	     holder.secondLine.setTextColor(Color.BLACK);
 	    }
 

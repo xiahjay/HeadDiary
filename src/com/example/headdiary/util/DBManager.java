@@ -688,9 +688,18 @@ public class DBManager {
 	public static void getUnreadCountFromDB() {
 		// TODO Auto-generated method stub
 		int count=0;
-		
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor;
+		String sql ="select * from SuggestionInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"' and IfNew=1";
+		cursor = db.rawQuery(sql, null);
+		if(cursor!=null && cursor.moveToFirst())
+		  do{
+			 count++; 
+			  
+     		}while (cursor.moveToNext());
 		
 		UserDAO.getInstance().setUnreadSuggestion(count);
+		db.close();
 	}
 	
 	
