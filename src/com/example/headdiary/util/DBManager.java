@@ -665,13 +665,32 @@ public class DBManager {
 		return druglist;
 	}
 
-	public static ArrayList<Suggestion> getSuggestionlistFromDB() {
+	public static void getSuggestionlistFromDB() {
 		// TODO Auto-generated method stub
-		ArrayList<Suggestion> suggestionList = null;
+		ArrayList<Suggestion> suggestionList = new ArrayList<Suggestion>();
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor;
+		String sql ="select * from SuggestionInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"' order by SuggestionTime desc";
+		cursor=db.rawQuery(sql,null);
+		if(cursor!=null && cursor.moveToFirst())
+		  do{
+			  Suggestion suggestion = new Suggestion();
+			  suggestion.setSuggestion(cursor.getString(cursor.getColumnIndex("Suggestion")));
+			  suggestion.setSuggestionTime(cursor.getString(cursor.getColumnIndex("SuggestionTime")));
+			  
+			  suggestionList.add(suggestion);			  			  
+		  }while (cursor.moveToNext());
+		
+		UserDAO.getInstance().setSuggestionList(suggestionList);
+		db.close();
+	}
+
+	public static void getUnreadCountFromDB() {
+		// TODO Auto-generated method stub
+		int count=0;
 		
 		
-		
-		return suggestionList;
+		UserDAO.getInstance().setUnreadSuggestion(count);
 	}
 	
 	

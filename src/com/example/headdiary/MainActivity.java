@@ -54,6 +54,7 @@ public class MainActivity extends Activity {
 		}, 1000);//1000
 		
 		PushManager.getInstance().initialize(this.getApplicationContext());
+		Log.i("PushManager", "PushManager="+PushManager.getInstance().isPushTurnedOn(this.getApplicationContext()));
 	}
 
 	@Override

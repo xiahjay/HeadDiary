@@ -6,6 +6,8 @@ import java.util.HashMap;
 import com.example.headdiary.R;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +67,9 @@ public class MessageAdapter extends BaseAdapter{
 	    DocumentViewHolder holder = (DocumentViewHolder) v.getTag();
 	    holder.firstLine.setText((CharSequence) mDataArrayList.get(position).get(ArrayKey_FirstLine));
 	    holder.secondLine.setText((CharSequence) mDataArrayList.get(position).get(ArrayKey_SecondLine));
-	    
+	    if(position<2){
+	     holder.secondLine.setTextColor(Color.BLACK);
+	    }
 
         return v;
 	}

@@ -1,25 +1,32 @@
 package com.example.headdiary.data;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+
 
 import javax.security.auth.PrivateCredentialPermission;
 
 import com.example.headdiary.util.DBManager;
 import com.example.headdiary.util.DocumentAdapter;
 import com.example.headdiary.util.MessageAdapter;
+import com.example.headdiary.util.TimeManager;
 
 import android.R.string;
+import android.annotation.SuppressLint;
 
-public class UserDAO {
+public class UserDAO {	
 	private static UserDAO mInstance;
 	private int timePeriod,documentStyle,analysisStyle,graphicStyle,language,listStyle,monthStyle;
 	private User user,loginUser,registerUser;
 	private Boolean loginFromWeb;
-	private String selectMonth;
+	private String selectMonth, lastSuggestionTime;
 	private ArrayList<Suggestion> suggestionList;
+	private int unreadSuggestion;
 	
 	public UserDAO(){
 		timePeriod=3;
@@ -28,6 +35,7 @@ public class UserDAO {
 		graphicStyle=1;
 		loginFromWeb=false;
 		selectMonth="2014-09";
+		
 	}
 	
 	public static UserDAO getInstance(){
@@ -131,31 +139,75 @@ public class UserDAO {
 	}
 
 	public void setLoginFromWeb(Boolean loginFromWeb) {
-		this.loginFromWeb = loginFromWeb;
+		this.loginFromWeb = loginFromWeb;		
 	}
-
-	public ArrayList<Suggestion> getDocumentHDiaryList() {
+	
+	
+	
+   //新添方法
+	public ArrayList<Suggestion> getSuggestionList() {
 		if (suggestionList==null)
 			DBManager.getSuggestionlistFromDB();
 		return suggestionList;
 	}
 	
-	public ArrayList<HashMap<String, Object>> getSuggestionListForDisplay(ArrayList<Suggestion> suggestionList){
+	public void setSuggestionList(ArrayList<Suggestion> suggestionList) {
+		this.suggestionList = suggestionList;
+	}
+	
+	 public ArrayList<HashMap<String, Object>> getSuggestionListForDisplay(ArrayList<Suggestion> suggestionList){
 		ArrayList<HashMap<String, Object>> resultList=new ArrayList<HashMap<String, Object>>();
 		HashMap<String, Object> map;
 		String content, suggestionTime;
+		
 		for(Suggestion suggestion:suggestionList){
 			content= suggestion.getSuggestion();
 			suggestionTime= suggestion.getSuggestionTime();
+			//String getDate=null;
+			//if(suggestionTime.equals(TimeManager.getStrDateTime())){
+			 // getDate="今天"+suggestionTime.substring(11, 16);
+			//}
+			//else{
+			String getDate=StringPattern(suggestionTime.substring(0, 16), "yyyy-MM-dd HH:mm", "yyyy年MM月dd日 HH:mm");
+			//}
 			map=new HashMap<String, Object>();			
-			map.put(MessageAdapter.ArrayKey_FirstLine, content);
-			map.put(MessageAdapter.ArrayKey_SecondLine, "张医生 "+suggestionTime);
-			resultList.add(map);
-			
-		}
-		
-		
+			map.put(MessageAdapter.ArrayKey_FirstLine, getDate);
+			map.put(MessageAdapter.ArrayKey_SecondLine, content);
+			resultList.add(map);			
+		    }
+				
 		return resultList;
 	}
+
+	public String getLastSuggestionTime() {				
+		return lastSuggestionTime;
+	}
+
+	public void setLastSuggestionTime(String lastSuggestionTime) {
+		this.lastSuggestionTime = lastSuggestionTime;
+	}
+
+	public int getUnreadSuggestion() {
+		DBManager.getUnreadCountFromDB();
+		return unreadSuggestion;
+	}
+
+	public void setUnreadSuggestion(int unreadSuggestion) {
+		this.unreadSuggestion = unreadSuggestion;
+	}
+	
+	public final String StringPattern(String date, String oldPattern, String newPattern) {   
+        if (date == null || oldPattern == null || newPattern == null)   
+            return "";   
+        SimpleDateFormat sdf1 = new SimpleDateFormat(oldPattern) ;        // 实例化模板对象    
+        SimpleDateFormat sdf2 = new SimpleDateFormat(newPattern) ;        // 实例化模板对象    
+        Date d = null ;    
+        try{    
+            d = sdf1.parse(date) ;   // 将给定的字符串中的日期提取出来    
+        }catch(Exception e){            // 如果提供的字符串格式有错误，则进行异常处理    
+            e.printStackTrace() ;       // 打印异常信息    
+        }    
+        return sdf2.format(d);  
+    }   
 	
 }
