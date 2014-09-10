@@ -200,26 +200,51 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="wrap_content"                              
+                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
+                >    
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="-30dp"              
+                android:gravity="center"
                 android:orientation="vertical"
-                android:onClick="onClickOnlineDoctor"  >
+                android:layout_weight="1"
+                android:onClick="onClickOnlineDoctor" 
+                >
+                
 
                 <ImageView
                     android:id="@+id/home_iv_tab_onlinedoctor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="matrix"
-                    android:src="@drawable/btn_home_onlinedoc"/>
+                    android:src="@drawable/btn_home_onlinedoc" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/title_online_doc"
                     android:textColor="@color/color_white_to_green"
-                    android:textSize="12sp" />
+                    android:textSize="12sp" />                                               
             </LinearLayout>
+            
+            
+                    <TextView 
+                        android:layout_marginRight="10dp"
+                        android:textSize="10.0dip" 
+                        android:textColor="@android:color/white" 
+                       android:gravity="top|center"
+                        android:id="@+id/main_tab_unread_tv" 
+                        android:background="@drawable/tab_unread_bg" 
+                        android:visibility="visible" 
+                        android:layout_width="wrap_content" 
+                        android:layout_height="wrap_content" 
+                        android:text="2" />
+               
+       </LinearLayout>      
 
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -16,7 +16,7 @@
        android:src="@drawable/img_doctor" />
 
     <TextView
-        android:id="@+id/listitem_doctor_secondLine"
+        android:id="@+id/listitem_doctor_secondLine2"
         android:layout_width="fill_parent"
         android:layout_height="20dip"
         android:layout_alignParentBottom="true"
@@ -29,10 +29,10 @@
         android:textColor="@color/gray" />
 
     <TextView
-        android:id="@+id/listitem_doctor_fistLine"
+        android:id="@+id/listitem_doctor_fistLine1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/listitem_doctor_secondLine"
+        android:layout_above="@id/listitem_doctor_secondLine2"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"

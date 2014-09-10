@@ -52,7 +52,7 @@ public class MessageAdapter extends BaseAdapter{
 		View v = convertView;
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.listitem_doctor_online, parent, false);
+            v = inflater.inflate(R.layout.mylistview_item, parent, false);
             // configure view holder
             DocumentViewHolder viewHolder = new DocumentViewHolder();
             viewHolder.firstLine = (TextView) v.findViewById(R.id.listitem_doctor_fistLine);
