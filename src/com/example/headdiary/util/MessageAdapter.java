@@ -5,11 +5,13 @@ import java.util.HashMap;
 
 import com.example.headdiary.R;
 import com.example.headdiary.data.UserDAO;
+import com.igexin.sdk.PushManager;
 
 import android.R.integer;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +26,14 @@ public class MessageAdapter extends BaseAdapter{
 	public static final String ArrayKey_Degree="Degree";
 	private ArrayList<HashMap<String, Object>> mDataArrayList;
 	private Context context;
+	private int unread;
 
 	public MessageAdapter(Context context, ArrayList<HashMap<String, Object>> data) {
 		super();
 		// TODO Auto-generated constructor stub
 		mDataArrayList=data;
 		this.context=context;
+	 unread = UserDAO.getInstance().getUnreadSuggestion();
 	}
 
 	@Override
@@ -69,11 +73,12 @@ public class MessageAdapter extends BaseAdapter{
 	    DocumentViewHolder holder = (DocumentViewHolder) v.getTag();
 	    holder.firstLine.setText((CharSequence) mDataArrayList.get(position).get(ArrayKey_FirstLine));
 	    holder.secondLine.setText((CharSequence) mDataArrayList.get(position).get(ArrayKey_SecondLine));
-	    int unRead = UserDAO.getInstance().getUnreadSuggestion();
-	    if(position<unRead){
+	   // int unRead = DBManager.getUnreadCountFromDB();
+	   // Log.i("UnreadAdapter", "UnreadSuggestion="+unRead);
+	    if(position<unread){
 	     holder.secondLine.setTextColor(Color.BLACK);
 	    }
-
+        
         return v;
 	}
 

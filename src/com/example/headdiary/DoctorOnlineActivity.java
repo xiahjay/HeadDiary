@@ -45,6 +45,7 @@ public class DoctorOnlineActivity extends ListActivity {
 		setContentView(R.layout.activity_doctor_online);				
 		refreshDispArray();
 		//PushManager.getInstance().turnOffPush(getApplicationContext());
+		//DBManager.setSelectedSuggestionRead(1);
 	}
 
 	
@@ -52,7 +53,7 @@ public class DoctorOnlineActivity extends ListActivity {
 	@Override
 	public void onResume(){
 		super.onResume();
-		mAdapter.notifyDataSetChanged();
+		//mAdapter.notifyDataSetChanged();
 		//if (HeadacheDiaryDAO.getInstance().getIfSelectedDiaryChanged()){
 			//refreshDispArray();
 		//}
@@ -83,22 +84,18 @@ public class DoctorOnlineActivity extends ListActivity {
 	}
 						
 	//--------------方法-------------------//
-	private void refreshDispArray(){
-		//int size=0;
-		/*for(int i=0; i<3; i++){
-		HashMap<String, Object> map = new HashMap<String, Object>();		
-		map.put(MessageAdapter.ArrayKey_FirstLine,"少吃止痛药"+i );
-		map.put(MessageAdapter.ArrayKey_SecondLine, "持续时间： "+i);
-		HDList.add(map);
-		}*/
-		ArrayList<Suggestion> suggestionList= UserDAO.getInstance().getSuggestionList();
-		HDList=UserDAO.getInstance().getSuggestionListForDisplay(suggestionList);
+	private void refreshDispArray(){		
+	  ArrayList<Suggestion> suggestionList= UserDAO.getInstance().getSuggestionList();
+	  HDList=UserDAO.getInstance().getSuggestionListForDisplay(suggestionList);
+	  
 		if (HDList!=null){
-			mAdapter = new MessageAdapter(this,HDList);
-			setListAdapter(mAdapter);
-			//size=HDList.size();
-		}
+		   mAdapter = new MessageAdapter(this,HDList);
+		   setListAdapter(mAdapter);											
+		   }
 		
+		for(Suggestion suggestion:suggestionList){			
+	       UserDAO.getInstance().setSuggestionRead(suggestion.getSuggestionId());
+		   }		
 	}
 
 }

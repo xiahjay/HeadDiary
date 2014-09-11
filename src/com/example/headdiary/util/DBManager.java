@@ -677,7 +677,7 @@ public class DBManager {
 			  Suggestion suggestion = new Suggestion();
 			  suggestion.setSuggestion(cursor.getString(cursor.getColumnIndex("Suggestion")));
 			  suggestion.setSuggestionTime(cursor.getString(cursor.getColumnIndex("SuggestionTime")));
-			  
+			  suggestion.setSuggestionId(Integer.parseInt(cursor.getString(cursor.getColumnIndex("SuggestionId"))));
 			  suggestionList.add(suggestion);			  			  
 		  }while (cursor.moveToNext());
 		
@@ -694,11 +694,24 @@ public class DBManager {
 		cursor = db.rawQuery(sql, null);
 		if(cursor!=null && cursor.moveToFirst())
 		  do{
-			 count++; 
-			  
+			 count++;
      		}while (cursor.moveToNext());
 		
 		UserDAO.getInstance().setUnreadSuggestion(count);
+		db.close();
+		
+	}
+
+	public static void setSelectedSuggestionRead(int suggestionId) {
+		// TODO Auto-generated method stub
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor=db.query("SuggestionInfor",null, "UserId='"+UserDAO.getInstance().getUser().getUserId()+"'", null, null, null, null);
+		if(cursor!=null && cursor.moveToFirst()){
+		  int a = 0;
+		  String sql ="update SuggestionInfor set IfNew='"+a+"' where SuggestionId='"+suggestionId+"'";
+		  db.execSQL(sql);			
+		}
+		
 		db.close();
 	}
 	

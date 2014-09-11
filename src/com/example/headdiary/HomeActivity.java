@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.igexin.sdk.PushManager;
 
+import android.R.integer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -63,21 +64,22 @@ public class HomeActivity extends Activity {
 		tvNewsContent.setMovementMethod(ScrollingMovementMethod.getInstance()); 
 		btnDiary=(Button)findViewById(R.id.home_btn_new_headache);
 		btnSynchronize=(Button)findViewById(R.id.home_btn_synchronize);
-		progressBar=(ProgressBar)findViewById(R.id.home_progressBar);
-		tvUnread =  (TextView)findViewById(R.id.main_tab_unread_tv);  
-		if(UserDAO.getInstance().getUnreadSuggestion()==0){
-		  tvUnread.setVisibility(View.GONE);
-		}
-		else{
-		tvUnread.setVisibility(View.VISIBLE);	
-		tvUnread.setText(Integer.toString(UserDAO.getInstance().getUnreadSuggestion()));
-		}
+		progressBar=(ProgressBar)findViewById(R.id.home_progressBar);		
 	}
 
 	public void onResume() {
 	    super.onResume();  // Always call the superclass method first
 	    setBtnDiary(); 
-	    
+	    tvUnread =  (TextView)findViewById(R.id.main_tab_unread_tv); 	    
+	    int unread = UserDAO.getInstance().getUnreadSuggestion();
+		if(unread==0){
+		  tvUnread.setVisibility(View.GONE);
+		}
+		else{
+		tvUnread.setVisibility(View.VISIBLE);	
+		tvUnread.setText(Integer.toString(unread));
+		}
+		 //Log.i("UnreadHome", "UnreadSuggestion="+unread);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

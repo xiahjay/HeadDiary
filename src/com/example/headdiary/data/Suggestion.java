@@ -7,7 +7,7 @@ public class Suggestion implements Cloneable{
 	
 	private int UserId, SuggestionId;
 	private String Suggestion, SuggestionTime;
-	private Boolean IfNew;
+	private int IfNew;
 	
 	public Suggestion() {
 		// TODO Auto-generated constructor stub
@@ -15,7 +15,7 @@ public class Suggestion implements Cloneable{
 		SuggestionId=0;
 		Suggestion="";
 		SuggestionTime="";
-		IfNew= true;
+		
 		
 	}
 
@@ -51,11 +51,11 @@ public class Suggestion implements Cloneable{
 		SuggestionTime = suggestionTime;
 	}
 
-	public Boolean getIfNew() {
+	public int getIfNew() {
 		return IfNew;
 	}
 
-	public void setIfNew(Boolean ifNew) {
+	public void setIfNew(int ifNew) {
 		IfNew = ifNew;
 	}
 	

@@ -16,6 +16,7 @@ import com.example.headdiary.util.DocumentAdapter;
 import com.example.headdiary.util.MessageAdapter;
 import com.example.headdiary.util.TimeManager;
 
+import android.R.integer;
 import android.R.string;
 import android.annotation.SuppressLint;
 
@@ -162,7 +163,7 @@ public class UserDAO {
 		
 		for(Suggestion suggestion:suggestionList){
 			content= suggestion.getSuggestion();
-			suggestionTime= suggestion.getSuggestionTime();
+			suggestionTime= suggestion.getSuggestionTime();			
 			//String getDate=null;
 			//if(suggestionTime.equals(TimeManager.getStrDateTime())){
 			 // getDate="今天"+suggestionTime.substring(11, 16);
@@ -208,6 +209,11 @@ public class UserDAO {
             e.printStackTrace() ;       // 打印异常信息    
         }    
         return sdf2.format(d);  
-    }   
+    }
+
+	public void setSuggestionRead(int suggestionId) {
+		// TODO Auto-generated method stub
+		DBManager.setSelectedSuggestionRead(suggestionId);
+	}   
 	
 }
