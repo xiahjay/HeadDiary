@@ -39,6 +39,13 @@ public class Config {
         public static final String COL_LoginInfo_LoginTime = "LoginTime";
         public static final String COL_LoginInfo_LogoutTime = "LogoutTime";
 
+        public static final String TB_SuggestionInfor = "SuggestionInfor";
+        public static final String COL_SuggestionInfor_UserId = "UserId";
+        public static final String COL_SuggestionInfor_RecId = "RecId";
+        public static final String COL_SuggestionInfor_Suggestion = "Suggestion";
+        public static final String COL_SuggestionInfor_SuggestionTime = "SuggestionTime";
+        public static final String COL_SuggestionInfor_IfNew = "IfNew";        
+    
         
         public static final String TB_HeadacheDiary = "HeadacheDiary";
         public static final String COL_HDiary_UserId = "UserId";

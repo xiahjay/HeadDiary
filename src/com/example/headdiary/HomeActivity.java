@@ -1,6 +1,7 @@
 package com.example.headdiary;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -8,6 +9,7 @@ import org.json.JSONObject;
 
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
+import com.example.headdiary.data.Suggestion;
 import com.example.headdiary.data.User;
 import com.example.headdiary.data.UserDAO;
 import com.example.headdiary.data.Config.MsgConfig;
@@ -28,6 +30,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
@@ -44,11 +47,14 @@ import android.widget.TextView;
 public class HomeActivity extends Activity {
 	static ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 	static ExecutorService singleThreadExecutorForSynchronize = Executors.newSingleThreadExecutor();
-	private TextView tvNewsContent, tvUnread;
+	private TextView tvNewsContent;
 	private Button btnDiary,btnSynchronize;
 	private ProgressBar progressBar;
 	private static Boolean isSynchronizing=false;
+	private static Boolean synchonizingSuggAvaliable=true;
 	private static Boolean synchonizeingAvaliable=true;	
+	public static  String getPayload=null;
+	public static TextView tvUnread;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +62,11 @@ public class HomeActivity extends Activity {
 		AllExit.getInstance().addActivity(this);
 		setContentView(R.layout.activity_home);
 		init();	
-		
+		//if(UserDAO.getInstance().getPayload()!=null){
+		//singleThreadExecutorForSynchronize.execute(synchronizeSuggestionRunnable);
+		//Log.i("JYM","singleThreadExecutorForSynchronize");
+		//UserDAO.getInstance().setPayload(null);
+		//}
 	}
 
 	private void init(){
@@ -64,22 +74,32 @@ public class HomeActivity extends Activity {
 		tvNewsContent.setMovementMethod(ScrollingMovementMethod.getInstance()); 
 		btnDiary=(Button)findViewById(R.id.home_btn_new_headache);
 		btnSynchronize=(Button)findViewById(R.id.home_btn_synchronize);
-		progressBar=(ProgressBar)findViewById(R.id.home_progressBar);		
+		progressBar=(ProgressBar)findViewById(R.id.home_progressBar);	
+		tvUnread =  (TextView)findViewById(R.id.main_tab_unread_tv); 
 	}
 
 	public void onResume() {
 	    super.onResume();  // Always call the superclass method first
 	    setBtnDiary(); 
-	    tvUnread =  (TextView)findViewById(R.id.main_tab_unread_tv); 	    
+	    
+	   	    
 	    int unread = UserDAO.getInstance().getUnreadSuggestion();
-		if(unread==0){
-		  tvUnread.setVisibility(View.GONE);
-		}
-		else{
-		tvUnread.setVisibility(View.VISIBLE);	
-		tvUnread.setText(Integer.toString(unread));
-		}
-		 //Log.i("UnreadHome", "UnreadSuggestion="+unread);
+	    
+		   if(unread==0){
+		     tvUnread.setVisibility(View.GONE);
+		     }
+		   else{
+		     tvUnread.setVisibility(View.VISIBLE);	
+		     tvUnread.setText(Integer.toString(unread));
+		     }
+		 Log.i("UnreadHome", "UnreadSuggestion="+unread);
+		 
+		// if(getPayload!=null){
+			 //Intent intent=new Intent(HomeActivity.this,DoctorOnlineActivity.class);
+			// startActivity(intent);
+			 //getPayload=null;
+		// }
+		 
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,7 +146,8 @@ public class HomeActivity extends Activity {
 	public void onClickSynchronize(View v){
 		User user=UserDAO.getInstance().getUser();
 		if (user.ifHasUUID()){
-			synchronize(); 		
+			synchronize(); 
+			//singleThreadExecutorForSynchronize.execute(synchronizeSuggestionRunnable);
 		}
 		else{
 			if (progressBar.getVisibility()==View.VISIBLE){
@@ -236,6 +257,7 @@ public class HomeActivity extends Activity {
 		else{
 			btnSynchronize.setText("云端同步头痛日志");
 			btnSynchronize.setTextColor(this.getResources().getColor(R.color.green));
+			
 		}
 	}
 
@@ -248,14 +270,17 @@ public class HomeActivity extends Activity {
 		if (NetWorkManager.isNetworkConnected(this)){
 			btnSynchronize.setText("正在同步...");
 			btnSynchronize.setTextColor(this.getResources().getColor(R.color.blue));
-			isSynchronizing=true;
-			singleThreadExecutor.execute(synchronizeRunnable);	 
+			isSynchronizing=true;			 
+			//singleThreadExecutorForSynchronize.execute(synchronizeSuggestionRunnable);
+			singleThreadExecutor.execute(synchronizeRunnable);	
+			//singleThreadExecutor.execute(synchronizeSuggestionRunnable);
 		}
 		else{
 			ToastManager.showNoWeb();
 		}	
 		
 	}
+                 
     
     private Boolean ifNetWorkOpen(){
     	return NetWorkManager.isNetworkConnected(this);
@@ -414,6 +439,83 @@ public class HomeActivity extends Activity {
  	        isSynchronizing=false;
  	        setBtnDiary();
  	        
+ 	    }
+ 	       
+ 	};
+ 	
+ 	//--------------同步医生建议功能--------------------//
+ 	Runnable synchronizeSuggestionRunnable = new Runnable(){
+        public void run() {
+         // TODO Auto-generated method stub
+        	Gson gson=new Gson();
+        	
+        	User user=UserDAO.getInstance().getUser();
+        	String uuid=user.getUserUUID();
+        	String cid = UserDAO.getInstance().getPushClientId();
+            String lastSuggestionTime=null;
+            if(user.getLastSuggestionTime()!=null){
+        	 lastSuggestionTime = user.getLastSuggestionTime();}
+            else{
+             lastSuggestionTime=null;
+            }
+           
+            
+            
+        	WebServiceManager.clearProperties();
+        	WebServiceManager.addProperties("userUUID", uuid);
+        	WebServiceManager.addProperties("pushClientId", cid);
+        	WebServiceManager.addProperties("lastSuggestionTime", "2014-04-25 12:20:00");        	
+        	
+        	String res=WebServiceManager.callWebServiceForString("synchronizeSuggestion");  
+        	
+        	Message message = new Message();
+	        Bundle data = new Bundle();
+	        data.putString(MsgConfig.KEY_RESULT,res);
+	        message.setData(data);
+			synSuggHandler.sendMessage(message);
+        }
+
+	};
+	
+	Handler synSuggHandler = new Handler(){
+ 	    @Override
+ 	    public void handleMessage(Message msg) {
+ 	        super.handleMessage(msg); 	        
+ 	        Bundle data = msg.getData();
+ 	        String res = data.getString(MsgConfig.KEY_RESULT);
+ 	        if(res==null){
+ 	        	//ToastManager.showCallWebServiceError();
+ 	        	synchonizingSuggAvaliable=false;
+ 	        }
+ 	        else{
+ 	        	//syn Success
+ 	        	try {
+ 	        		JSONObject jsonObject;
+ 	        		jsonObject = new JSONObject(res);
+ 	        		String lastTime = jsonObject.getString("webLastSuggestionTime");
+ 	        		String jsonSuggestionList = jsonObject.getString("jsonNewSuggestionList");
+ 	        		Log.i("JYMwebLastSuggestionTime", lastTime);
+ 	        		Log.i("JYMjsonNewSuggestionList", jsonSuggestionList);
+					Gson gson=new Gson();
+					User user=UserDAO.getInstance().getUser();
+					
+					if (!jsonSuggestionList.equals(MsgConfig.NO_DATA)){
+						ArrayList<Suggestion> nSuggestionList =gson.fromJson(jsonSuggestionList, new TypeToken<ArrayList<Suggestion>>(){}.getType());
+						DBManager.updateSuggestionList(nSuggestionList);
+					}
+					
+				   // user.setLastSuggestionTime(lastTime); 	        		
+ 	        		synchonizingSuggAvaliable=true;
+ 	        		//ToastManager.showShortToast("同步成功");	
+				} catch (Exception e) {
+					// TODO: handle exception
+					//ToastManager.showShortToast("无法解析数据");
+					synchonizingSuggAvaliable=false;
+				}
+ 	        	
+ 	        }	
+ 	        
+ 	        	        
  	    }
  	       
  	};

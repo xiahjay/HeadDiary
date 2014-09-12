@@ -38,12 +38,13 @@ public class DoctorOnlineActivity extends ListActivity {
 	private static final String TAG="MainDocumentActivity";
 	private MessageAdapter mAdapter;
 	private ArrayList<HashMap<String, Object>> HDList=new ArrayList<HashMap<String, Object>>();	
-	
+	public static ArrayList<Suggestion> suggestionList;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_doctor_online);				
 		refreshDispArray();
+		
 		//PushManager.getInstance().turnOffPush(getApplicationContext());
 		//DBManager.setSelectedSuggestionRead(1);
 	}
@@ -66,35 +67,30 @@ public class DoctorOnlineActivity extends ListActivity {
 		//PushManager.getInstance().turnOnPush(getApplicationContext());
 	}
 
-	/*@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-	    super.onListItemClick(l, v, position, id);
-	    // Get the item that was clicked
-	    HeadacheDiaryDAO.getInstance().setDocumentHDChoice(position);
-	    HeadacheDiary headacheDiary=(HeadacheDiary) HeadacheDiaryDAO.getInstance().getDocumentHDiaryList().get(position).clone();
-	    HeadacheDiaryDAO.getInstance().setHeadacheDiarySelected(headacheDiary);
-	    Intent intent=new Intent(this,HeadDiaryFormActivity.class);
-        startActivity(intent);
-	  }*/
-	
+		
 	//--------------Click响应事件-------------------//
 	
 	public void onClickBack(View v){
+		//if(UserDAO.getInstance().getPayload()!=null){
+		//Intent intent=new Intent(DoctorOnlineActivity.this,HomeActivity.class);
+		//startActivity(intent);}
     	this.finish();
 	}
 						
 	//--------------方法-------------------//
-	private void refreshDispArray(){		
-	  ArrayList<Suggestion> suggestionList= UserDAO.getInstance().getSuggestionList();
+	private void refreshDispArray(){	
+		
+	  suggestionList= UserDAO.getInstance().getSuggestionList();
 	  HDList=UserDAO.getInstance().getSuggestionListForDisplay(suggestionList);
-	  
+	  Log.i("JYM","refreshDispArray has ran");
+	  Log.i("JYM","suggestionList="+suggestionList);
 		if (HDList!=null){
 		   mAdapter = new MessageAdapter(this,HDList);
 		   setListAdapter(mAdapter);											
 		   }
 		
 		for(Suggestion suggestion:suggestionList){			
-	       UserDAO.getInstance().setSuggestionRead(suggestion.getSuggestionId());
+	       UserDAO.getInstance().setSuggestionRead(suggestion.getRecId());
 		   }		
 	}
 

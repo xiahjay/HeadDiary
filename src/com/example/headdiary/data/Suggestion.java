@@ -5,14 +5,14 @@ import android.R.integer;
 public class Suggestion implements Cloneable{
 	
 	
-	private int UserId, SuggestionId;
+	private int UserId, RecId;
 	private String Suggestion, SuggestionTime;
 	private int IfNew;
 	
 	public Suggestion() {
 		// TODO Auto-generated constructor stub
 		UserId=0;
-		SuggestionId=0;
+		RecId=0;
 		Suggestion="";
 		SuggestionTime="";
 		
@@ -27,12 +27,12 @@ public class Suggestion implements Cloneable{
 		UserId = UserDAO.getInstance().getUser().getUserId();
 	}
 
-	public int getSuggestionId() {
-		return SuggestionId;
+	public int getRecId() {
+		return RecId;
 	}
 
-	public void setSuggestionId(int suggestionId) {
-		SuggestionId = suggestionId;
+	public void setRecId(int recId) {
+		RecId = recId;
 	}
 
 	public String getSuggestion() {

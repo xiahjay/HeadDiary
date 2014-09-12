@@ -141,8 +141,10 @@ public class GraphicActivity extends Activity {
     	 HeadacheAnalysis[] headacheAnalysisList=HeadacheDiaryDAO.getInstance().getHeadacheAnalysisList();
     	 HeadacheAnalysis headacheAnalysis = headacheAnalysisList[3];
     	 String frequency=TimeManager.getStrDate(headacheAnalysis.getStartAnalysisTime())+" ~ "+TimeManager.getStrDate(headacheAnalysis.getEndAnalysisTime());
-    	 textTitle.setText(frequency);
-    	 text2.setText(frequency);
+    	 textTitle.setText(month);
+    	 text2.setText(month);
+    	 text3.setText(month.substring(0, 4)+"年1月~12月");
+    	 text4.setText(month.substring(0, 4)+"年1月~12月");
     	 initGraph1();
     	 initGraph2();
     	 initGraph3();

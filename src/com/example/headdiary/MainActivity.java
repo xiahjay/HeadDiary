@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);				
-		
+		//Log.i("getPayload","payload="+UserDAO.getInstance().getPayload());
 	    //deleteDB(DBConfig.DB_FULLNAME);
 		importDB(DBConfig.DB_FULLNAME);
 
@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 			public void run(){
 				Intent intent;
 				
-				if (DBManager.getLastUser()){
+				if (DBManager.getLastUser()){					
 					intent=new Intent(MainActivity.this,HomeActivity.class);
 					startActivity(intent);
 				}
@@ -55,6 +55,7 @@ public class MainActivity extends Activity {
 		
 		PushManager.getInstance().initialize(this.getApplicationContext());
 		Log.i("PushManager", "PushManager="+PushManager.getInstance().isPushTurnedOn(this.getApplicationContext()));
+		
 	}
 
 	@Override

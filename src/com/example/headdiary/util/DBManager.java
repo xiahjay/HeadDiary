@@ -677,7 +677,7 @@ public class DBManager {
 			  Suggestion suggestion = new Suggestion();
 			  suggestion.setSuggestion(cursor.getString(cursor.getColumnIndex("Suggestion")));
 			  suggestion.setSuggestionTime(cursor.getString(cursor.getColumnIndex("SuggestionTime")));
-			  suggestion.setSuggestionId(Integer.parseInt(cursor.getString(cursor.getColumnIndex("SuggestionId"))));
+			  suggestion.setRecId(Integer.parseInt(cursor.getString(cursor.getColumnIndex("RecId"))));
 			  suggestionList.add(suggestion);			  			  
 		  }while (cursor.moveToNext());
 		
@@ -702,15 +702,64 @@ public class DBManager {
 		
 	}
 
-	public static void setSelectedSuggestionRead(int suggestionId) {
+	public static void setSelectedSuggestionRead(int RecId) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
 		Cursor cursor=db.query("SuggestionInfor",null, "UserId='"+UserDAO.getInstance().getUser().getUserId()+"'", null, null, null, null);
 		if(cursor!=null && cursor.moveToFirst()){
 		  int a = 0;
-		  String sql ="update SuggestionInfor set IfNew='"+a+"' where SuggestionId='"+suggestionId+"'";
+		  String sql ="update SuggestionInfor set IfNew='"+a+"' where RecId='"+RecId+"'";
 		  db.execSQL(sql);			
 		}
+		
+		db.close();
+	}
+
+	/*public static void getLastSuggestionTimeFromDB() {
+		// TODO Auto-generated method stub
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor;
+		String lastTime = null;
+		String sql="select SuggestionTime from SuggestionInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"' and SuggestionTime >= all (select SuggestionTime from SuggestionInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"')";
+	    
+		cursor= db.rawQuery(sql, null);
+	    if(cursor!=null && cursor.moveToFirst()){
+	       lastTime = cursor.getString(cursor.getColumnIndex("SuggestionTime"));
+	       String sqll ="update UserInfo set LastSuggestionTime='"+lastTime+"' where UserId='"+UserDAO.getInstance().getUser().getUserId()+"'";
+	       db.execSQL(sqll);
+	    }
+	  
+	   UserDAO.getInstance().getUser().setLastSuggestionTime(lastTime);  
+	   db.close();
+	}*/
+
+	public static void updateSuggestionList(ArrayList<Suggestion> nSuggestionList) {
+		// TODO Auto-generated method stub		
+		SQLiteDatabase db;
+		User user=UserDAO.getInstance().getUser();
+		int IfNew=1;
+		for(Suggestion suggestion:nSuggestionList){
+		ContentValues args = new ContentValues();
+		args.put(DBConfig.COL_SuggestionInfor_UserId,user.getUserId());
+		args.put(DBConfig.COL_SuggestionInfor_RecId, suggestion.getRecId());
+		args.put(DBConfig.COL_SuggestionInfor_Suggestion, suggestion.getSuggestion());
+		args.put(DBConfig.COL_SuggestionInfor_SuggestionTime, suggestion.getSuggestionTime());
+		args.put(DBConfig.COL_SuggestionInfor_IfNew, IfNew);
+								
+		db= openDB(DBConfig.DB_FULLNAME);
+		db.insert(DBConfig.TB_SuggestionInfor, null, args);
+		db.close();
+		}
+		
+		
+		
+	}
+
+	public static void updateLastTimetoDB(String lastSuggestionTime) {
+		// TODO Auto-generated method stub
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		String sql = "update UserInfo set LastSuggestionTime='"+lastSuggestionTime+"' where UserId='"+UserDAO.getInstance().getUser().getUserId()+"'";
+		db.execSQL(sql);
 		
 		db.close();
 	}

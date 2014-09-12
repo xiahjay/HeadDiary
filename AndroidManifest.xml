@@ -57,7 +57,7 @@
         </activity>
         <activity
             android:name="com.example.headdiary.HomeActivity"
-            android:label="@string/title_activity_home" >
+            android:label="@string/title_activity_home">
         </activity>
         <activity
             android:name="com.example.headdiary.UnfinishedDiaryActivity"

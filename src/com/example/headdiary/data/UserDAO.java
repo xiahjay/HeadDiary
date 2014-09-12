@@ -25,9 +25,13 @@ public class UserDAO {
 	private int timePeriod,documentStyle,analysisStyle,graphicStyle,language,listStyle,monthStyle;
 	private User user,loginUser,registerUser;
 	private Boolean loginFromWeb;
-	private String selectMonth, lastSuggestionTime;
+	private String selectMonth;
 	private ArrayList<Suggestion> suggestionList;
 	private int unreadSuggestion;
+	private String pushClientId;
+	private String payload;
+		
+	
 	
 	public UserDAO(){
 		timePeriod=3;
@@ -147,7 +151,7 @@ public class UserDAO {
 	
    //ÐÂÌí·½·¨
 	public ArrayList<Suggestion> getSuggestionList() {
-		if (suggestionList==null)
+		//if (suggestionList==null)
 			DBManager.getSuggestionlistFromDB();
 		return suggestionList;
 	}
@@ -179,15 +183,7 @@ public class UserDAO {
 				
 		return resultList;
 	}
-
-	public String getLastSuggestionTime() {				
-		return lastSuggestionTime;
-	}
-
-	public void setLastSuggestionTime(String lastSuggestionTime) {
-		this.lastSuggestionTime = lastSuggestionTime;
-	}
-
+	
 	public int getUnreadSuggestion() {
 		DBManager.getUnreadCountFromDB();
 		return unreadSuggestion;
@@ -211,9 +207,28 @@ public class UserDAO {
         return sdf2.format(d);  
     }
 
-	public void setSuggestionRead(int suggestionId) {
+	public void setSuggestionRead(int RecId) {
 		// TODO Auto-generated method stub
-		DBManager.setSelectedSuggestionRead(suggestionId);
+		DBManager.setSelectedSuggestionRead(RecId);
+	}
+
+	public String getPushClientId() {
+		
+		return pushClientId;
+	}
+
+	public void setPushClientId(String pushClientId) {
+		this.pushClientId = pushClientId;
+	}
+
+	public String getPayload() {
+		return payload;
+	}
+
+	public void setPayload(String payload) {
+		this.payload = payload;
 	}   
+	
+	
 	
 }
