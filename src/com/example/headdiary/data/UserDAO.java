@@ -30,6 +30,7 @@ public class UserDAO {
 	private int unreadSuggestion;
 	private String pushClientId;
 	private String payload;
+	private Calendar selectCalendar;
 		
 	
 	
@@ -227,8 +228,15 @@ public class UserDAO {
 
 	public void setPayload(String payload) {
 		this.payload = payload;
+	}
+
+	public void setSelectCalendar(Calendar startTime) {
+		// TODO Auto-generated method stub
+		this.selectCalendar = startTime;
 	}   
 	
-	
+	public Calendar getSelectCalendar(){
+		return selectCalendar;
+	}
 	
 }

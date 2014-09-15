@@ -102,7 +102,7 @@ public class PushDemoReceiver extends BroadcastReceiver {
 	        	
 	        	User user=UserDAO.getInstance().getUser();
 	        	String uuid=user.getUserUUID();
-	        	String cid = UserDAO.getInstance().getPushClientId();
+	        	//String cid = UserDAO.getInstance().getPushClientId();
 	            String lastSuggestionTime=null;
 	            if(user.getLastSuggestionTime()!=null){
 	        	 lastSuggestionTime = user.getLastSuggestionTime();}
@@ -114,7 +114,7 @@ public class PushDemoReceiver extends BroadcastReceiver {
 	            
 	        	WebServiceManager.clearProperties();
 	        	WebServiceManager.addProperties("userUUID", uuid);
-	        	WebServiceManager.addProperties("pushClientId", cid);
+	        	//WebServiceManager.addProperties("pushClientId", cid);
 	        	WebServiceManager.addProperties("lastSuggestionTime", "1993-07-08 18:00:00");        	
 	        	
 	        	String res=WebServiceManager.callWebServiceForString("synchronizeSuggestion");  

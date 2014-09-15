@@ -88,6 +88,7 @@ public class SelectMonthDialog extends Activity {
 		String month=TimeManager.getStrDateTime(startTime);
 		//month = month.substring(0,7);
 			UserDAO.getInstance().setSelectMonth(month);
+			UserDAO.getInstance().setSelectCalendar(startTime);
 			
 					
 		

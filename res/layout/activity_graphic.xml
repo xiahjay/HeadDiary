@@ -210,8 +210,39 @@
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:visibility="gone" 
-                     android:orientation="vertical">
+                     android:orientation="vertical">                    
                </LinearLayout>
+               <LinearLayout
+              android:id="@+id/linechart11"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"                      
+              android:layout_gravity="center_horizontal" 
+              android:visibility="gone" >
+            <Button
+              android:id="@+id/btn_before"
+              android:layout_width="140dp"
+              android:layout_height="40dp"
+              android:layout_marginRight="5dp"
+              android:text="上一月"
+              android:textSize="16sp"
+              android:textColor="@color/white"
+              android:background="@drawable/security_row_qq_bg"
+              android:gravity="center"
+              android:onClick="onClickBefore"         
+              />
+             
+            <Button
+              android:id="@+id/btn_next"
+              android:layout_width="140dp"
+              android:layout_height="40dp"
+              android:layout_marginLeft="5dp"
+              android:text="下一月"
+              android:textSize="16sp"
+              android:textColor="@color/white"
+              android:background="@drawable/security_row_qq_bg"
+              android:gravity="center"
+              android:onClick="onClickNext"/>
+             </LinearLayout>
             </LinearLayout>
 <!-- **内容一结束***************************************************************************************** -->
             <LinearLayout
@@ -286,6 +317,40 @@
                     android:layout_height="300dp"
                     android:orientation="vertical" >
                 </LinearLayout>
+                
+                <LinearLayout
+              android:id="@+id/linechart21"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"                      
+              android:layout_gravity="center_horizontal" 
+              android:visibility="gone" >
+            <Button
+              android:id="@+id/btn_before1"
+              android:layout_width="140dp"
+              android:layout_height="40dp"
+              android:layout_marginRight="5dp"
+              android:text="上一月"
+              android:textSize="16sp"
+              android:textColor="@color/white"
+              android:background="@drawable/security_row_qq_bg"
+              android:gravity="center"
+              android:onClick="onClickBefore1"         
+              />
+             
+            <Button
+              android:id="@+id/btn_next1"
+              android:layout_width="140dp"
+              android:layout_height="40dp"
+              android:layout_marginLeft="5dp"
+              android:text="下一月"
+              android:textSize="16sp"
+              android:textColor="@color/white"
+              android:background="@drawable/security_row_qq_bg"
+              android:gravity="center"
+              android:onClick="onClickNext1"/>
+             </LinearLayout>
+           
+                
             </LinearLayout>
 <!-- ***内容2结束*************************************************************************************** -->
             <LinearLayout

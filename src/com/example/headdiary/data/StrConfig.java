@@ -45,7 +45,7 @@ public class StrConfig {
 	public static String DocumentStyle[];
 	public static String AnalysisStyle[];
 	public static String GraphicStyle[];
-	public static String MonthStyle[];
+	public static String MonthStyle[],MonthList[];
 	//temp
 	public static String analysisAnsArray[];
 	public static String msgArray1[];
@@ -64,7 +64,7 @@ public class StrConfig {
 				lan=1;
 		}
 		if (lan==1){//中文
-			HDIntervalCategory=new String[]{"<30分钟","[30分钟~3小时]","(3小时~4小时)","[4小时~72小时]",">72小时"};
+			HDIntervalCategory=new String[]{"小于30分钟","[30分钟~3小时]","(3小时~4小时)","[4小时~72小时]","大于72小时"};
 			HDPosition=new String[]{"左侧为主","右侧为主","双侧头痛"};
 			HDPositionAroundEye=new String[]{"未出现","出现"};
 			HDPositionAroundEyeTrue="眼眶或太阳穴附近";
@@ -109,6 +109,7 @@ public class StrConfig {
 			DocumentStyle=new String[]{"列表","日历"};
 			AnalysisStyle=new String[]{"统计表","趋势图"};
 			MonthStyle=new String[]{"2014年1月","2014年2月","2014年3月","2014年4月","2014年5月","2014年6月","2014年7月","2014年8月","2014年9月","2014年10月","2014年11月","2014年12月"};
+			MonthList=new String[]{"2014-01","2014-02","2014-03","2014-04","2014-05","2014-06","2014-07","2014-08","2014-09","2014-10","2014-11","2014-12"};
 			GraphicStyle=new String[]{"趋势图","统计表"};
 			
 			

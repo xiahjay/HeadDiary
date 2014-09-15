@@ -1,5 +1,6 @@
 package com.example.headdiary;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.example.headdiary.R;
@@ -29,7 +30,6 @@ import com.example.headdiary.util.AllExit;
 import com.example.headdiary.util.DBManager;
 import com.example.headdiary.util.TimeManager;
 import com.example.headdiary.util.ToastManager;
-import com.example.headdiary.ActivityManager;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -44,20 +44,31 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 //display headacheDiarySelected in HeadacheDiaryDAO
 public class UnfinishedDiaryActivity extends Activity {
-	private HeadacheDiary headacheDiary;	
-	private TextView tvStartTime,tvPosition,tvType,tvDegree,tvActivity,tvCompanion,tvDiagnoseResult, tvGuidelines;
+
+	private HeadacheDiary headacheDiary;
+	private final static int DRUG_MAX_NUM=5;
+	private RelativeLayout[] reLayoutDrug=new RelativeLayout[DRUG_MAX_NUM];
+	private int[] reLayoutDrugID={
+		R.id.newdiary_rlayout_drug0,R.id.newdiary_rlayout_drug1,R.id.newdiary_rlayout_drug2,R.id.newdiary_rlayout_drug3,R.id.newdiary_rlayout_drug4	
+	};
+	private TextView[] tvDrug=new TextView[DRUG_MAX_NUM];
+	private int[] tvDrugID={
+		R.id.newdiary_tv_drug0,R.id.newdiary_tv_drug1,R.id.newdiary_tv_drug2,R.id.newdiary_tv_drug3,R.id.newdiary_tv_drug4	
+	};
+	
+	private TextView tvStartTime,tvEndTime,tvPosition,tvType,tvDegree,tvActivity,tvCompanion,tvPrecipiating,tvMitigating,tvDiagnoseResult, tvGuidelines;
 	Boolean flag=true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_unfinished_diary);
-		//Boolean ifComplete=headacheDiary.getIfComplete();
+		setContentView(R.layout.activity_head_diary_form);
 		if (HeadacheDiaryDAO.getInstance().getIfLastDiaryComplete())
 		{Intent intent = new Intent (UnfinishedDiaryActivity.this,StartTimeQuestion.class);	
 		startActivity(intent);}
@@ -65,17 +76,18 @@ public class UnfinishedDiaryActivity extends Activity {
 			Intent intent = new Intent (UnfinishedDiaryActivity.this,EndTimeQuestion.class);	
 			startActivity(intent);
 		}
-		
 		headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
-		findView();	
+		findView();
 		initLayout();
+							    	 			  	
 	}
 	
 	
+
 	private void initLayout() {
 		// TODO Auto-generated method stub
-		final TextView tv = (TextView)findViewById(R.id.un_guidelines);
-		final ImageView arrow = (ImageView) findViewById(R.id.un_arrow_all);
+		final TextView tv = (TextView)findViewById(R.id.newdiary_guidelines);
+		final ImageView arrow = (ImageView) findViewById(R.id.arrow_all);
 		  //tv.setMovementMethod(ScrollingMovementMethod.getInstance());
 		 tv .setOnClickListener(new View.OnClickListener() {
 			
@@ -99,33 +111,43 @@ public class UnfinishedDiaryActivity extends Activity {
 				// tv.setEllipsize(android.text.TextUtils.TruncateAt.END);
 				 //tv.setLines(4);
 			          }
-			      });			      			        		    	   
+			      });
+			       
+			        	 
+			    	   
 			   
 	}
 	
+
+
 	private void findView() {
 		// TODO Auto-generated method stub
-		tvStartTime=(TextView)findViewById(R.id.unfinished_tv_start_time);		
-		tvPosition=(TextView)findViewById(R.id.unfinished_tv_position);
-		tvType=(TextView)findViewById(R.id.unfinished_tv_ache_type);
-		tvDegree=(TextView)findViewById(R.id.unfinished_tv_ache_degree);
-		tvActivity=(TextView)findViewById(R.id.unfinished_tv_activity);		
-		tvCompanion=(TextView)findViewById(R.id.unfinished_tv_companion);		
-		tvDiagnoseResult=(TextView)findViewById(R.id.un_diagnose_result);	
-		tvGuidelines=(TextView)findViewById(R.id.un_guidelines);
+		tvStartTime=(TextView)findViewById(R.id.newdiary_tv_start_time);
+		tvEndTime=(TextView)findViewById(R.id.newdiary_tv_end_time);
+		tvPosition=(TextView)findViewById(R.id.newdiary_tv_position);
+		tvType=(TextView)findViewById(R.id.newdiary_tv_ache_type);
+		tvDegree=(TextView)findViewById(R.id.newdiary_tv_ache_degree);
+		tvActivity=(TextView)findViewById(R.id.newdiary_tv_activity);		
+		tvCompanion=(TextView)findViewById(R.id.newdiary_tv_companion);
+		tvPrecipiating=(TextView)findViewById(R.id.newdiary_tv_precipiating);
+		tvMitigating=(TextView)findViewById(R.id.newdiary_tv_mitigating);
+		tvDiagnoseResult=(TextView)findViewById(R.id.newdiary_diagnose_result);
+		tvGuidelines=(TextView)findViewById(R.id.newdiary_guidelines);
+		
+		
+		for (int i=0;i<DRUG_MAX_NUM;i++){
+			tvDrug[i]=(TextView)findViewById(tvDrugID[i]);
+			reLayoutDrug[i]=(RelativeLayout)findViewById(reLayoutDrugID[i]);
+		}
 	}
 
 	@Override
 	public void onResume() {
 	    super.onResume();  // Always call the superclass method first
-	    if(headacheDiary.getEndTime()!=null)
-	    {finish();}
-	    getMyDiaryInfo();
-	    //ActivityManager.getInstance().addActivity(this);
-	    
+	    getMyDiaryInfo();        
 	    
 	}
-	
+
 	@Override  
 	public boolean onKeyDown(int keyCode, KeyEvent event) {  
 	    if(keyCode == KeyEvent.KEYCODE_BACK){  
@@ -150,14 +172,17 @@ public class UnfinishedDiaryActivity extends Activity {
 	public void onClickSave(View v){
 		//if (HeadacheDiaryDAO.getInstance().getIfSelectedDiaryChanged())
 			saveAndBack();
-		//else {finish();}
 	}
 	
 	public void onClickStartTime(View v){
 		Intent intent = new Intent (this, StartTimeDialog.class);		
     	startActivity(intent);
 	}
-		
+	
+	public void onClickEndTime(View v){
+		Intent intent = new Intent (this, EndTimeDialog.class);		
+    	startActivity(intent);
+	}
 	
 	public void onClickAchePosition(View v){
 		Intent intent = new Intent (this, AchePositionDialog.class);		
@@ -178,12 +203,72 @@ public class UnfinishedDiaryActivity extends Activity {
 		Intent intent = new Intent (this, ActivityAggravateDialog.class);		
     	startActivity(intent);
 	}
-			
+	
+	public void onClickProdrome(View v){
+		Intent intent = new Intent (this, ProdromeDialog.class);		
+    	startActivity(intent);
+	}
+	
 	public void onClickCompanion(View v){
 		Intent intent = new Intent (this, CompanionDialog.class);		
     	startActivity(intent);
 	}
 	
+	public void onClickPrecipiating(View v){
+		Intent intent = new Intent (this, PrecipiatingDialog.class);		
+    	startActivity(intent);
+	}
+	
+	public void onClickMitigating(View v){
+		Intent intent = new Intent (this, MitigatingDialog.class);		
+    	startActivity(intent);
+	}
+	
+	public void onClickDrug0(View v){	
+		Intent intent = new Intent();
+		intent.setClass(this, AddDrugDialog.class);
+		intent.putExtra("choice",0);
+    	startActivity(intent);
+	}
+	
+	public void onClickDrug1(View v){	
+		Intent intent = new Intent();
+		intent.setClass(this, AddDrugDialog.class);
+		intent.putExtra("choice",1);
+    	startActivity(intent);
+	}
+	
+	public void onClickDrug2(View v){	
+		Intent intent = new Intent();
+		intent.setClass(this, AddDrugDialog.class);
+		intent.putExtra("choice",2);
+    	startActivity(intent);
+	}
+	
+	public void onClickDrug3(View v){	
+		Intent intent = new Intent();
+		intent.setClass(this, AddDrugDialog.class);
+		intent.putExtra("choice",3);
+    	startActivity(intent);
+	}
+	
+	public void onClickDrug4(View v){	
+		Intent intent = new Intent();
+		intent.setClass(this, AddDrugDialog.class);
+		intent.putExtra("choice",4);
+    	startActivity(intent);
+	}
+	
+	public void onClickDrugNew(View v){	
+		if(headacheDiary.getDrugListSize()>=5){
+			Toast.makeText(this, this.getResources().getString(R.string.error_drug_maxnum), Toast.LENGTH_SHORT).show();;
+			return;
+		}
+		Intent intent = new Intent();
+		intent.setClass(this, AddDrugDialog.class);
+		intent.putExtra("choice",5);
+    	startActivity(intent);
+	}
 
 	
 	//-------------------------------//
@@ -246,6 +331,8 @@ public class UnfinishedDiaryActivity extends Activity {
 	
 	private void saveAndBack(){
 		headacheDiary.setRecordTime(TimeManager.getStrDateTime());
+		ArrayList<Drug> druglist = headacheDiary.getDrugList();
+		DBManager.saveDruglistToDB(druglist);
 		String hint=DBManager.saveHDiaryToDB(headacheDiary);
 		ToastManager.showShortToast(hint);
     	this.finish();
@@ -268,26 +355,35 @@ public class UnfinishedDiaryActivity extends Activity {
 	private void getMyDiaryInfo(){
 		String mText,tempstr;
 		int ans,i,length;
+		
 		//diagnose result
-		headacheDiary.makeAidDiagnosis();
-		String diagnoseResult=headacheDiary.getStrAidDiagnosis();
-		//StrConfig.HDSecondaryClassification[AidDiagnosis]
+				headacheDiary.makeAidDiagnosis();
+				String diagnoseResult=headacheDiary.getStrAidDiagnosis();
+				//StrConfig.HDSecondaryClassification[AidDiagnosis]
+				
+		//diagnose suggestion and guidelines
+				Diagnose diagnose = DBManager.getDiagnoseInfor(headacheDiary.getAidDiagnosis());
+				String suggestion = diagnose.getSuggestion();
+				String finalDiagnoseResult = diagnoseResult+"\n"+"建议的缓解方法为:"+suggestion;
+				tvDiagnoseResult.setText(finalDiagnoseResult);
+				
+				String guidelines = diagnose.getGuidelines();
+				tvGuidelines.setText(guidelines);
+				
 		
-    //diagnose suggestion and guidelines
-		Diagnose diagnose = DBManager.getDiagnoseInfor(headacheDiary.getAidDiagnosis());
-		String suggestion = diagnose.getSuggestion();
-		String finalDiagnoseResult = diagnoseResult+"\n"+"建议的缓解方法为:"+suggestion;
-		tvDiagnoseResult.setText(finalDiagnoseResult);
-		
-		String guidelines = diagnose.getGuidelines();
-		tvGuidelines.setText(guidelines);
 		//StartTime
 		String startTime=headacheDiary.getStartTime();
 		if (startTime!=null)
 			startTime=startTime.substring(0,16);
     	
     	tvStartTime.setText(startTime);
-    	    	
+    	
+    	//EndTime
+    	String endTime=headacheDiary.getEndTime();
+		if (endTime!=null)
+			endTime=endTime.substring(0,16);
+    	
+    	tvEndTime.setText(endTime);
     	
     	//AchePosition
     	ans=headacheDiary.getPosition();
@@ -326,7 +422,41 @@ public class UnfinishedDiaryActivity extends Activity {
     	if (ans!=-1)
     		activity=StrConfig.HDActivity[ans];
     	tvActivity.setText(activity);
-    		    	    	
+    		
+    	//Prodrome
+    	/*String prodrome="";
+    	Boolean completeProdromeFlag=true;
+    	for (i=0;i<StrConfig.HDProdromeCategory.length;i++){
+    		ans=headacheDiary.getProdrome(i);
+    		if (ans!=-1){
+    			if (ans!=0){		//ans==0 means no this type of prodrome
+    				prodrome+=StrConfig.HDProdromeCategory[i];
+    				tempstr=StrConfig.HDProdromeValue[i][ans];
+    				if (!tempstr.equals(this.getResources().getString(R.string.prompt_therebe)))	//if the answer is "therebe",there is no need to show.
+    					prodrome+=" ( "+tempstr+" )";
+    				prodrome+=this.getResources().getString(R.string.punctuation_semicolon);
+    			}
+    		}
+    		else{
+    			completeProdromeFlag=false;
+    			break;
+    		}
+    	}
+    	
+    	if (completeProdromeFlag){
+    		if (!prodrome.equals("")){
+    			prodrome=prodrome.substring(0,prodrome.length()-1);
+    		}
+    		else{
+    			prodrome=this.getResources().getString(R.string.prompt_none);
+    		}
+    		tvProdrome.setVisibility(View.VISIBLE);
+    		tvProdrome.setText(prodrome);
+    	}
+    	else{
+    		tvProdrome.setVisibility(View.GONE);
+    	}*/
+    	
     	//Companion
     	String companion="";
     	Boolean completeCompanionFlag=true;
@@ -361,7 +491,93 @@ public class UnfinishedDiaryActivity extends Activity {
     		tvCompanion.setVisibility(View.GONE);
     	}
     	
+    	//-----------------------------------------//
+    	//			additional information         //
+    	//-----------------------------------------//
+    	
+    	//Precipiating factor
+    	String precipiating="";
+    	length=StrConfig.HDPrecipiating.length;
+    	for (i=0;i<length-1;i++)
+    		if (headacheDiary.getPrecipiating(i)==1){
+    			tempstr=StrConfig.HDPrecipiating[i];
+				precipiating+=tempstr+this.getResources().getString(R.string.punctuation_semicolon);
+			}	
+    	
+    	if (headacheDiary.getPrecipiating(length-1)==1){ //选择了其他
+			tempstr=headacheDiary.getPrecipiatingComment();
+			if (tempstr.equals(""))
+				tempstr=StrConfig.HDPrecipiating[length-1];
+			precipiating+=tempstr+this.getResources().getString(R.string.punctuation_semicolon);
+		}	
+    	
+    	if (!precipiating.equals("")){
+    		precipiating = precipiating.substring(0,precipiating.length()-1);
+    		tvPrecipiating.setVisibility(View.VISIBLE);
+    		tvPrecipiating.setText(precipiating);
+    	}
+    	else{
+    		tvPrecipiating.setVisibility(View.GONE);
+    	}
+    	
+    	//Mitigating factor
+    	String mitigating="";
+    	length=StrConfig.HDMitigating.length;
+    	
+    	for (i=0;i<length-1;i++)
+    		if (headacheDiary.getMitigating(i)==1){
+    			tempstr=StrConfig.HDMitigating[i];
+				mitigating+=tempstr+this.getResources().getString(R.string.punctuation_semicolon);
+			}	
+    	
+    	if (headacheDiary.getMitigating(length-1)==1){ //选择了其他
+			tempstr=headacheDiary.getMitigatingComment();
+			if (tempstr.equals(""))
+				tempstr=StrConfig.HDMitigating[length-1];
+			mitigating+=tempstr+this.getResources().getString(R.string.punctuation_semicolon);
+		}	
+    	
+    	if (!mitigating.equals("")){
+    		mitigating = mitigating.substring(0,mitigating.length()-1);
+    		tvMitigating.setVisibility(View.VISIBLE);
+    		tvMitigating.setText(mitigating);
+    	}
+    	
+    	else{
+    		tvMitigating.setVisibility(View.GONE);
+    	}
+    	
+    	//-----------------------------------------//
+    	//			   drug information            //
+    	//-----------------------------------------//
+    	length=headacheDiary.getDrugListSize();
+    	Drug tempDrug;
+    	ImageView drugArrow=(ImageView)findViewById(R.id.newdiary_arrow_drug0);
+    	
+    	if (length==0){
+    		drugArrow.setVisibility(View.GONE);
+    		
+    		mText= "<font color=\"#000000\">"+this.getResources().getString(R.string.prompt_no_drug)+"</font>";
+    		tvDrug[0].setText(Html.fromHtml(mText));
+    		reLayoutDrug[0].setVisibility(View.VISIBLE);
+    		
+    		for (i=1;i<DRUG_MAX_NUM;i++)
+    			reLayoutDrug[i].setVisibility(View.GONE);
+    	}
+    	else{
+    		drugArrow.setVisibility(View.VISIBLE);
+    		
+    		for (i=0;i<length;i++){
+    			tempDrug=headacheDiary.getDrugInList(i);
+    			mText= "<font color=\"#000000\">"+this.getResources().getString(R.string.title_drug_name)+"&nbsp;&nbsp;"+tempDrug.getName()+"</font><br>";
+    			mText+="<font color=\"#000000\">"+this.getResources().getString(R.string.title_drug_quantity)+"&nbsp;&nbsp;"+tempDrug.getQuantity()+"</font><br>";
+    			mText+= "<font color=\"#0066FF\">"+this.getResources().getString(R.string.prompt_drug_effect)+" "+StrConfig.HDDrugEffect[tempDrug.getEffect()]+"</font>";
+    			tvDrug[i].setText(Html.fromHtml(mText));
+    			reLayoutDrug[i].setVisibility(View.VISIBLE);
+    		}
+    		for (i=length;i<DRUG_MAX_NUM;i++)
+    			reLayoutDrug[i].setVisibility(View.GONE);
+    	}
+    		
 	}
-
-	
 }

@@ -20,10 +20,12 @@ import com.example.headdiary.hddialog.ActivityAggravateDialog;
 import com.example.headdiary.hddialog.AddDrugDialog;
 import com.example.headdiary.hddialog.CompanionDialog;
 import com.example.headdiary.hddialog.EndTimeDialog;
+import com.example.headdiary.hddialog.EndTimeQuestion;
 import com.example.headdiary.hddialog.MitigatingDialog;
 import com.example.headdiary.hddialog.PrecipiatingDialog;
 import com.example.headdiary.hddialog.ProdromeDialog;
 import com.example.headdiary.hddialog.StartTimeDialog;
+import com.example.headdiary.hddialog.StartTimeQuestion;
 import com.example.headdiary.util.AllExit;
 import com.example.headdiary.util.DBManager;
 import com.example.headdiary.util.TimeManager;
@@ -67,6 +69,7 @@ public class HeadDiaryFormActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_head_diary_form);
+		
 		headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
 		findView();
 		initLayout();

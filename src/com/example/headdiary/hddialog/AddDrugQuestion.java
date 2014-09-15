@@ -7,6 +7,7 @@ package com.example.headdiary.hddialog;
 
 import java.util.ArrayList;
 
+import com.example.headdiary.HeadDiaryFormActivity;
 import com.example.headdiary.R;
 import com.example.headdiary.R.id;
 import com.example.headdiary.R.layout;
@@ -44,7 +45,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AddDrugDialog extends Activity{
+public class AddDrugQuestion extends Activity{
 	private static final int RADIO_NUM=4;
 	private  RadioGroup radioGroup;  
 	private  RadioButton[] radioBtn=new RadioButton[RADIO_NUM];
@@ -53,14 +54,19 @@ public class AddDrugDialog extends Activity{
 	private EditText etName,etQuantity;
 	private HeadacheDiary headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
 	private PopupWindow popupwindow;	
+	private Button btn_before, btn_finish, btn_nodrug;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_drug_dialog);				
-		initView();
-		//button = (Button) findViewById(R.id.button1);
-		//button.setOnClickListener(this);
+		initView();		
+		btn_before= (Button)findViewById(R.id.drug_btn_cancel);
+		btn_before.setText("上一步");
+		btn_finish= (Button)findViewById(R.id.drug_btn_confirm);
+		btn_finish.setText("完成");
+		
+		
 	}
 	
 	
@@ -137,8 +143,7 @@ public class AddDrugDialog extends Activity{
 		
 	
  	private void initView(){
-		Drug tempDrug;
-		
+		Drug tempDrug;								
 		Intent intent=getIntent();
 		choice=intent.getIntExtra("choice", 5); 
 		if (choice<5 && headacheDiary.getDrugInList(choice)!=null){
@@ -198,9 +203,9 @@ public class AddDrugDialog extends Activity{
 		
 	}
 				
-	public void onClickCancel(View v){
-		if (choice<5 && headacheDiary.getDrugInList(choice)!=null)
-			headacheDiary.removeDrugInList(choice);
+	public void onClickCancel(View v){		
+		Intent intent = new Intent (AddDrugQuestion.this,MitigatingQuestion.class);	
+		startActivity(intent);
 		finish();
 	}
 	
@@ -210,20 +215,23 @@ public class AddDrugDialog extends Activity{
 		
 		name=etName.getText().toString().trim();
 		quantity=etQuantity.getText().toString().trim();
-		if (name.equals("")){
-			Toast.makeText(this, this.getResources().getString(R.string.error_no_drug_name), Toast.LENGTH_SHORT).show();
-			return;
-		}
-		if (quantity.equals("")){
+		
+		if (!name.equals("") && quantity.equals("")){
 			Toast.makeText(this, this.getResources().getString(R.string.error_no_drug_quantity), Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
 		int answer=radioGroup.getCheckedRadioButtonId ();
-		if (answer==-1){
+		if (!name.equals("") && answer==-1){
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_no_drug_effect), Toast.LENGTH_SHORT).show();
 			return;
 		}
+		
+		if(name.equals("") && quantity.equals("") && answer==-1){
+			finish();
+			Intent intent = new Intent (AddDrugQuestion.this,HeadDiaryFormActivity.class);	
+			startActivity(intent);
+		}else{
 		
 		newDrug.setName(name);
 		newDrug.setQuantity(quantity);
@@ -234,8 +242,10 @@ public class AddDrugDialog extends Activity{
 			headacheDiary.setDrugInList(choice, newDrug);
 		else
 			headacheDiary.addDrugToList(newDrug);
-		finish();		
-
+		finish();	
+		Intent intent = new Intent (AddDrugQuestion.this,HeadDiaryFormActivity.class);	
+		startActivity(intent);
+		}
 	}
 	
 	private static int getAnsbyId(int answer){
@@ -245,6 +255,10 @@ public class AddDrugDialog extends Activity{
 		return -1;
 	}
 
-
+   public void onClickNodrug(View v){	  
+	   finish();
+	   Intent intent = new Intent (AddDrugQuestion.this,HeadDiaryFormActivity.class);	
+	   startActivity(intent);
+   }
 
 }

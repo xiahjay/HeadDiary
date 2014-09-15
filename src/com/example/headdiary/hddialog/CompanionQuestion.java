@@ -133,6 +133,7 @@ public void onClickBefore(View v){
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_incomplete_input), Toast.LENGTH_SHORT).show();
 		else
 			{
+			
 			finish();			
 			}
 	}

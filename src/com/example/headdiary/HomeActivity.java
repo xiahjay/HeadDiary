@@ -133,14 +133,18 @@ public class HomeActivity extends Activity {
 	public void onClickNewHeadDiary(View v) {   
 		if (HeadacheDiaryDAO.getInstance().getIfLastDiaryComplete()){			
 			HeadacheDiaryDAO.getInstance().setHeadacheDiarySelected(new HeadacheDiary());
-			Intent intent = new Intent (HomeActivity.this,UnfinishedDiaryActivity.class);	
-			startActivity(intent);
+			//Intent intent = new Intent (HomeActivity.this,UnfinishedDiaryActivity.class);	
+			//startActivity(intent);
 		}
 		else{
 			HeadacheDiaryDAO.getInstance().setHeadacheDiarySelected((HeadacheDiary) HeadacheDiaryDAO.getInstance().getLastHeadacheDiary().clone());
-			Intent intent = new Intent (HomeActivity.this,UnfinishedDiaryActivity.class);	
-			startActivity(intent);	
+			//Intent intent = new Intent (HomeActivity.this,UnfinishedDiaryActivity.class);	
+			//startActivity(intent);	
 		}	
+		
+		Intent intent = new Intent (HomeActivity.this,UnfinishedDiaryActivity.class);	
+		startActivity(intent);
+		
 	}
 	
 	public void onClickSynchronize(View v){
@@ -443,81 +447,6 @@ public class HomeActivity extends Activity {
  	       
  	};
  	
- 	//--------------同步医生建议功能--------------------//
- 	Runnable synchronizeSuggestionRunnable = new Runnable(){
-        public void run() {
-         // TODO Auto-generated method stub
-        	Gson gson=new Gson();
-        	
-        	User user=UserDAO.getInstance().getUser();
-        	String uuid=user.getUserUUID();
-        	String cid = UserDAO.getInstance().getPushClientId();
-            String lastSuggestionTime=null;
-            if(user.getLastSuggestionTime()!=null){
-        	 lastSuggestionTime = user.getLastSuggestionTime();}
-            else{
-             lastSuggestionTime=null;
-            }
-           
-            
-            
-        	WebServiceManager.clearProperties();
-        	WebServiceManager.addProperties("userUUID", uuid);
-        	WebServiceManager.addProperties("pushClientId", cid);
-        	WebServiceManager.addProperties("lastSuggestionTime", "2014-04-25 12:20:00");        	
-        	
-        	String res=WebServiceManager.callWebServiceForString("synchronizeSuggestion");  
-        	
-        	Message message = new Message();
-	        Bundle data = new Bundle();
-	        data.putString(MsgConfig.KEY_RESULT,res);
-	        message.setData(data);
-			synSuggHandler.sendMessage(message);
-        }
-
-	};
-	
-	Handler synSuggHandler = new Handler(){
- 	    @Override
- 	    public void handleMessage(Message msg) {
- 	        super.handleMessage(msg); 	        
- 	        Bundle data = msg.getData();
- 	        String res = data.getString(MsgConfig.KEY_RESULT);
- 	        if(res==null){
- 	        	//ToastManager.showCallWebServiceError();
- 	        	synchonizingSuggAvaliable=false;
- 	        }
- 	        else{
- 	        	//syn Success
- 	        	try {
- 	        		JSONObject jsonObject;
- 	        		jsonObject = new JSONObject(res);
- 	        		String lastTime = jsonObject.getString("webLastSuggestionTime");
- 	        		String jsonSuggestionList = jsonObject.getString("jsonNewSuggestionList");
- 	        		Log.i("JYMwebLastSuggestionTime", lastTime);
- 	        		Log.i("JYMjsonNewSuggestionList", jsonSuggestionList);
-					Gson gson=new Gson();
-					User user=UserDAO.getInstance().getUser();
-					
-					if (!jsonSuggestionList.equals(MsgConfig.NO_DATA)){
-						ArrayList<Suggestion> nSuggestionList =gson.fromJson(jsonSuggestionList, new TypeToken<ArrayList<Suggestion>>(){}.getType());
-						DBManager.updateSuggestionList(nSuggestionList);
-					}
-					
-				   // user.setLastSuggestionTime(lastTime); 	        		
- 	        		synchonizingSuggAvaliable=true;
- 	        		//ToastManager.showShortToast("同步成功");	
-				} catch (Exception e) {
-					// TODO: handle exception
-					//ToastManager.showShortToast("无法解析数据");
-					synchonizingSuggAvaliable=false;
-				}
- 	        	
- 	        }	
- 	        
- 	        	        
- 	    }
- 	       
- 	};
+ 	
 }
 

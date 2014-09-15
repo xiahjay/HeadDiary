@@ -43,6 +43,7 @@ import android.graphics.Color;
 import android.graphics.Paint.Align;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.DateTimeKeyListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -90,6 +91,9 @@ public class GraphicActivity extends Activity {
 	    private Dialog dialog;
 		private RadioGroup radiogroup;
 		private TextView tvRecord;
+		private String month;
+			
+		
 		//ArrayList<String> dayList= new  ArrayList<String>();
 		//ArrayList<Integer> degreeList= new  ArrayList<Integer>();
 		
@@ -135,13 +139,16 @@ public class GraphicActivity extends Activity {
     	super.onResume();
     	Log.d("onResume", "onResume Method is executed");
     	
-    	 String month=UserDAO.getInstance().getSelectMonth();
-    	 month=month.substring(0,7);
+    	  month=UserDAO.getInstance().getSelectMonth();
+    	  month=month.substring(0,7);
+    	
+    	
+    	 
     	 tvRecord.setText(month);
     	 HeadacheAnalysis[] headacheAnalysisList=HeadacheDiaryDAO.getInstance().getHeadacheAnalysisList();
     	 HeadacheAnalysis headacheAnalysis = headacheAnalysisList[3];
-    	 String frequency=TimeManager.getStrDate(headacheAnalysis.getStartAnalysisTime())+" ~ "+TimeManager.getStrDate(headacheAnalysis.getEndAnalysisTime());
-    	 textTitle.setText(month);
+    	 String frequency=TimeManager.getStrDate(headacheAnalysis.getStartAnalysisTime())+" ~ "+TimeManager.getStrDate(headacheAnalysis.getEndAnalysisTime());    	 
+         textTitle.setText(month);
     	 text2.setText(month);
     	 text3.setText(month.substring(0, 4)+"年1月~12月");
     	 text4.setText(month.substring(0, 4)+"年1月~12月");
@@ -153,6 +160,7 @@ public class GraphicActivity extends Activity {
  
     private void init(){
     	final LinearLayout ll1 = (LinearLayout) findViewById(R.id.linechart1);
+    	final LinearLayout ll11 = (LinearLayout) findViewById(R.id.linechart11);
     	final ImageView arrow1 = (ImageView) findViewById(R.id.arrow1);
 		LinearLayout tl1 = (LinearLayout) findViewById(R.id.templl);
 		
@@ -164,10 +172,12 @@ public class GraphicActivity extends Activity {
 				// TODO Auto-generated method stub
 				if (ll1.getVisibility() == 0) {
 					ll1.setVisibility(View.GONE);
+					ll11.setVisibility(View.GONE);
 					arrow1.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow1));
 					
 				} else {
 					ll1.setVisibility(View.VISIBLE);
+					ll11.setVisibility(View.VISIBLE);
 					arrow1.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow2));// 璁剧疆鍙
 					
 				}
@@ -175,6 +185,7 @@ public class GraphicActivity extends Activity {
 			}
 		});
 		final LinearLayout ll2 = (LinearLayout) findViewById(R.id.linechart2);
+		final LinearLayout ll21 = (LinearLayout) findViewById(R.id.linechart21);
 		LinearLayout tl2 = (LinearLayout) findViewById(R.id.windll);
 		final ImageView arrow2 = (ImageView) findViewById(R.id.arrow2);
 
@@ -187,10 +198,12 @@ public class GraphicActivity extends Activity {
 				// TODO Auto-generated method stub
 				if (ll2.getVisibility() == 0) {
 					ll2.setVisibility(View.GONE);
+					ll21.setVisibility(View.GONE);
 					arrow2.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow1));
 					
 				} else {
 					ll2.setVisibility(View.VISIBLE);
+					ll21.setVisibility(View.VISIBLE);
 					arrow2.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow2));// 璁剧疆鍙
 					
 				}
@@ -326,7 +339,16 @@ public class GraphicActivity extends Activity {
         	series2.add(i, monthDuration[i]);  }
         	
         }
-        	              
+        	 
+        int max = monthDuration[0];
+
+       for (int i : monthDuration) {
+
+       max = max>i?max:i;
+       
+     
+      }
+       
           
         //将点集添加到这个数据集中  
         mDataset2.addSeries(series2);  
@@ -343,7 +365,7 @@ public class GraphicActivity extends Activity {
         }
           
         //设置好图表的样式  
-        setChartSettings(renderer2, "X", "Y", 1, xRange, 0, 25, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer2, "X", "Y", 1, xRange, 0, max, Color.BLACK, Color.BLACK);  
           
         //生成图表  
         chart2 = ChartFactory.getLineChartView(context2, mDataset2, renderer2);  
@@ -369,7 +391,24 @@ public class GraphicActivity extends Activity {
         	series3.add(i, monthDegree[i]);        	
         }
         	              
-          
+        int max = monthDegree[0];
+
+        for (int i :monthDegree) {
+
+        max = max>i?max:i;
+
+      
+       } 
+        
+        int ymax;
+        if(max<=10){
+        	 ymax=10;
+        }
+        if(max>=10 && max<=20){
+        	 ymax=20;
+        }else{
+        	 ymax=max;
+        }
         //将点集添加到这个数据集中  
         mDataset3.addSeries(series3);  
         Log.d("addSeries", "addSeries Method is executed");
@@ -381,7 +420,7 @@ public class GraphicActivity extends Activity {
         renderer3 = buildRenderer(color, style, true);  
           
         //设置好图表的样式  
-        setChartSettings(renderer3, "X", "Y", 1, 12, 0, 10, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer3, "X", "Y", 1, 12, 0,10, Color.BLACK, Color.BLACK);  
           
         //生成图表  
         chart3 = ChartFactory.getBarChartView(context3, mDataset3, renderer3,type);  
@@ -407,6 +446,23 @@ public class GraphicActivity extends Activity {
         	series4.add(i, drugFrequency[i]);        	
         }
         	              
+        int max = drugFrequency[0];
+
+        for (int i :drugFrequency) {
+
+        max = max>i?max:i;
+
+      
+       }  
+        int ymax;
+        if(max<10){
+        	 ymax=10;
+        }
+        if(max>=10 && max<20){
+        	 ymax=20;
+        }else{
+        	 ymax=max;
+        }
           
         //将点集添加到这个数据集中  
         mDataset4.addSeries(series4);  
@@ -419,7 +475,7 @@ public class GraphicActivity extends Activity {
         renderer4 = buildRenderer(color, style, true);  
           
         //设置好图表的样式  
-        setChartSettings(renderer4, "X", "Y", 1, 12, 0, 10, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer4, "X", "Y", 1, 12, 0,10, Color.BLACK, Color.BLACK);  
           
         //生成图表  
         chart4 = ChartFactory.getBarChartView(context4, mDataset4, renderer4,type);  
@@ -489,7 +545,7 @@ public class GraphicActivity extends Activity {
         renderer.setBackgroundColor(Color.WHITE);
         //renderer.setMarginsColor(Color.GRAY);
         //renderer.setLabelsColor(Color.WHITE);
-        renderer.setMargins(new int[] {20, 30, 10,20});
+        renderer.setMargins(new int[] {20, 50, 10,20});
         renderer.setChartTitleTextSize((float) 40);
         renderer.setAxisTitleTextSize((float) 20);
         renderer.setLabelsTextSize((float) 30);
@@ -525,16 +581,108 @@ public class GraphicActivity extends Activity {
 		}).show();
 		
 	}	
-   /*public void onClickRight(View v){
-    if(UserDAO.getInstance().getMonth()<12)	{
-    	int a=UserDAO.getInstance().getMonth();
-    	UserDAO.getInstance().setMonth(a+1);    	
-    	tvMonth.setText(StrConfig.MonthStyle[a+1]);
+   public void onClickBefore(View v){
+	   Button btn_before= (Button)findViewById(R.id.btn_before);
+	   month=UserDAO.getInstance().getSelectMonth().substring(5, 7);
+	   Log.i("jymMonth1before",month);
+	   int getMonth=Integer.parseInt(month);
+	  
+    if(getMonth>1)	{
+    	//btn_before.setClickable(true);
+    	month=StrConfig.MonthList[getMonth-2];
+        UserDAO.getInstance().setSelectMonth(month);        
+    	Log.i("jymMonth2before",month);	
+    	tvRecord.setText(month);
+        }
+    else{
+    	month=StrConfig.MonthList[0];
+    	UserDAO.getInstance().setSelectMonth(month);    	
+    	//btn_before.setClickable(false);
+    	tvRecord.setText(month);
        }
-    else 
-    	tvMonth.setText(StrConfig.MonthStyle[11]);
+     textTitle.setText(month);
+	 text2.setText(month);
+     initGraph1();
+	 initGraph2();
     
-    }*/
+    }
+    
+   public void onClickNext(View v) {
+	   Button btn_next= (Button)findViewById(R.id.btn_next);
+	   month=UserDAO.getInstance().getSelectMonth().substring(5, 7);
+	   Log.i("jymMonth1next",month);
+	   int getMonth=Integer.parseInt(month);
+	   if(getMonth<12){
+		  // btn_next.setClickable(true);
+		   month=StrConfig.MonthList[getMonth];
+	       UserDAO.getInstance().setSelectMonth(month);
+	       Log.i("jymMonth2next",month);	
+	       tvRecord.setText(month);}	   	           
+	   else{
+		   month=StrConfig.MonthList[11];
+	       UserDAO.getInstance().setSelectMonth(month);	    	
+	       //btn_next.setClickable(false);
+	       tvRecord.setText(month);
+	   }
+	   textTitle.setText(month);
+	   text2.setText(month);
+	   initGraph1();
+  	   initGraph2();
+	
+}
+ 
+   public void onClickBefore1(View v){
+	  
+	   month=UserDAO.getInstance().getSelectMonth().substring(5, 7);
+	   Log.i("jymMonth1before",month);
+	   int getMonth=Integer.parseInt(month);
+	  
+    if(getMonth>1)	{
+    	//btn_before.setClickable(true);
+    	month=StrConfig.MonthList[getMonth-2];
+        UserDAO.getInstance().setSelectMonth(month);        
+    	Log.i("jymMonth2before",month);	
+    	tvRecord.setText(month);
+        }
+    else{
+    	month=StrConfig.MonthList[0];
+    	UserDAO.getInstance().setSelectMonth(month);    	
+    	//btn_before.setClickable(false);
+    	tvRecord.setText(month);
+       }
+     textTitle.setText(month);
+	 text2.setText(month);
+     initGraph1();
+	 initGraph2();
+    
+    }
+    
+   public void onClickNext1(View v) {
+	   
+	   month=UserDAO.getInstance().getSelectMonth().substring(5, 7);
+	   Log.i("jymMonth1next",month);
+	   int getMonth=Integer.parseInt(month);
+	   if(getMonth<12){
+		  // btn_next.setClickable(true);
+		   month=StrConfig.MonthList[getMonth];
+	       UserDAO.getInstance().setSelectMonth(month);
+	       Log.i("jymMonth2next",month);	
+	       tvRecord.setText(month);}	   	           
+	   else{
+		   month=StrConfig.MonthList[11];
+	       UserDAO.getInstance().setSelectMonth(month);	    	
+	       //btn_next.setClickable(false);
+	       tvRecord.setText(month);
+	   }
+	   textTitle.setText(month);
+	   text2.setText(month);
+	   initGraph1();
+  	   initGraph2();
+	
+}
+   
+   
+   
     public void onClickMonth(View v){
     	
     	Intent intent = new Intent (GraphicActivity.this,SelectMonthDialog.class);	
@@ -640,7 +788,7 @@ public class GraphicActivity extends Activity {
     	return xSeries;
     }
     
-    
+     
     }
     
 

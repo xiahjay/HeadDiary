@@ -113,8 +113,8 @@ public class EndTimeQuestion extends Activity {
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_end_time_early), Toast.LENGTH_SHORT).show();	
 		else
 			{headacheDiary.setEndTime(TimeManager.getStrDateTime(endTime));
-		Intent intent = new Intent (EndTimeQuestion.this,PrecipiatingQuestion.class);	
-		startActivity(intent);
+		//Intent intent = new Intent (EndTimeQuestion.this,PrecipiatingQuestion.class);	
+		//startActivity(intent);
 		finish();
 			}
 	}

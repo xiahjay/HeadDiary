@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -40,13 +41,16 @@ public class PrecipiatingQuestion extends Activity {
 	private RelativeLayout reLayout;
 	private EditText etElse;
 	private HeadacheDiary headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
-	
+	private Button btn_cancel, btn_confirm;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_precipiating_dialog);
 		initView();
-
+		btn_cancel= (Button)findViewById(R.id.precipiating_btn_cancel);
+		btn_cancel.setText("上一步");
+		btn_confirm= (Button)findViewById(R.id.precipiating_btn_confirm);
+		btn_confirm.setText("下一步");
 	}
 
 	@Override  
@@ -98,7 +102,7 @@ public class PrecipiatingQuestion extends Activity {
 	}
 	
 	public void onClickCancel(View v){		
-		Intent intent = new Intent (PrecipiatingQuestion.this,HeadDiaryFormActivity.class);	
+		Intent intent = new Intent (PrecipiatingQuestion.this,EndTimeQuestion.class);	
 		startActivity(intent);
 		finish();
 	}

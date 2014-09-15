@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -34,12 +35,17 @@ public class MitigatingQuestion extends Activity {
 	
 	private EditText etElse;
 	private HeadacheDiary headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
+	private Button btn_cancel, btn_confirm;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mitigating_dialog);
 		initView();
+		btn_cancel= (Button)findViewById(R.id.mitigating_btn_cancel);
+		btn_cancel.setText("上一步");
+		btn_confirm= (Button)findViewById(R.id.mitigating_btn_confirm);
+		btn_confirm.setText("下一步");
 
 	}
 
@@ -92,7 +98,7 @@ public class MitigatingQuestion extends Activity {
 	}
 	
 	public void onClickCancel(View v){
-		Intent intent = new Intent (MitigatingQuestion.this,HeadDiaryFormActivity.class);	
+		Intent intent = new Intent (MitigatingQuestion.this,PrecipiatingQuestion.class);	
 		startActivity(intent);
 		finish();
 	}
@@ -112,7 +118,7 @@ public class MitigatingQuestion extends Activity {
 			headacheDiary.setMitigatingComment(etElse.getText().toString().trim());
 		else
 			headacheDiary.setMitigatingComment("");
-		Intent intent = new Intent (MitigatingQuestion.this,HeadDiaryFormActivity.class);	
+		Intent intent = new Intent (MitigatingQuestion.this,AddDrugQuestion.class);	
 		startActivity(intent);
 		finish();
 	}

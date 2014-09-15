@@ -107,7 +107,9 @@ public class LoginActivity extends Activity {
         public void run() {
          // TODO Auto-generated method stub
         	
+        	String cid = UserDAO.getInstance().getPushClientId();
         	WebServiceManager.clearProperties();
+        	WebServiceManager.addProperties("pushClientId", cid);
         	WebServiceManager.addProperties("phone", UserDAO.getInstance().getLoginUser().getPhone());
         	WebServiceManager.addProperties("password", UserDAO.getInstance().getLoginUser().getPassword());
         	String res=WebServiceManager.callWebServiceForString("attemptLogin");  
