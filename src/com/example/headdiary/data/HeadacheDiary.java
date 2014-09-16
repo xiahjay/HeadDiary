@@ -380,7 +380,7 @@ public class HeadacheDiary implements Cloneable{
 	public String getStrAidDiagnosis() {
 		String result="";
 		if(AidDiagnosis>=0)
-			result="头痛分类为："+StrConfig.HDSecondaryClassification[AidDiagnosis];
+			result="可能的头痛分类为："+StrConfig.HDSecondaryClassification[AidDiagnosis];
 		return result;
 		
 	}

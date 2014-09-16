@@ -365,7 +365,7 @@ public class GraphicActivity extends Activity {
         }
           
         //设置好图表的样式  
-        setChartSettings(renderer2, "X", "Y", 1, xRange, 0, max, Color.BLACK, Color.BLACK);  
+        setChartSettings(renderer2, "X", "Y", 1, xRange, 0, max*1.2, Color.BLACK, Color.BLACK);  
           
         //生成图表  
         chart2 = ChartFactory.getLineChartView(context2, mDataset2, renderer2);  
