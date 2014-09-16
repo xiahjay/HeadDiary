@@ -15,13 +15,14 @@ public class Diagnosis {
 		int count[]={0,0};
 		
 		//PART 1
-		if(headacheDiary.getEndTime()!=null){
-			Log.i("diagnoseJYM","getendtime");
+		if(headacheDiary.getEndTime()!=null){			
 		long duration=headacheDiary.getDurationMin();
+		    
 		if (duration<240 || duration>4320)
 			flag[0]=false;
 		if (duration<15 || duration>180)
 			flag[2]=false;
+		  Log.i("diagnoseJYM","duration<15");
 	    }
 		
 		//PART 2

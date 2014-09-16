@@ -50,6 +50,7 @@ public class PushDemoReceiver extends BroadcastReceiver {
 			if (payload != null) {
 				String data = new String(payload);
                 UserDAO.getInstance().setPayload(data);
+               DoctorOnlineActivity.getPayload = data;
                HomeActivity.getPayload = data;
                singleThreadExecutorForSynchronize.execute(synchronizeSuggestionRunnable);
                //设置主页的消息提醒

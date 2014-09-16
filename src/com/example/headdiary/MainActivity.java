@@ -26,7 +26,7 @@ import android.view.Menu;
 
 public class MainActivity extends Activity {
 	private static final String TAG="MainActivity";
-	
+	public static  String getPayload=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,14 +38,15 @@ public class MainActivity extends Activity {
 		new Handler().postDelayed(new Runnable(){
 			@Override
 			public void run(){
-				Intent intent;
+				
 				
 				if (DBManager.getLastUser()){					
-					intent=new Intent(MainActivity.this,HomeActivity.class);
-					startActivity(intent);
+					
+				Intent intent=new Intent(MainActivity.this,HomeActivity.class);
+			    startActivity(intent);
 				}
 				else{
-					intent=new Intent(MainActivity.this,LoginActivity.class);
+					Intent intent=new Intent(MainActivity.this,LoginActivity.class);
 					startActivity(intent);
 				}
 				setLanguage();

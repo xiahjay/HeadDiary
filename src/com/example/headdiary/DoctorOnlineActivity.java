@@ -2,14 +2,26 @@ package com.example.headdiary;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import org.json.JSONObject;
 
 
 
 import com.example.headdiary.data.Suggestion;
+import com.example.headdiary.data.User;
 import com.example.headdiary.data.UserDAO;
+import com.example.headdiary.data.Config.MsgConfig;
+import com.example.headdiary.util.DBManager;
 import com.example.headdiary.util.MessageAdapter;
+import com.example.headdiary.util.WebServiceManager;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +38,9 @@ public class DoctorOnlineActivity extends Activity {
 	private ArrayList<HashMap<String, Object>> HDList=new ArrayList<HashMap<String, Object>>();	
 	public static ArrayList<Suggestion> suggestionList;
 	private ZrcListView listView;
+	private static Boolean synchonizingSuggAvaliable=true;
+	static ExecutorService singleThreadExecutorForSynchronize = Executors.newSingleThreadExecutor();
+	public static String getPayload=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,7 +80,8 @@ public class DoctorOnlineActivity extends Activity {
 	        listView.setOnRefreshStartListener(new OnStartListener() {
 	            @Override
 	            public void onStart() {
-	                refresh();
+	                refresh();	                
+
 	            }
 	        });
 
@@ -77,17 +93,29 @@ public class DoctorOnlineActivity extends Activity {
 	            }
 	        });
 	        
-	        listView.refresh(); // 主动下拉刷新
+	        if(getPayload!=null){
+	        listView.refresh(); // 主动下拉刷新	   
+	        }
+	       
 	    }
 	
 	private void refresh(){
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-               
-            listView.setRefreshSuccess("刷新成功"); // 通知加载成功
-            listView.startLoadMore(); // 开启LoadingMore功能
-                
+            if(getPayload!=null){
+             singleThreadExecutorForSynchronize.execute(synchronizeSuggestionRunnable);               
+             getPayload=null;
+             }
+            if(synchonizingSuggAvaliable){
+               listView.setRefreshSuccess("刷新成功"); // 通知加载成功
+               listView.startLoadMore(); // 开启LoadingMore功能               
+               }
+           else{
+            	listView.setRefreshFail("刷新失败");
+               }
+            
+            
             }
         }, 2 * 1000);
     }
@@ -143,4 +171,84 @@ public class DoctorOnlineActivity extends Activity {
 		   }		
 	}
 
+	//--------------同步医生建议功能--------------------//
+ 	Runnable synchronizeSuggestionRunnable = new Runnable(){
+        public void run() {
+         // TODO Auto-generated method stub
+        	Gson gson=new Gson();
+        	
+        	User user=UserDAO.getInstance().getUser();
+        	String uuid=user.getUserUUID();
+        	//String cid = UserDAO.getInstance().getPushClientId();
+            String lastSuggestionTime=null;
+            if(user.getLastSuggestionTime()!=null){
+        	 lastSuggestionTime = user.getLastSuggestionTime();}
+            else{
+             lastSuggestionTime="1993-07-08 18:00:00";
+            }
+           
+            
+            
+        	WebServiceManager.clearProperties();
+        	WebServiceManager.addProperties("userUUID", uuid);
+        	//WebServiceManager.addProperties("pushClientId", cid);
+        	WebServiceManager.addProperties("lastSuggestionTime", "1993-07-08 18:00:00");        	
+        	
+        	String res=WebServiceManager.callWebServiceForString("synchronizeSuggestion");  
+        	
+        	Message message = new Message();
+	        Bundle data = new Bundle();
+	        data.putString(MsgConfig.KEY_RESULT,res);
+	        message.setData(data);
+			synSuggHandler.sendMessage(message);
+        }
+
+	};
+	
+	Handler synSuggHandler = new Handler(){
+ 	    @Override
+ 	    public void handleMessage(Message msg) {
+ 	        super.handleMessage(msg); 	        
+ 	        Bundle data = msg.getData();
+ 	        String res = data.getString(MsgConfig.KEY_RESULT);
+ 	        if(res==null){
+ 	        	//ToastManager.showCallWebServiceError();
+ 	        	synchonizingSuggAvaliable=false;
+ 	        }
+ 	        else{
+ 	        	//syn Success
+ 	        	try {
+ 	        		JSONObject jsonObject;
+ 	        		jsonObject = new JSONObject(res);
+ 	        		String lastTime = jsonObject.getString("webLastSuggestionTime");
+ 	        		String jsonSuggestionList = jsonObject.getString("jsonNewSuggestionList");
+ 	        		Log.i("JYMwebLastSuggestionTime", lastTime);
+ 	        		Log.i("JYMjsonNewSuggestionList", jsonSuggestionList);
+					Gson gson=new Gson();
+					User user=UserDAO.getInstance().getUser();
+					
+					if (!jsonSuggestionList.equals(MsgConfig.NO_DATA)){
+						ArrayList<Suggestion> nSuggestionList =gson.fromJson(jsonSuggestionList, new TypeToken<ArrayList<Suggestion>>(){}.getType());
+						DBManager.updateSuggestionList(nSuggestionList);
+					}
+					
+				    user.setLastSuggestionTime(lastTime); 
+				    Log.i("PushDemoReceiver","lastSuggestionTime="+user.getLastSuggestionTime());
+ 	        		synchonizingSuggAvaliable=true;
+ 	        		//ToastManager.showShortToast("同步成功");	
+				} catch (Exception e) {
+					// TODO: handle exception
+					//ToastManager.showShortToast("无法解析数据");
+					synchonizingSuggAvaliable=false;
+				}
+ 	        	
+ 	        }	
+ 	        
+ 	        	        
+ 	    }
+ 	       
+ 	};
+	
+	
+	
 }

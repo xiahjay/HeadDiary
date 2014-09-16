@@ -415,7 +415,7 @@ public class GraphicActivity extends Activity {
           
         //以下都是曲线的样式和属性等等的设置，renderer相当于一个用来给图表做渲染的句柄  
         BarChart.Type type = BarChart.Type.DEFAULT;
-        int color = Color.BLUE;  
+        int color =Color.rgb(0, 128, 0);
         PointStyle style = PointStyle.DIAMOND;  
         renderer3 = buildRenderer(color, style, true);  
           
@@ -470,7 +470,7 @@ public class GraphicActivity extends Activity {
           
         //以下都是曲线的样式和属性等等的设置，renderer相当于一个用来给图表做渲染的句柄  
         BarChart.Type type = BarChart.Type.DEFAULT;
-        int color = Color.BLUE;  
+        int color = Color.rgb(0, 128, 0);  
         PointStyle style = PointStyle.DIAMOND;  
         renderer4 = buildRenderer(color, style, true);  
           

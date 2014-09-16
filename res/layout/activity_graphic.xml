@@ -56,7 +56,7 @@
         		android:layout_height="wrap_content"
         		android:layout_centerVertical="true"
         		android:padding="8dp" 
-        		android:text="切换月份"
+        		android:text="切换年月"
         		android:textSize="13sp"		
 				android:textColor="#000" />  
 			<TextView
@@ -132,11 +132,18 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingTop="5dp" >
+			
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_shezhi"
+                android:orientation="vertical" >
 <!-- **内容一开始***************************************************************************************** -->
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/list_item_bg1"
+                android:background="@color/lightblue"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -157,7 +164,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="时间-疼痛程度 (单位：日期-疼痛等级)"
+                            android:text="每日-疼痛程度 (单位：日期-疼痛等级)"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                         
@@ -217,14 +224,15 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"                      
               android:layout_gravity="center_horizontal" 
+              android:layout_marginBottom="5dp"
               android:visibility="gone" >
             <Button
               android:id="@+id/btn_before"
               android:layout_width="140dp"
-              android:layout_height="40dp"
+              android:layout_height="30dp"
               android:layout_marginRight="5dp"
               android:text="上一月"
-              android:textSize="16sp"
+              android:textSize="12sp"
               android:textColor="@color/white"
               android:background="@drawable/security_row_qq_bg"
               android:gravity="center"
@@ -234,10 +242,10 @@
             <Button
               android:id="@+id/btn_next"
               android:layout_width="140dp"
-              android:layout_height="40dp"
+              android:layout_height="30dp"
               android:layout_marginLeft="5dp"
               android:text="下一月"
-              android:textSize="16sp"
+              android:textSize="12sp"
               android:textColor="@color/white"
               android:background="@drawable/security_row_qq_bg"
               android:gravity="center"
@@ -249,7 +257,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/list_item_bg1"
+                android:layout_marginBottom="10dp"
+                 android:background="@color/lightblue"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -268,7 +277,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="时间-疼痛持续时间 (单位；日期-小时)"
+                            android:text="每日-疼痛持续时间 (单位；日期-小时)"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -323,14 +332,15 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"                      
               android:layout_gravity="center_horizontal" 
+              android:layout_marginBottom="5dp"
               android:visibility="gone" >
             <Button
               android:id="@+id/btn_before1"
               android:layout_width="140dp"
-              android:layout_height="40dp"
+              android:layout_height="30dp"
               android:layout_marginRight="5dp"
               android:text="上一月"
-              android:textSize="16sp"
+              android:textSize="12sp"
               android:textColor="@color/white"
               android:background="@drawable/security_row_qq_bg"
               android:gravity="center"
@@ -340,10 +350,10 @@
             <Button
               android:id="@+id/btn_next1"
               android:layout_width="140dp"
-              android:layout_height="40dp"
+              android:layout_height="30dp"
               android:layout_marginLeft="5dp"
               android:text="下一月"
-              android:textSize="16sp"
+              android:textSize="12sp"
               android:textColor="@color/white"
               android:background="@drawable/security_row_qq_bg"
               android:gravity="center"
@@ -352,12 +362,20 @@
            
                 
             </LinearLayout>
+            </LinearLayout>
 <!-- ***内容2结束*************************************************************************************** -->
-            <LinearLayout
+           <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_shezhi"
+                android:orientation="vertical" >
+           
+            <LinearLayout                
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/list_item_bg1"
+                android:layout_marginTop="10dp"
+                 android:background="#ccf2a4"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -412,7 +430,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="8月"
-                            android:textColor="@color/blue"
+                            android:textColor="@color/green"
                             android:textSize="15sp" />
                       </LinearLayout>
                       
@@ -433,7 +451,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/list_item_bg1"
+                android:layout_marginBottom="10dp"
+                 android:background="#ccf2a4"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -488,7 +507,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="8月"
-                            android:textColor="@color/blue"
+                            android:textColor="@color/green"
                             android:textSize="15sp" />
                       </LinearLayout>
                       
@@ -504,6 +523,7 @@
                </LinearLayout>
                
             </LinearLayout>
+             </LinearLayout>
 <!-- *内容四结束*************************************************************************************** -->  
             
      </LinearLayout>             

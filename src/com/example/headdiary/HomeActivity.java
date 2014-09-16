@@ -62,11 +62,11 @@ public class HomeActivity extends Activity {
 		AllExit.getInstance().addActivity(this);
 		setContentView(R.layout.activity_home);
 		init();	
-		//if(UserDAO.getInstance().getPayload()!=null){
-		//singleThreadExecutorForSynchronize.execute(synchronizeSuggestionRunnable);
-		//Log.i("JYM","singleThreadExecutorForSynchronize");
-		//UserDAO.getInstance().setPayload(null);
-		//}
+		if(getPayload!=null){
+			Intent intent=new Intent(HomeActivity.this,DoctorOnlineActivity.class);
+			startActivity(intent);
+			getPayload=null;
+		}
 	}
 
 	private void init(){
