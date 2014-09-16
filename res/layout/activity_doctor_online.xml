@@ -4,8 +4,8 @@
     android:layout_height="fill_parent"
     android:background="#EDE4D6"
     android:orientation="vertical" >
-        
-    <RelativeLayout
+          
+ 	 <RelativeLayout
         android:id="@+id/doctor_layout_top"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -31,30 +31,25 @@
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold" />
-    </RelativeLayout>
-    
-	
-
-	
-	
+    </RelativeLayout> 
+      
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
+        android:layout_height="0dp"             
         android:layout_weight="1">
-
-         <ListView
-	    	android:id="@android:id/list"
-	    	android:layout_width="match_parent"
-	    	android:layout_height="wrap_content"
-	    	android:cacheColorHint="@color/white"
-       		android:fadeScrollbars="false" 
-       		android:divider="#EDE4D6"   
-			android:dividerHeight="0.2dp"/>  
+        
+       <zrc.widget.ZrcListView
+        android:id="@+id/zListView"
+        android:layout_width="match_parent"
+        android:divider="#EDE4D6"  
+        android:layout_height="match_parent" >
+       </zrc.widget.ZrcListView>
 		<ViewStub
             android:id="@android:id/empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout="@layout/doctor_online_viewstub_empty" />
-    </FrameLayout>
+		
+       </FrameLayout>
  </LinearLayout>
