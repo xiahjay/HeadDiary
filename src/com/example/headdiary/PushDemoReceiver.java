@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 
 import org.json.JSONObject;
 
+import android.R.integer;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -51,10 +52,10 @@ public class PushDemoReceiver extends BroadcastReceiver {
 				String data = new String(payload);
                 UserDAO.getInstance().setPayload(data);
                DoctorOnlineActivity.getPayload = data;
-               HomeActivity.getPayload = data;
+               HomeActivity.getPayload = data;                     		  
                singleThreadExecutorForSynchronize.execute(synchronizeSuggestionRunnable);
                //设置主页的消息提醒
-               setReminder();
+               //setReminder();
                //DoctorOnlineActivity.suggestionList= UserDAO.getInstance().getSuggestionList();
               // Log.i("JYM","suggestionList="+UserDAO.getInstance().getSuggestionList());
                 Log.d("GetuiSdkDemo", "Got Payload:" + data);
@@ -91,8 +92,9 @@ public class PushDemoReceiver extends BroadcastReceiver {
 	
 	private void setReminder() {
 		// TODO Auto-generated method stub
-		HomeActivity.tvUnread.setVisibility(View.VISIBLE);	
+		HomeActivity.tvUnread.setVisibility(View.VISIBLE);			
 		HomeActivity.tvUnread.setText(Integer.toString(UserDAO.getInstance().getUnreadSuggestion()));
+		Log.i("PushDemoReciever","unreadsuggestion="+Integer.toString(UserDAO.getInstance().getUnreadSuggestion()));
 	}
 
 		//--------------同步医生建议功能--------------------//
@@ -154,6 +156,10 @@ public class PushDemoReceiver extends BroadcastReceiver {
 						if (!jsonSuggestionList.equals(MsgConfig.NO_DATA)){
 							ArrayList<Suggestion> nSuggestionList =gson.fromJson(jsonSuggestionList, new TypeToken<ArrayList<Suggestion>>(){}.getType());
 							DBManager.updateSuggestionList(nSuggestionList);
+							
+							HomeActivity.tvUnread.setVisibility(View.VISIBLE);			
+				       		HomeActivity.tvUnread.setText(Integer.toString(UserDAO.getInstance().getUnreadSuggestion()));
+				       		Log.i("PushDemoReciever","unreadsuggestion="+Integer.toString(UserDAO.getInstance().getUnreadSuggestion()));
 						}
 						
 					    user.setLastSuggestionTime(lastTime); 

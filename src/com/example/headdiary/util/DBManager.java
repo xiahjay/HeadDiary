@@ -701,6 +701,23 @@ public class DBManager {
 		db.close();
 		
 	}
+	
+	public static int getAllCountFromDB() {
+		// TODO Auto-generated method stub
+		int count=0;
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor;
+		String sql ="select * from SuggestionInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"'";
+		cursor = db.rawQuery(sql, null);
+		if(cursor!=null && cursor.moveToFirst())
+		  do{
+			 count++;
+     		}while (cursor.moveToNext());
+		
+		
+		db.close();
+		return count;
+	}
 
 	public static void setSelectedSuggestionRead(int RecId) {
 		// TODO Auto-generated method stub

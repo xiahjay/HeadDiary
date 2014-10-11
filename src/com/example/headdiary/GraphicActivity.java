@@ -537,7 +537,7 @@ public class GraphicActivity extends Activity {
         renderer.setLabelsColor(Color.BLACK);
         renderer.setShowGrid(true);  
         renderer.setGridColor(Color.GRAY);  
-        renderer.setXLabels(20);  
+        renderer.setXLabels(20);          
         renderer.setYLabels(10);  
         renderer.setXTitle(" "); 
         renderer.setYTitle(" ");  

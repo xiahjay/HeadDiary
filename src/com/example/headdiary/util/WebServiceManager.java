@@ -14,6 +14,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.util.Log;
 
 public class WebServiceManager {
+	//public static final String URL="http://115.28.42.235/HeadacheWebsite/Service1.svc";
 	public static final String URL="http://115.28.42.235/HeadacheDiaryWCF_Suggestion/Service1.svc";
 	//public static final String URL="http://115.28.42.235/HeadacheDiaryWCF/Service1.svc"; 
 	//public static final String URL="http://115.28.42.235/APPBigGame/Service1.svc";  //APP´óÈü

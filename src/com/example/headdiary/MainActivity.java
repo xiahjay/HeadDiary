@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);				
 		//Log.i("getPayload","payload="+UserDAO.getInstance().getPayload());
-	    //deleteDB(DBConfig.DB_FULLNAME);
+	   // deleteDB(DBConfig.DB_FULLNAME);
 		importDB(DBConfig.DB_FULLNAME);
 
 		new Handler().postDelayed(new Runnable(){

@@ -22,9 +22,11 @@ import com.google.gson.reflect.TypeToken;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.R.integer;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewStub;
 import zrc.widget.SimpleFooter;
 import zrc.widget.SimpleHeader;
 import zrc.widget.ZrcListView;
@@ -68,9 +70,9 @@ public class DoctorOnlineActivity extends Activity {
 	        listView.setHeadable(header);
 
 	        // 设置加载更多的样式（可选）
-	        SimpleFooter footer = new SimpleFooter(this);
-	        footer.setCircleColor(0xff33bbee);
-	        listView.setFootable(footer);
+	      //  SimpleFooter footer = new SimpleFooter(this);
+	       // footer.setCircleColor(0xff33bbee);
+	        //listView.setFootable(footer);
 
 	        // 设置列表项出现动画（可选）
 	        listView.setItemAnimForTopIn(R.anim.topitem_in);
@@ -80,22 +82,24 @@ public class DoctorOnlineActivity extends Activity {
 	        listView.setOnRefreshStartListener(new OnStartListener() {
 	            @Override
 	            public void onStart() {
-	                refresh();	                
+	                refresh();	
+	               // refreshDispArray();
 
 	            }
 	        });
 
 	        // 加载更多事件回调（可选）
-	        listView.setOnLoadMoreStartListener(new OnStartListener() {
-	            @Override
-	            public void onStart() {
-	                loadMore();
-	            }
-	        });
+	      //  listView.setOnLoadMoreStartListener(new OnStartListener() {
+	           // @Override
+	            //public void onStart() {
+	             //   loadMore();
+	           // }
+	       // });
 	        
-	        if(getPayload!=null){
-	        listView.refresh(); // 主动下拉刷新	   
-	        }
+	        //if(getPayload!=null){
+	       // listView.refresh(); 
+	        // 主动下拉刷新	   
+	        //}
 	       
 	    }
 	
@@ -104,7 +108,8 @@ public class DoctorOnlineActivity extends Activity {
             @Override
             public void run() {
             if(getPayload!=null){
-             singleThreadExecutorForSynchronize.execute(synchronizeSuggestionRunnable);               
+             singleThreadExecutorForSynchronize.execute(synchronizeSuggestionRunnable);  
+             refreshDispArray();
              getPayload=null;
              }
             if(synchonizingSuggAvaliable){
@@ -155,16 +160,17 @@ public class DoctorOnlineActivity extends Activity {
 						
 	//--------------方法-------------------//
 	private void refreshDispArray(){	
-		
+	  //int count=DBManager.getAllCountFromDB();
 	  suggestionList= UserDAO.getInstance().getSuggestionList();
 	  HDList=UserDAO.getInstance().getSuggestionListForDisplay(suggestionList);
 	  Log.i("JYM","refreshDispArray has ran");
-	  Log.i("JYM","suggestionList="+suggestionList);
+	  
 		if (HDList!=null){
 		   mAdapter = new MessageAdapter(this,HDList);
-		  // setListAdapter(mAdapter);	
+		   Log.i("JYM","suggestionList="+suggestionList);
 		   listView.setAdapter(mAdapter);
 		   }
+		
 		
 		for(Suggestion suggestion:suggestionList){			
 	       UserDAO.getInstance().setSuggestionRead(suggestion.getRecId());

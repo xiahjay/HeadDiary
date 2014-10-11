@@ -365,10 +365,19 @@ public class UnfinishedDiaryActivity extends Activity {
 				Diagnose diagnose = DBManager.getDiagnoseInfor(headacheDiary.getAidDiagnosis());
 				String suggestion = diagnose.getSuggestion();
 				String finalDiagnoseResult = diagnoseResult+"\n"+"建议的缓解方法为:"+suggestion;
-				tvDiagnoseResult.setText(finalDiagnoseResult);
+				
 				
 				String guidelines = diagnose.getGuidelines();
-				tvGuidelines.setText(guidelines);
+				
+				
+				if(headacheDiary.getEndTime()==null){
+				  tvDiagnoseResult.setText("建议的缓解方法为:"+suggestion);
+				  tvGuidelines.setText("尚未得出诊断结果，暂无临床指南依据。");
+				}else{
+				  tvDiagnoseResult.setText(finalDiagnoseResult);
+				  tvGuidelines.setText(guidelines);
+				}
+				
 				
 		
 		//StartTime

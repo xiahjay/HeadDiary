@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/title_document"
+            android:text="查看日志"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -40,15 +40,14 @@
 	    android:layout_height="wrap_content" >
 		
         <RelativeLayout
-      		android:id="@+id/document_rlayout_period"
-            android:layout_width="0dp"
+            android:id="@+id/document_rlayout_period"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center_vertical"
-            android:background="@drawable/diary_single_item"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:onClick="onClickPeriod">
+            android:layout_marginTop="8dp"
+            android:background="@drawable/diary_single_item"
+            android:gravity="center_vertical"
+            android:onClick="onClickPeriod" >
             
             <TextView
                 android:id="@+id/document_tv_time"
@@ -108,7 +107,7 @@
        		android:divider="@color/lightgray"   
 			android:dividerHeight="0.2dp"/>  
 		<ViewStub
-            android:id="@android:id/empty"
+            android:id="@+id/viewstub_empty"           
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -62,11 +62,11 @@ public class HomeActivity extends Activity {
 		AllExit.getInstance().addActivity(this);
 		setContentView(R.layout.activity_home);
 		init();	
-		if(getPayload!=null){
-			Intent intent=new Intent(HomeActivity.this,DoctorOnlineActivity.class);
-			startActivity(intent);
-			getPayload=null;
-		}
+		//if(getPayload!=null){
+			//Intent intent=new Intent(HomeActivity.this,DoctorOnlineActivity.class);
+			//startActivity(intent);
+			//getPayload=null;
+		//}
 	}
 
 	private void init(){

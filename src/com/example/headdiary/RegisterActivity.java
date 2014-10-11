@@ -106,10 +106,10 @@ public class RegisterActivity extends Activity{
         	User user=UserDAO.getInstance().getRegisterUser();
         	String cid = UserDAO.getInstance().getPushClientId();
         	WebServiceManager.clearProperties();
-            WebServiceManager.addProperties("pushClientId", cid);
         	WebServiceManager.addProperties("userName", user.getUserName());
         	WebServiceManager.addProperties("phone", user.getPhone());
         	WebServiceManager.addProperties("password", user.getPassword());
+        	WebServiceManager.addProperties("pushClientId", cid);
         	String res=WebServiceManager.callWebServiceForString("register");  
         	
         	Message message = new Message();
