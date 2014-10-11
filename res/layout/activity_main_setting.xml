@@ -146,7 +146,7 @@
             			android:layout_height="wrap_content"
             			android:gravity="center_vertical"
             			android:onClick="onClickAutoUpload"
-            			android:background="@drawable/diary_last_item" >
+            			android:background="@drawable/diary_item" >
             			<TextView
             		        android:id="@+id/tv1"
             		        android:layout_width="120dp"
@@ -187,11 +187,10 @@
       				
       				<RelativeLayout      				    
             			android:layout_width="fill_parent"
-            			android:layout_height="wrap_content"
-            			android:layout_marginTop="14dp"
+            			android:layout_height="wrap_content"            			
             			android:gravity="center_vertical"
             			android:clickable="true"
-            			android:background="@drawable/diary_single_item" 
+            			android:background="@drawable/diary_last_item" 
             			android:onClick="onClickLanguage">
             			<TextView
             		        android:id="@+id/tv2"
@@ -228,8 +227,91 @@
             		        android:src="@drawable/diary_arrow" />      					
       				</RelativeLayout>
       				
+ <!--  服药提醒以及添加药物 ***********************************************************************   -->     				
+      				<RelativeLayout      				    
+            			android:layout_width="fill_parent"
+            			android:layout_height="wrap_content"
+            			android:layout_marginTop="14dp"
+            			android:gravity="center_vertical"            			
+            			android:background="@drawable/diary_first_item" >
+            			<TextView
+            		        android:id="@+id/alarm_clock"
+            		        android:layout_width="120dp"
+            		        android:layout_height="wrap_content"
+            		        android:layout_centerVertical="true"
+            		        android:padding="8dp"
+            		        android:text="@string/alarm_clock"
+            		        android:textColor="#000"
+            		        android:textSize="17sp" />
+            		    
+            		    <TextView
+            		        android:id="@+id/setting_alarm_clock"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:padding="8dp"
+            		        android:layout_toRightOf="@id/alarm_clock"
+            		        android:layout_marginLeft="40dp"
+            		        android:layout_toLeftOf="@+id/arrow"
+            		        android:layout_centerVertical="true"
+            		        android:text="@string/prompt_none"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/green"
+            		        android:gravity="right"/>
 
-      				<!--   ***********************************************************************   -->
+            		    <ImageView
+            		        android:id="@id/arrow"
+            		        android:layout_width="wrap_content"
+            		        android:layout_height="wrap_content"
+            		        android:layout_alignParentRight="true"
+            		        android:layout_centerVertical="true"
+            		        android:clickable="true"
+            		        android:scaleType="matrix"
+            		        android:src="@drawable/diary_arrow" />      					
+      				</RelativeLayout>
+      				
+      				<RelativeLayout      				    
+            			android:layout_width="fill_parent"
+            			android:layout_height="wrap_content"
+            			android:gravity="center_vertical"            			
+            			android:background="@drawable/diary_last_item" >
+            			<TextView
+            		        android:id="@+id/add_drug"
+            		        android:layout_width="120dp"
+            		        android:layout_height="wrap_content"
+            		        android:layout_centerVertical="true"
+            		        android:padding="8dp"
+            		        android:text="@string/add_drug"
+            		        android:textColor="#000"
+            		        android:textSize="17sp" />
+            		    
+            		    <TextView
+            		        android:id="@+id/setting_new_drug"
+            		        android:layout_width="match_parent"
+            		        android:layout_height="wrap_content"
+            		        android:padding="8dp"
+            		        android:layout_toRightOf="@id/add_drug"
+            		        android:layout_marginLeft="40dp"
+            		        android:layout_toLeftOf="@+id/arrow"
+            		        android:layout_centerVertical="true"
+            		        android:text="添加"
+            		        android:textSize="17sp" 
+            		        android:textColor="@color/green"
+            		        android:gravity="right"/>
+
+            		    <ImageView
+            		        android:id="@id/arrow"
+            		        android:layout_width="wrap_content"
+            		        android:layout_height="wrap_content"
+            		        android:layout_alignParentRight="true"
+            		        android:layout_centerVertical="true"
+            		        android:clickable="true"
+            		        android:scaleType="matrix"
+            		        android:src="@drawable/diary_arrow" />      					
+      				</RelativeLayout>
+      				
+      				
+
+ <!--   ***********************************************************************   -->
       				
       				<Button 
       				    android:layout_width="fill_parent" 

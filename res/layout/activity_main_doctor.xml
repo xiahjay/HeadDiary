@@ -124,7 +124,7 @@
             android:onClick="onClickDoctor">
             
             <ImageView
-                android:id="@+id/head"
+                android:id="@id/head"
                 android:layout_width="55dp"
 		        android:layout_height="55dp"
                 android:layout_alignParentLeft="true"
@@ -146,7 +146,7 @@
       			android:orientation="vertical" 
       			android:layout_centerVertical="true">
       			<TextView
-      				android:id="@+id/tv1"
+      				android:id="@id/tv1"
       				android:layout_width="wrap_content"
       				android:layout_height="wrap_content"
       				android:padding="3dp"
@@ -154,7 +154,7 @@
       				android:textColor="#000"
       				android:textSize="15sp" />
       			<TextView
-      				android:id="@+id/tv2"
+      				android:id="@id/tv2"
       				android:layout_width="wrap_content"
       				android:layout_height="wrap_content"
       				android:padding="3dp"

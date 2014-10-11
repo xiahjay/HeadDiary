@@ -6,6 +6,8 @@ package com.example.headdiary.data;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.example.headdiary.util.DBManager;
+
 import android.R.integer;
 
 /**
@@ -18,7 +20,7 @@ public class User {
 	private String UserUUID;
 	private ArrayList<Integer> HDNeedUpload,HDNeedDelete;
 	private int RemPswd,BirthYear,AutoUpload;
-	private String UserName,Password,Phone,Sex,DoctorName;
+	private String UserName,Password,Phone,Sex,DoctorName,LastSuggestionTime;
 	
 	public User(){
 		clearData();
@@ -207,6 +209,16 @@ public class User {
 			return true;
 		return false;
 		
+	}
+
+	public String getLastSuggestionTime() {
+		//DBManager.getLastSuggestionTimeFromDB();
+		return LastSuggestionTime;
+	}
+
+	public void setLastSuggestionTime(String lastSuggestionTime) {
+		DBManager.updateLastTimetoDB(lastSuggestionTime);
+		LastSuggestionTime = lastSuggestionTime;
 	}
 	
 	

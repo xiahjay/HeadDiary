@@ -11,6 +11,7 @@ import com.example.headdiary.data.StrConfig;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -62,7 +63,7 @@ public class ActivityAggravateDialog extends Activity {
 		}
 		else{
 			headacheDiary.setIfActivityAggravate(getAnsbyId(answer));
-			finish();
+			finish();			
 		}
 		
 

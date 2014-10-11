@@ -1,5 +1,6 @@
 package com.example.headdiary.hddialog;
 
+import com.example.headdiary.HeadDiaryFormActivity;
 import com.example.headdiary.R;
 import com.example.headdiary.R.id;
 import com.example.headdiary.R.layout;
@@ -11,6 +12,7 @@ import com.example.headdiary.data.StrConfig;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -99,7 +101,9 @@ public class ProdromeDialog extends Activity {
 		if (!flag)
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_incomplete_input), Toast.LENGTH_SHORT).show();
 		else
-			finish();
+			{
+			finish();			
+			}
 	}
 	
 	private static int getAnsbyId(int cate,int answer){

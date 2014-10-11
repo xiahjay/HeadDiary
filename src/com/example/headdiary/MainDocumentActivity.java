@@ -35,7 +35,7 @@ public class MainDocumentActivity extends ListActivity {
 	private static final String TAG="MainDocumentActivity";
 	private DocumentAdapter mAdapter;
 	private ArrayList<HashMap<String, Object>> HDList=new ArrayList<HashMap<String, Object>>();
-	private TextView tvTime,tvRecord,tvStyle;
+	private TextView tvTime,tvRecord;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +50,8 @@ public class MainDocumentActivity extends ListActivity {
 	private void initView() {
 		// TODO Auto-generated method stub
 		tvTime=(TextView)findViewById(R.id.document_tv_time);
-		tvRecord=(TextView)findViewById(R.id.document_tv_record);
-		tvStyle=(TextView)findViewById(R.id.document_tv_style);
-		tvStyle.setText(StrConfig.DocumentStyle[0]);
+		tvRecord=(TextView)findViewById(R.id.document_tv_record);		
+		
 	}
 	
 	@Override
@@ -96,7 +95,7 @@ public class MainDocumentActivity extends ListActivity {
 			}).show();
 	}
 	
-	public void onClickStyle(View v){
+	/*public void onClickStyle(View v){
 		new AlertDialog.Builder(this)
 		.setTitle("显示方式")
 		.setSingleChoiceItems(StrConfig.DocumentStyle, UserDAO.getInstance().getDocumentStyle(),
@@ -108,7 +107,7 @@ public class MainDocumentActivity extends ListActivity {
 						dialog.dismiss();
 					}
 		}).show();
-	}
+	}*/
 	
 	//--------------方法-------------------//
 	private void refreshDispArray(){

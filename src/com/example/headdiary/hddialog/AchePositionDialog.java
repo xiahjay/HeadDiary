@@ -11,6 +11,7 @@ import com.example.headdiary.data.StrConfig;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -70,6 +71,7 @@ public class AchePositionDialog extends Activity {
 	
 	public void onClickCancel(View v){
 		finish();
+		
 	}
 	
 	public void onClickConfirm(View v){
@@ -81,7 +83,7 @@ public class AchePositionDialog extends Activity {
 		else{
 			headacheDiary.setPosition(getAnsbyId(answer));
 			headacheDiary.setIfAroundEye(getAnsbyId2(answer2));
-			finish();
+			finish();			
 		}
 	}
 	

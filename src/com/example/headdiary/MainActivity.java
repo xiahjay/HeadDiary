@@ -7,14 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
 
-import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
-import com.example.headdiary.data.User;
 import com.example.headdiary.data.UserDAO;
 import com.example.headdiary.data.Config.DBConfig;
-import com.example.headdiary.util.AllExit;
 import com.example.headdiary.util.DBManager;
-import com.example.headdiary.util.ToastManager;
+import com.igexin.sdk.PushManager;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,27 +26,27 @@ import android.view.Menu;
 
 public class MainActivity extends Activity {
 	private static final String TAG="MainActivity";
-	
+	public static  String getPayload=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		
-		//deleteDB(DBConfig.DB_FULLNAME);
+		setContentView(R.layout.activity_main);				
+		//Log.i("getPayload","payload="+UserDAO.getInstance().getPayload());
+	   // deleteDB(DBConfig.DB_FULLNAME);
 		importDB(DBConfig.DB_FULLNAME);
 
 		new Handler().postDelayed(new Runnable(){
 			@Override
 			public void run(){
-				Intent intent;
 				
-				if (DBManager.getLastUser()){
-					intent=new Intent(MainActivity.this,HomeActivity.class);
-					startActivity(intent);
+				
+				if (DBManager.getLastUser()){					
+					
+				Intent intent=new Intent(MainActivity.this,HomeActivity.class);
+			    startActivity(intent);
 				}
 				else{
-					intent=new Intent(MainActivity.this,LoginActivity.class);
+					Intent intent=new Intent(MainActivity.this,LoginActivity.class);
 					startActivity(intent);
 				}
 				setLanguage();
@@ -57,6 +54,8 @@ public class MainActivity extends Activity {
 			}
 		}, 1000);//1000
 		
+		PushManager.getInstance().initialize(this.getApplicationContext());
+		Log.i("PushManager", "PushManager="+PushManager.getInstance().isPushTurnedOn(this.getApplicationContext()));
 		
 	}
 

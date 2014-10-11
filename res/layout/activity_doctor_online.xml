@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#EDE4D6"
+    android:orientation="vertical" >
+          
+ 	 <RelativeLayout
+        android:id="@+id/doctor_layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/title_bar" >
+
+        <Button
+            android:id="@+id/doctor_btn_back"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_style_back"
+            android:text="@string/action_back"
+            android:textColor="#fff"
+            android:textSize="14sp" 
+            android:onClick="onClickBack"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="在线医生"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout> 
+      
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"             
+        android:layout_weight="1">
+        
+       <zrc.widget.ZrcListView
+        android:id="@+id/zListView"
+        android:layout_width="match_parent"
+        android:divider="#EDE4D6"  
+        android:layout_height="match_parent" >
+       </zrc.widget.ZrcListView>
+		<ViewStub
+            android:id="@android:id/empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout="@layout/doctor_online_viewstub_empty" />
+		
+       </FrameLayout>
+ </LinearLayout>

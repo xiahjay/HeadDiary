@@ -7,7 +7,7 @@
     
 	<!-- 头部的标题栏*********************************************************************** -->
 
-    <RelativeLayout
+   <RelativeLayout
         android:id="@+id/analysis_layout_top"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -28,16 +28,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/title_analysis"
+            android:text="头痛统计"
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold" />
         
 
-    </RelativeLayout>
+    </RelativeLayout> 
 
 
-     <LinearLayout
+     
+	
+    <!-- 主内容界面 *********************************************************************** -->
+    
+      
+        <LinearLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"  >
 		
@@ -113,15 +118,12 @@
         		android:layout_alignParentRight="true"
         		android:src="@drawable/diary_arrow" /> 					
       </RelativeLayout>
-	</LinearLayout>
-	
-    <!-- 主内容界面 *********************************************************************** -->
-    
-
-    <ScrollView 
+	</LinearLayout>  
+         
+     <ScrollView 
     	android:layout_width="match_parent"
         android:layout_height="match_parent"
-    	android:scrollbarStyle="outsideOverlay" 
+    	android:scrollbarStyle="outsideOverlay"    	
     	android:paddingTop="6dp"
     	android:paddingBottom="15dp">
     	
@@ -332,33 +334,7 @@
       				</RelativeLayout>
       				
 
-      				<RelativeLayout
-      				    android:id="@+id/analysis_rlayout_prodrome"
-            			android:layout_width="match_parent"
-            			android:layout_height="wrap_content"           			
-            			android:background="@drawable/diary_item" 
-            			android:paddingBottom="6dp"  >
-            			<TextView
-        					android:id="@+id/analysis_tv_title6"
-        					android:layout_width="wrap_content"  
-        					android:layout_height="wrap_content"
-        					android:layout_marginRight="25dp"
-        					android:paddingTop="8dp"
-        					android:paddingLeft="8dp"
-        					android:paddingBottom="2dp"
-        					android:text="@string/select_prodrome"
-        					android:textSize="17sp"		
-							android:textColor="#000" />  
-						<TextView
-            		        android:id="@+id/analysis_tv_prodrome"
-            		        android:layout_width="match_parent"
-            		        android:layout_height="wrap_content"
-            		        android:layout_below="@id/analysis_tv_title6"
-            		        android:paddingLeft="8dp"
-            		        android:paddingBottom="2dp"
-            		        android:textSize="17sp" 
-            		        android:textColor="@color/orange"/>     				
-      				</RelativeLayout>
+      				
       				
       			<RelativeLayout
       				    android:id="@+id/analysis_rlayout_companion"
@@ -495,7 +471,7 @@
             				android:src="@drawable/icon_drug" />
 
                 		<TextView
-                    		android:id="@+id/textView1"
+                    		android:id="@+id/textView2"
                     		android:layout_width="wrap_content"
                     		android:layout_height="wrap_content"
                     		android:layout_alignBottom="@+id/analysis_iv_drug"
@@ -533,5 +509,6 @@
       				
 
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+     </ScrollView>
+     </LinearLayout>
+

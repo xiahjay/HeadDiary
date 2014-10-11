@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:hint="@string/prompt_drug_name"
+        android:hint="选择药物"
         android:background="#A4D3EE"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -35,21 +35,59 @@
         android:paddingRight="15dp"> 
     </EditText>
     
-	<EditText
-        android:id="@+id/drug_et_quantity"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/prompt_drug_quantity"
-        android:background="#A4D3EE"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"> 
-    </EditText>
+        android:layout_height="wrap_content" >
 
+        <EditText
+            android:id="@+id/drug_et_quantity"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.01"
+            android:background="#A4D3EE"
+            android:hint="@string/prompt_drug_quantity"
+            android:paddingBottom="8dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" >
+
+        </EditText>
+
+        <!--  <RelativeLayout
+            android:id="@+id/drug_unit"
+            android:layout_width="91dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_weight="0.00"
+            android:background="@drawable/diary_single_item"
+            android:gravity="center_vertical"
+            android:onClick="onClickUnit" >
+
+            <TextView
+                android:id="@+id/text_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/imageView1"
+                android:layout_centerVertical="true"
+                 android:layout_weight="0.6"
+                android:padding="8dp"
+                android:text="单位"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:scaleType="matrix"
+                android:src="@drawable/diary_arrow" />
+        </RelativeLayout>-->
+
+    </LinearLayout>
   
 	<TextView
         android:id="@+id/drug_tv_effect"
@@ -103,13 +141,13 @@
         		
     </RadioGroup> 
     
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp"
-        android:layout_marginTop="33dp"
-        android:layout_gravity="center_horizontal" >
+        android:layout_marginTop="33dp" >
+
         <Button
             android:id="@+id/drug_btn_cancel"
             android:layout_width="120dp"
@@ -122,8 +160,7 @@
             android:textColor="#333"
             android:textSize="16sp" />
         
-
-        <Button
+         <Button
             android:id="@+id/drug_btn_confirm"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
@@ -134,8 +171,6 @@
             android:text="@string/action_confirm"
             android:textColor="#fff"
             android:textSize="16sp" />
-
-        
     </LinearLayout>
 
 </LinearLayout>

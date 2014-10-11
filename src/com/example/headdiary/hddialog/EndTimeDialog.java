@@ -2,6 +2,7 @@ package com.example.headdiary.hddialog;
 
 import java.util.Calendar;
 
+import com.example.headdiary.HomeActivity;
 import com.example.headdiary.R;
 import com.example.headdiary.R.id;
 import com.example.headdiary.R.layout;
@@ -16,10 +17,12 @@ import com.speedven.pickview.widget.WheelView;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -32,12 +35,14 @@ public class EndTimeDialog extends Activity {
 	private WheelView mins;
 	private HeadacheDiary headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
 	long nowTimeinMs=0;
+	private Button btnNotFinished;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_end_time_dialog);
-		
+		btnNotFinished=(Button)findViewById(R.id.end_btn_cancel);
+		btnNotFinished.setText("取消");
 		initDateTime();
 		
 	}
@@ -98,8 +103,8 @@ public class EndTimeDialog extends Activity {
 	
 	
 	public void onClickAcheNotFinished(View v){
-		headacheDiary.setEndTime(null);
-		finish();
+		//headacheDiary.setEndTime(null);
+		finish();		
 	}
 	
 	public void onClickConfirm(View v){
@@ -118,9 +123,9 @@ public class EndTimeDialog extends Activity {
 		else if (endTime.getTimeInMillis()<startTimeinMs+60000)	//要求至少有一分钟的时�?
 			Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_end_time_early), Toast.LENGTH_SHORT).show();	
 		else
-			headacheDiary.setEndTime(TimeManager.getStrDateTime(endTime));
-
+			{headacheDiary.setEndTime(TimeManager.getStrDateTime(endTime));		
 		finish();
+			}
 	}
 	
 	/**

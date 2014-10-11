@@ -6,6 +6,8 @@ import com.example.headdiary.data.HeadacheAnalysis;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
 import com.example.headdiary.data.UserDAO;
+import com.example.headdiary.hddialog.AchePositionQuestion;
+import com.example.headdiary.hddialog.StartTimeQuestion;
 import com.example.headdiary.util.DocumentAdapter;
 import com.example.headdiary.util.TimeManager;
 
@@ -14,6 +16,8 @@ import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -21,9 +25,9 @@ import android.widget.TextView;
 
 public class MainAnalysisActivity extends Activity {
 	private TextView tvTime,tvRecord,tvStyle;
-	private TextView tvFrequency,tvDuration,tvPosition,tvType,tvDegree,tvActivity,tvProdrome,tvCompanion,tvPrecipiating,tvMitigating,tvDrug;
+	private TextView tvFrequency,tvDuration,tvPosition,tvType,tvDegree,tvActivity,tvCompanion,tvPrecipiating,tvMitigating,tvDrug;
 	private int[] textViewIdList={R.id.analysis_tv_frequency,R.id.analysis_tv_interval,R.id.analysis_tv_position,R.id.analysis_tv_ache_type,R.id.analysis_tv_ache_degree
-			,R.id.analysis_tv_activity,R.id.analysis_tv_prodrome,R.id.analysis_tv_companion,R.id.analysis_tv_precipiating,R.id.analysis_tv_mitigating,R.id.analysis_tv_drug};
+			,R.id.analysis_tv_activity,R.id.analysis_tv_companion,R.id.analysis_tv_precipiating,R.id.analysis_tv_mitigating,R.id.analysis_tv_drug};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,7 +50,7 @@ public class MainAnalysisActivity extends Activity {
 		tvType=(TextView)findViewById(R.id.analysis_tv_ache_type);
 		tvDegree=(TextView)findViewById(R.id.analysis_tv_ache_degree);
 		tvActivity=(TextView)findViewById(R.id.analysis_tv_activity);
-		tvProdrome=(TextView)findViewById(R.id.analysis_tv_prodrome);
+		//tvProdrome=(TextView)findViewById(R.id.analysis_tv_prodrome);
 		tvCompanion=(TextView)findViewById(R.id.analysis_tv_companion);
 		tvPrecipiating=(TextView)findViewById(R.id.analysis_tv_precipiating);
 		tvMitigating=(TextView)findViewById(R.id.analysis_tv_mitigating);
@@ -83,7 +87,10 @@ public class MainAnalysisActivity extends Activity {
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						if (UserDAO.getInstance().getAnalysisStyle()!=which){
-							UserDAO.getInstance().setAnalysisStyle(which);
+							UserDAO.getInstance().setListStyle(which);
+							Intent intent = new Intent (MainAnalysisActivity.this,GraphicActivity.class);	
+							startActivity(intent);
+							finish();
 						}
 						dialog.dismiss();
 					}
@@ -124,69 +131,78 @@ public class MainAnalysisActivity extends Activity {
 		int totalDiary=headacheAnalysis.getTotalDiary();
 		
 		//Frequency
-		String frequency="统计范围："+TimeManager.getStrDate(headacheAnalysis.getStartAnalysisTime())+" ~ "+TimeManager.getStrDate(headacheAnalysis.getEndAnalysisTime())+"\n";
+		String html="<html>ddddd<font color = red>统计范围：</html>";		
 		float averageFrequencyPerMonth=totalDiary/(float)headacheAnalysis.getTotalMonth();
-		String strAverageFrequency=new DecimalFormat("###,###,###.#").format(averageFrequencyPerMonth);
-		frequency+="平均："+ strAverageFrequency+"次/月；最少："+Integer.toString(headacheAnalysis.getMinFrequencyPerMonth())+"次/月；最多："+Integer.toString(headacheAnalysis.getMaxFrequencyPerMonth())+"次/月";
-		tvFrequency.setText(frequency);
+		String strAverageFrequency=new DecimalFormat("###,###,###.#").format(averageFrequencyPerMonth);				
+		String frequency=TimeManager.getStrDate(headacheAnalysis.getStartAnalysisTime())+" ~ "+TimeManager.getStrDate(headacheAnalysis.getEndAnalysisTime())+"\n";
+		String html1="<font color=black>统计范围：</font>";
+		String html2="<font color=black>平均：</font>";
+		String average=strAverageFrequency+"次/月；";
+		String html3="<font color=black>最少：</font>";
+		String least=Integer.toString(headacheAnalysis.getMinFrequencyPerMonth())+"次/月；";
+		String html4="<font color=black>最多：</font>";
+		String most=Integer.toString(headacheAnalysis.getMaxFrequencyPerMonth())+"次/月";
+		
+		tvFrequency.setText(Html.fromHtml(html1+frequency+"<br>"+html2+average+"<br>"+html3+least+html4+most));
 		
 		//Duration
 		String duration;
 		long averageDuration=headacheAnalysis.getSumIntervalMinutes()/totalDiary;
-		duration="平均："+TimeManager.getStrDayHourMin(averageDuration)+"；最短："+TimeManager.getStrDayHourMin(headacheAnalysis.getMinIntervalMinutes())+"；最长："+TimeManager.getStrDayHourMin(headacheAnalysis.getMaxIntervalMinutes());
-
+		duration="<font color=black>平均：</font>"+TimeManager.getStrDayHourMin(averageDuration)+"；"+"<br><font color=black>最短：</font>"+TimeManager.getStrDayHourMin(headacheAnalysis.getMinIntervalMinutes())+"；"+"<font color=black>最长：</font>"+TimeManager.getStrDayHourMin(headacheAnalysis.getMaxIntervalMinutes());
+		//duration="平均："+TimeManager.getStrDayHourMin(averageDuration)+"；最短："+TimeManager.getStrDayHourMin(headacheAnalysis.getMinIntervalMinutes())+"；最长："+TimeManager.getStrDayHourMin(headacheAnalysis.getMaxIntervalMinutes());
 		strTemp=getStrPercentByCategoryCountList(headacheAnalysis.getIntervalCount(), StrConfig.HDIntervalCategory, totalDiary);
-		
+		Log.i("strTemp",strTemp);
 		if (!strTemp.equals(""))
-			duration+="\n"+strTemp.substring(0, strTemp.length()-1);
-		tvDuration.setText(duration);
+			tvDuration.setText(Html.fromHtml(duration+"<br>"+strTemp));
+		else{
+		tvDuration.setText(Html.fromHtml(duration));}
 		
 		//Position
 		String position=getStrPercentByCategoryCountList(headacheAnalysis.getPositionCount(), StrConfig.HDPosition, totalDiary);
 
 		intTemp=headacheAnalysis.getIfAroundEyeCount()*100/totalDiary;
 		if (intTemp>0)
-			position+="\n"+StrConfig.HDPositionAroundEyeTrue+"："+Integer.toString(intTemp)+"%；";
-		tvPosition.setText(position);
+			position+="<br><font color=black>眼眶或太阳穴附近：</font>"+Integer.toString(intTemp)+"%；";
+		tvPosition.setText(Html.fromHtml(position));
 		
 		//Type
 		String type=getStrPercentByCategoryCountList(headacheAnalysis.getTypeCount(), StrConfig.HDAcheType, totalDiary);
-		tvType.setText(type);
+		tvType.setText(Html.fromHtml(type));
 		
 		//Degree
 		float averageDegree=headacheAnalysis.getSumDegree()/(float)totalDiary;
 		strTemp=new DecimalFormat("###,###,###.#").format(averageDegree);
-		String degree="平均："+strTemp+"；最轻："+Integer.toString(headacheAnalysis.getMinDegree())+"；最重："+Integer.toString(headacheAnalysis.getMaxDegree());
-		degree+="\n"+getStrPercentByCategoryCountList(headacheAnalysis.getDegreeCount(), StrConfig.HDAcheDegree, totalDiary);
-		tvDegree.setText(degree);
+		String degree="<font color=black>平均：</font>"+strTemp+"；"+"<font color=black>最轻：</font>"+Integer.toString(headacheAnalysis.getMinDegree())+"；"+"<font color=black>最重：</font>"+Integer.toString(headacheAnalysis.getMaxDegree());
+		degree+="<br>"+getStrPercentByCategoryCountList(headacheAnalysis.getDegreeCount(), StrConfig.HDAcheDegree, totalDiary);
+		tvDegree.setText(Html.fromHtml(degree));
 		
 		//Activity
 		String activity=StrConfig.HDActivity[1]+"："+Integer.toString(headacheAnalysis.getIfActivityAggravateCount()*100/totalDiary)+"%";
-		tvActivity.setText(activity);
+		tvActivity.setText(Html.fromHtml(activity));
 		
 		//Prodrome
-		String prodrome=getStrPercentByMultipleCategoryCountList(headacheAnalysis.getProdromeCount(), StrConfig.HDProdromeCategory, StrConfig.HDProdromeValue,totalDiary);
-		if(prodrome.equals(""))
-			prodrome=this.getResources().getString(R.string.prompt_none);
-		tvProdrome.setText(prodrome);
+		//String prodrome=getStrPercentByMultipleCategoryCountList(headacheAnalysis.getProdromeCount(), StrConfig.HDProdromeCategory, StrConfig.HDProdromeValue,totalDiary);
+		//if(prodrome.equals(""))
+			//prodrome=this.getResources().getString(R.string.prompt_none);
+		//tvProdrome.setText(prodrome);
 		
 		//Companion
 		String companion=getStrPercentByMultipleCategoryCountList(headacheAnalysis.getCompanionCount(), StrConfig.HDCompanionCategory, StrConfig.HDCompanionValue, totalDiary);
 		if(companion.equals(""))
 			companion=this.getResources().getString(R.string.prompt_none);
-		tvCompanion.setText(companion);
+		tvCompanion.setText(Html.fromHtml(companion));
 		
 		//Precipiating
 		String precipiating=getStrPercentByCategoryCountList(headacheAnalysis.getPrecipiatingCount(), StrConfig.HDPrecipiating, totalDiary);
 		if(precipiating.equals(""))
 			precipiating=this.getResources().getString(R.string.prompt_none);
-		tvPrecipiating.setText(precipiating);
+		tvPrecipiating.setText(Html.fromHtml(precipiating));
 		
 		//Mitigating
 		String mitigating=getStrPercentByCategoryCountList(headacheAnalysis.getMitigatingCount(), StrConfig.HDMitigating, totalDiary);
 		if(mitigating.equals(""))
 			mitigating=this.getResources().getString(R.string.prompt_none);
-		tvMitigating.setText(mitigating);
+		tvMitigating.setText(Html.fromHtml(mitigating));
 		
 		//Drug
 		String drug="";
@@ -209,7 +225,7 @@ public class MainAnalysisActivity extends Activity {
 		for(int i=0;i<countList.length;i++){
 			countValue=countList[i];
 			if (countValue>0){
-				result+=categoryNameList[i]+"："+Integer.toString(countValue*100/totalNum)+"%；";
+				result+="<font color=black>"+categoryNameList[i]+"：</font>"+Integer.toString(countValue*100/totalNum)+"%；";
 			}
 		}
 		return result;
@@ -221,7 +237,7 @@ public class MainAnalysisActivity extends Activity {
 		for(int i=0;i<countList.length;i++){
 			countValue=countList[i][0];
 			if (countValue>0){
-				result+=categoryNameList[i]+"："+Integer.toString(countValue*100/totalNum)+"% ";
+				result+="<font color=black>"+categoryNameList[i]+"：</font>"+Integer.toString(countValue*100/totalNum)+"% ";
 				if (categoryValueList[i][1].equals(this.getResources().getString(R.string.prompt_therebe))){
 					result+="\n";
 					continue;

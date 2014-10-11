@@ -1,5 +1,6 @@
 package com.example.headdiary;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.example.headdiary.R;
@@ -7,6 +8,7 @@ import com.example.headdiary.R.id;
 import com.example.headdiary.R.layout;
 import com.example.headdiary.R.menu;
 import com.example.headdiary.R.string;
+import com.example.headdiary.data.Diagnose;
 import com.example.headdiary.data.Drug;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
@@ -18,10 +20,12 @@ import com.example.headdiary.hddialog.ActivityAggravateDialog;
 import com.example.headdiary.hddialog.AddDrugDialog;
 import com.example.headdiary.hddialog.CompanionDialog;
 import com.example.headdiary.hddialog.EndTimeDialog;
+import com.example.headdiary.hddialog.EndTimeQuestion;
 import com.example.headdiary.hddialog.MitigatingDialog;
 import com.example.headdiary.hddialog.PrecipiatingDialog;
 import com.example.headdiary.hddialog.ProdromeDialog;
 import com.example.headdiary.hddialog.StartTimeDialog;
+import com.example.headdiary.hddialog.StartTimeQuestion;
 import com.example.headdiary.util.AllExit;
 import com.example.headdiary.util.DBManager;
 import com.example.headdiary.util.TimeManager;
@@ -40,6 +44,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,14 +63,56 @@ public class HeadDiaryFormActivity extends Activity {
 		R.id.newdiary_tv_drug0,R.id.newdiary_tv_drug1,R.id.newdiary_tv_drug2,R.id.newdiary_tv_drug3,R.id.newdiary_tv_drug4	
 	};
 	
-	private TextView tvStartTime,tvEndTime,tvPosition,tvType,tvDegree,tvActivity,tvProdrome,tvCompanion,tvPrecipiating,tvMitigating;
+	private TextView tvStartTime,tvEndTime,tvPosition,tvType,tvDegree,tvActivity,tvCompanion,tvPrecipiating,tvMitigating,tvDiagnoseResult, tvGuidelines;
+	Boolean flag=true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_head_diary_form);
+		
 		headacheDiary=HeadacheDiaryDAO.getInstance().getHeadacheDiarySelected();
 		findView();
+		initLayout();
+							    	 			  	
 	}
+	
+	
+
+	private void initLayout() {
+		// TODO Auto-generated method stub
+		final TextView tv = (TextView)findViewById(R.id.newdiary_guidelines);
+		final ImageView arrow = (ImageView) findViewById(R.id.arrow_all);
+		  //tv.setMovementMethod(ScrollingMovementMethod.getInstance());
+		 tv .setOnClickListener(new View.OnClickListener() {
+			
+			 @Override         
+			 public void onClick(View v) {
+			  //do something
+				 //Log.i("tv.getLineCount()",tv.getHeight()+"");
+				   if(flag){
+				    
+				     flag = false;
+				     arrow.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow2));
+				     tv.setEllipsize(null); // 展开
+				     tv.setSingleLine(flag);
+				    }else {
+				     flag = true;
+				     tv.setEllipsize(android.text.TextUtils.TruncateAt.END);  // 收缩
+				     tv.setLines(4);
+				     arrow.setBackgroundDrawable(getResources().getDrawable(R.drawable.arrow1));
+				    }
+				
+				// tv.setEllipsize(android.text.TextUtils.TruncateAt.END);
+				 //tv.setLines(4);
+			          }
+			      });
+			       
+			        	 
+			    	   
+			   
+	}
+	
+
 
 	private void findView() {
 		// TODO Auto-generated method stub
@@ -74,11 +121,13 @@ public class HeadDiaryFormActivity extends Activity {
 		tvPosition=(TextView)findViewById(R.id.newdiary_tv_position);
 		tvType=(TextView)findViewById(R.id.newdiary_tv_ache_type);
 		tvDegree=(TextView)findViewById(R.id.newdiary_tv_ache_degree);
-		tvActivity=(TextView)findViewById(R.id.newdiary_tv_activity);
-		tvProdrome=(TextView)findViewById(R.id.newdiary_tv_prodrome);
+		tvActivity=(TextView)findViewById(R.id.newdiary_tv_activity);		
 		tvCompanion=(TextView)findViewById(R.id.newdiary_tv_companion);
 		tvPrecipiating=(TextView)findViewById(R.id.newdiary_tv_precipiating);
 		tvMitigating=(TextView)findViewById(R.id.newdiary_tv_mitigating);
+		tvDiagnoseResult=(TextView)findViewById(R.id.newdiary_diagnose_result);
+		tvGuidelines=(TextView)findViewById(R.id.newdiary_guidelines);
+		
 		
 		for (int i=0;i<DRUG_MAX_NUM;i++){
 			tvDrug[i]=(TextView)findViewById(tvDrugID[i]);
@@ -115,7 +164,7 @@ public class HeadDiaryFormActivity extends Activity {
 	}
 	
 	public void onClickSave(View v){
-		if (HeadacheDiaryDAO.getInstance().getIfSelectedDiaryChanged())
+		//if (HeadacheDiaryDAO.getInstance().getIfSelectedDiaryChanged())
 			saveAndBack();
 	}
 	
@@ -276,6 +325,8 @@ public class HeadDiaryFormActivity extends Activity {
 	
 	private void saveAndBack(){
 		headacheDiary.setRecordTime(TimeManager.getStrDateTime());
+		ArrayList<Drug> druglist = headacheDiary.getDrugList();
+		DBManager.saveDruglistToDB(druglist);
 		String hint=DBManager.saveHDiaryToDB(headacheDiary);
 		ToastManager.showShortToast(hint);
     	this.finish();
@@ -298,6 +349,21 @@ public class HeadDiaryFormActivity extends Activity {
 	private void getMyDiaryInfo(){
 		String mText,tempstr;
 		int ans,i,length;
+		
+		//diagnose result
+				headacheDiary.makeAidDiagnosis();
+				String diagnoseResult=headacheDiary.getStrAidDiagnosis();
+				//StrConfig.HDSecondaryClassification[AidDiagnosis]
+				
+		//diagnose suggestion and guidelines
+				Diagnose diagnose = DBManager.getDiagnoseInfor(headacheDiary.getAidDiagnosis());
+				String suggestion = diagnose.getSuggestion();
+				String finalDiagnoseResult = diagnoseResult+"\n"+"建议的缓解方法为:"+suggestion;
+				tvDiagnoseResult.setText(finalDiagnoseResult);
+				
+				String guidelines = diagnose.getGuidelines();
+				tvGuidelines.setText(guidelines);
+				
 		
 		//StartTime
 		String startTime=headacheDiary.getStartTime();
@@ -352,7 +418,7 @@ public class HeadDiaryFormActivity extends Activity {
     	tvActivity.setText(activity);
     		
     	//Prodrome
-    	String prodrome="";
+    	/*String prodrome="";
     	Boolean completeProdromeFlag=true;
     	for (i=0;i<StrConfig.HDProdromeCategory.length;i++){
     		ans=headacheDiary.getProdrome(i);
@@ -383,7 +449,7 @@ public class HeadDiaryFormActivity extends Activity {
     	}
     	else{
     		tvProdrome.setVisibility(View.GONE);
-    	}
+    	}*/
     	
     	//Companion
     	String companion="";

@@ -1,5 +1,6 @@
 package com.example.headdiary.hddialog;
 
+import com.example.headdiary.HomeActivity;
 import com.example.headdiary.R;
 import com.example.headdiary.R.id;
 import com.example.headdiary.R.layout;
@@ -11,6 +12,7 @@ import com.example.headdiary.data.StrConfig;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -91,8 +93,9 @@ public class AcheTypeDialog extends Activity {
 				headacheDiary.setTypeComment(etElse.getText().toString().trim());
 			else
 				headacheDiary.setTypeComment("");
-			finish();	
+			finish();				
 		}
+		
 	}
 	
 	private static int getAnsbyId(int checkedID){

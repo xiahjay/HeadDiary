@@ -51,9 +51,116 @@
    		<LinearLayout
         	android:layout_width="fill_parent"
         	android:layout_height="wrap_content"
-        	android:orientation="vertical" >
+        	android:orientation="vertical"
+        	android:id="@+id/diary_form" >
+        	"
            
-           <!--   头痛基本信息素等 ********************************************************************   -->
+  <!--   头痛基本信息素等 ********************************************************************   -->
+   <LinearLayout
+   			    android:layout_width="wrap_content"
+   			    android:layout_height="150.0dip"
+   			    android:layout_margin="10.0dip"
+   			    android:background="@drawable/publish_input_bg"
+   			    android:orientation="vertical"
+   			    android:padding="10.0dip" >
+
+   			    <LinearLayout
+   			        android:layout_width="fill_parent"
+   			        android:layout_height="30.0dip"
+   			        android:layout_marginTop="4.0dip"
+   			        android:orientation="horizontal" >
+
+   			        <TextView
+   			            android:layout_width="66.0dip"
+   			            android:layout_height="fill_parent"
+   			            android:layout_weight="0.23"
+   			            android:gravity="center"
+   			            android:text="@string/diagnose_result_title"
+   			            android:textColor="#ff646464"
+   			            android:textSize="18.0sp" />
+   			    </LinearLayout>
+
+   			    <View
+   			        android:layout_width="wrap_content"
+   			        android:layout_height="4.0dip"
+   			        android:background="@drawable/slash_bg" />
+
+   			    <TextView
+   			        android:id="@+id/newdiary_diagnose_result"
+   			        android:layout_width="fill_parent"
+   			        android:layout_height="80.0dip"
+   			        android:layout_marginTop="5.0dip"
+   			        android:background="#00ffffff"
+   			        android:gravity="top"
+   			        android:paddingLeft="10.0dip"
+   			        android:paddingRight="10.0dip"
+   			        android:textColor="#ff3c3c3c"
+   			        android:textColorHint="#ffc1c1c1"
+   			        android:textSize="14.0sp" />
+   			</LinearLayout>
+
+ <!-- 诊断结果结束*********************************************************************** -->    
+  <LinearLayout
+   			    android:layout_width="fill_parent"
+   			    android:layout_height="wrap_content"
+   			    android:layout_margin="10.0dip"
+   			    android:id="@+id/layout_guidelinesFrame"
+   			    android:background="@drawable/publish_input_bg"
+   			    android:orientation="vertical"
+   			    android:padding="10.0dip" >
+
+   			    <LinearLayout
+   			        android:id= "@+id/layout_guidelines"
+   			        android:layout_width="fill_parent"
+   			        android:layout_height="30.0dip"
+   			        android:layout_marginTop="4.0dip"
+   			        android:orientation="horizontal">
+
+   			        <TextView
+   			            android:layout_width="66.0dip"
+   			            android:layout_height="wrap_content"
+   			            android:layout_weight="0.23"
+   			            android:gravity="center"
+   			            android:text="@string/relief_method_title"
+   			            android:textColor="#ff646464"
+   			            android:textSize="18.0sp" />
+
+   			       
+   			        
+   			    </LinearLayout>
+   			        
+
+   			    <View
+   			        android:layout_width="wrap_content"
+   			        android:layout_height="4.0dip"
+   			        android:background="@drawable/slash_bg" />
+
+   			    <TextView
+   			        android:id="@+id/newdiary_guidelines"
+   			        android:layout_width="fill_parent"
+   			        android:layout_height="wrap_content"
+   			        android:layout_marginTop="5.0dip"
+   			        android:background="#00ffffff"
+   			        android:gravity="top"
+   			        android:paddingLeft="10.0dip"
+   			        android:paddingRight="10.0dip"
+   			        android:textColor="#ff3c3c3c"
+   			        android:textColorHint="#ffc1c1c1"
+   			        android:textSize="14.0sp" 
+   			        android:lines="4"
+   			        android:ellipsize="end"/>
+   			    
+   			      <ImageView
+   			           
+   			            android:id="@+id/arrow_all"
+   			            android:layout_width="wrap_content"
+   			            android:layout_height="wrap_content"
+   			            android:layout_marginLeft="270dp"   			           
+   			            android:background="@drawable/arrow1" />  
+   			</LinearLayout>
+
+
+  <!--   缓解方法结束 ********************************************************************   -->
             		<RelativeLayout
                 		android:layout_width="match_parent"
                 		android:layout_height="wrap_content">
@@ -314,45 +421,6 @@
         					android:src="@drawable/diary_arrow" />      					
       				</RelativeLayout>
       				
-
-      				<RelativeLayout
-      				    android:id="@+id/newdiary_rlayout_prodrome"
-            			android:layout_width="match_parent"
-            			android:layout_height="wrap_content"           			
-            			android:clickable="true"
-            			android:background="@drawable/diary_item" 
-            			android:onClick="onClickProdrome"
-            			android:paddingBottom="6dp"  >
-            			<TextView
-        					android:id="@+id/newdiary_tv_title7"
-        					android:layout_width="wrap_content"  
-        					android:layout_height="wrap_content"
-        					android:layout_marginRight="25dp"
-        					android:paddingTop="8dp"
-        					android:paddingLeft="8dp"
-        					android:paddingBottom="2dp"
-        					android:text="@string/select_prodrome"
-        					android:textSize="17sp"		
-							android:textColor="#000" />  
-						<TextView
-            		        android:id="@+id/newdiary_tv_prodrome"
-            		        android:layout_width="match_parent"
-            		        android:layout_height="wrap_content"
-            		        android:layout_below="@id/newdiary_tv_title7"
-            		        android:layout_marginRight="25dp"
-            		        android:paddingLeft="8dp"
-            		        android:paddingBottom="2dp"
-            		        android:textSize="17sp" 
-            		        android:textColor="@color/orange"/>     
-						<ImageView
-						    android:id="@+id/newdiary_arrow7"
-            				android:layout_width="wrap_content"
-        					android:layout_height="wrap_content"        	     	
-        					android:scaleType="matrix"
-        					android:layout_centerVertical="true"
-        					android:layout_alignParentRight="true"
-        					android:src="@drawable/diary_arrow" /> 					
-      				</RelativeLayout>
       				
       				<RelativeLayout
       				    android:id="@+id/newdiary_rlayout_companion"
@@ -384,7 +452,7 @@
             		        android:textSize="17sp" 
             		        android:textColor="@color/orange"/>     
 						<ImageView
-						    android:id="@+id/newdiary_arrow8"
+						    android:id="@+id/newdiary_arrow7"
             				android:layout_width="wrap_content"
         					android:layout_height="wrap_content"        	     	
         					android:scaleType="matrix"
@@ -392,6 +460,8 @@
         					android:layout_alignParentRight="true"
         					android:src="@drawable/diary_arrow" /> 				
       				</RelativeLayout>
+      				
+      				
       				
       				
       				<!--   补充信息 ********************************************************************   -->
@@ -454,7 +524,7 @@
             		        android:textSize="17sp" 
             		        android:textColor="@color/green"/>     
 						<ImageView
-						    android:id="@+id/newdiary_arrow8"
+						    android:id="@+id/newdiary_arrow9"
             				android:layout_width="wrap_content"
         					android:layout_height="wrap_content"        	     	
         					android:scaleType="matrix"
@@ -493,7 +563,7 @@
             		        android:textSize="17sp" 
             		        android:textColor="@color/green"/>     
 						<ImageView
-						    android:id="@+id/newdiary_arrow9"
+						    android:id="@+id/newdiary_arrow10"
             				android:layout_width="wrap_content"
         					android:layout_height="wrap_content"        	     	
         					android:scaleType="matrix"
@@ -609,7 +679,7 @@
         					android:textSize="17sp"		
 							android:lineSpacingExtra="5dp"/>
 						<ImageView
-						    android:id="@+id/newdiary_arrow"
+						    android:id="@id/newdiary_arrow"
             				android:layout_width="wrap_content"
         					android:layout_height="wrap_content"        	     	
         					android:scaleType="matrix"
@@ -637,7 +707,7 @@
         					android:textSize="17sp"		
 							android:lineSpacingExtra="5dp"/>
 						<ImageView
-						    android:id="@+id/newdiary_arrow"
+						    android:id="@id/newdiary_arrow"
             				android:layout_width="wrap_content"
         					android:layout_height="wrap_content"        	     	
         					android:scaleType="matrix"
@@ -665,7 +735,7 @@
         					android:textSize="17sp"		
 							android:lineSpacingExtra="5dp"/>
 						<ImageView
-						    android:id="@+id/newdiary_arrow"
+						    android:id="@id/newdiary_arrow"
             				android:layout_width="wrap_content"
         					android:layout_height="wrap_content"        	     	
         					android:scaleType="matrix"

@@ -1,6 +1,7 @@
 package com.example.headdiary;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -8,9 +9,12 @@ import org.json.JSONObject;
 
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
+import com.example.headdiary.data.Suggestion;
 import com.example.headdiary.data.User;
 import com.example.headdiary.data.UserDAO;
 import com.example.headdiary.data.Config.MsgConfig;
+import com.example.headdiary.hddialog.StartTimeDialog;
+import com.example.headdiary.hddialog.StartTimeQuestion;
 import com.example.headdiary.util.AllExit;
 import com.example.headdiary.util.DBManager;
 import com.example.headdiary.util.NetWorkManager;
@@ -18,12 +22,15 @@ import com.example.headdiary.util.ToastManager;
 import com.example.headdiary.util.WebServiceManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.igexin.sdk.PushManager;
 
+import android.R.integer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
@@ -44,7 +51,10 @@ public class HomeActivity extends Activity {
 	private Button btnDiary,btnSynchronize;
 	private ProgressBar progressBar;
 	private static Boolean isSynchronizing=false;
-	private static Boolean synchonizeingAvaliable=true;
+	private static Boolean synchonizingSuggAvaliable=true;
+	private static Boolean synchonizeingAvaliable=true;	
+	public static  String getPayload=null;
+	public static TextView tvUnread;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +62,11 @@ public class HomeActivity extends Activity {
 		AllExit.getInstance().addActivity(this);
 		setContentView(R.layout.activity_home);
 		init();	
+		//if(getPayload!=null){
+			//Intent intent=new Intent(HomeActivity.this,DoctorOnlineActivity.class);
+			//startActivity(intent);
+			//getPayload=null;
+		//}
 	}
 
 	private void init(){
@@ -59,13 +74,32 @@ public class HomeActivity extends Activity {
 		tvNewsContent.setMovementMethod(ScrollingMovementMethod.getInstance()); 
 		btnDiary=(Button)findViewById(R.id.home_btn_new_headache);
 		btnSynchronize=(Button)findViewById(R.id.home_btn_synchronize);
-		progressBar=(ProgressBar)findViewById(R.id.home_progressBar);
+		progressBar=(ProgressBar)findViewById(R.id.home_progressBar);	
+		tvUnread =  (TextView)findViewById(R.id.main_tab_unread_tv); 
 	}
 
 	public void onResume() {
 	    super.onResume();  // Always call the superclass method first
 	    setBtnDiary(); 
 	    
+	   	    
+	    int unread = UserDAO.getInstance().getUnreadSuggestion();
+	    
+		   if(unread==0){
+		     tvUnread.setVisibility(View.GONE);
+		     }
+		   else{
+		     tvUnread.setVisibility(View.VISIBLE);	
+		     tvUnread.setText(Integer.toString(unread));
+		     }
+		 Log.i("UnreadHome", "UnreadSuggestion="+unread);
+		 
+		// if(getPayload!=null){
+			 //Intent intent=new Intent(HomeActivity.this,DoctorOnlineActivity.class);
+			// startActivity(intent);
+			 //getPayload=null;
+		// }
+		 
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -97,21 +131,27 @@ public class HomeActivity extends Activity {
 	}  
 	
 	public void onClickNewHeadDiary(View v) {   
-		if (HeadacheDiaryDAO.getInstance().getIfLastDiaryComplete()){
+		if (HeadacheDiaryDAO.getInstance().getIfLastDiaryComplete()){			
 			HeadacheDiaryDAO.getInstance().setHeadacheDiarySelected(new HeadacheDiary());
+			//Intent intent = new Intent (HomeActivity.this,UnfinishedDiaryActivity.class);	
+			//startActivity(intent);
 		}
 		else{
 			HeadacheDiaryDAO.getInstance().setHeadacheDiarySelected((HeadacheDiary) HeadacheDiaryDAO.getInstance().getLastHeadacheDiary().clone());
-		}
+			//Intent intent = new Intent (HomeActivity.this,UnfinishedDiaryActivity.class);	
+			//startActivity(intent);	
+		}	
 		
-		Intent intent = new Intent (HomeActivity.this,HeadDiaryFormActivity.class);	
-		startActivity(intent);	
+		Intent intent = new Intent (HomeActivity.this,UnfinishedDiaryActivity.class);	
+		startActivity(intent);
+		
 	}
 	
 	public void onClickSynchronize(View v){
 		User user=UserDAO.getInstance().getUser();
 		if (user.ifHasUUID()){
-			synchronize(); 		
+			synchronize(); 
+			//singleThreadExecutorForSynchronize.execute(synchronizeSuggestionRunnable);
 		}
 		else{
 			if (progressBar.getVisibility()==View.VISIBLE){
@@ -151,12 +191,17 @@ public class HomeActivity extends Activity {
 	public void onClickAnalysis(View v) {   
 		if (isLoadingData())
 			return;
-		Intent intent = new Intent (HomeActivity.this,MainAnalysisActivity.class);			
-		startActivity(intent);	
+		if(UserDAO.getInstance().getListStyle()==0)
+		{Intent intent = new Intent (HomeActivity.this,MainAnalysisActivity.class);			
+		startActivity(intent);}
+		if(UserDAO.getInstance().getListStyle()==1)
+		{Intent intent = new Intent (HomeActivity.this,GraphicActivity.class);			
+		startActivity(intent);}
+			
 	}
 	
 	public void onClickOnlineDoctor(View v) {  
-		Intent intent = new Intent (HomeActivity.this,MainDoctorActivity.class);			
+		Intent intent = new Intent (HomeActivity.this,DoctorOnlineActivity.class);			
 		startActivity(intent);	
 	}
 	
@@ -216,6 +261,7 @@ public class HomeActivity extends Activity {
 		else{
 			btnSynchronize.setText("云端同步头痛日志");
 			btnSynchronize.setTextColor(this.getResources().getColor(R.color.green));
+			
 		}
 	}
 
@@ -228,14 +274,17 @@ public class HomeActivity extends Activity {
 		if (NetWorkManager.isNetworkConnected(this)){
 			btnSynchronize.setText("正在同步...");
 			btnSynchronize.setTextColor(this.getResources().getColor(R.color.blue));
-			isSynchronizing=true;
-			singleThreadExecutor.execute(synchronizeRunnable);	 
+			isSynchronizing=true;			 
+			//singleThreadExecutorForSynchronize.execute(synchronizeSuggestionRunnable);
+			singleThreadExecutor.execute(synchronizeRunnable);	
+			//singleThreadExecutor.execute(synchronizeSuggestionRunnable);
 		}
 		else{
 			ToastManager.showNoWeb();
 		}	
 		
 	}
+                 
     
     private Boolean ifNetWorkOpen(){
     	return NetWorkManager.isNetworkConnected(this);
@@ -397,5 +446,7 @@ public class HomeActivity extends Activity {
  	    }
  	       
  	};
+ 	
+ 	
 }
 

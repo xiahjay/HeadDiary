@@ -11,6 +11,7 @@ import com.example.headdiary.data.StrConfig;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -172,7 +173,7 @@ public class AcheDegreeDialog extends Activity {
 				Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_degree_invalid), Toast.LENGTH_SHORT).show();
 			else{
 				headacheDiary.setDegree(rating);
-				finish();
+				finish();				
 			}	
 		}
 

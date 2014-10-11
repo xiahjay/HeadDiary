@@ -49,5 +49,7 @@
     <string name="title_frequency">头痛频率</string>
     <string name="check_rem_pswd">记住密码</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="action_before">上一步</string>
+    <string name="action_next">下一步</string>
 
 </resources>

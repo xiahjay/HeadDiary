@@ -12,6 +12,10 @@ public class Config {
 	    public static final String DB_PATH = "/sdcard";
 	    public static final String DB_NAME = "headdiary.db"; //保存的数据库文件名
 	    public static final String DB_FULLNAME = DB_PATH + "/" + DB_NAME;
+	    public static final String DB_TABLENAME = "DiagnoseResult";
+	    public static final String DB_SUGGESTION = "MitigationSuggestion";
+	    public static final String DB_GUIDELINES = "Guidelines";
+	    
 	    
 	    //DB TABLE & COLUMN
         public static final String TB_UserInfo = "UserInfo";
@@ -35,6 +39,13 @@ public class Config {
         public static final String COL_LoginInfo_LoginTime = "LoginTime";
         public static final String COL_LoginInfo_LogoutTime = "LogoutTime";
 
+        public static final String TB_SuggestionInfor = "SuggestionInfor";
+        public static final String COL_SuggestionInfor_UserId = "UserId";
+        public static final String COL_SuggestionInfor_RecId = "RecId";
+        public static final String COL_SuggestionInfor_Suggestion = "Suggestion";
+        public static final String COL_SuggestionInfor_SuggestionTime = "SuggestionTime";
+        public static final String COL_SuggestionInfor_IfNew = "IfNew";        
+    
         
         public static final String TB_HeadacheDiary = "HeadacheDiary";
         public static final String COL_HDiary_UserId = "UserId";

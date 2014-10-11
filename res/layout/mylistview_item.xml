@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#EDE4D6"
+    android:padding="3dp" >
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/listview_item_background"
+      android:orientation="vertical"
+      android:paddingBottom="8dp"
+      android:paddingLeft="12dp"
+      android:paddingRight="12dp"
+      android:paddingTop="12dp" >
+
+                    
+      <TextView
+       android:id="@+id/listitem_doctor_fistLine"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       android:layout_marginLeft="10dp"
+       android:text="UserName"
+       android:singleLine="true"
+       android:textColor="#815F3D"
+       android:textSize="15sp" />
+       
+      <ImageView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       android:paddingBottom="10dp"
+       android:scaleType="centerCrop"
+       android:src="@drawable/comment_divider_line" /> 
+
+      <TextView
+       android:id="@+id/listitem_doctor_secondLine"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="5dp"
+       android:layout_marginTop="5dp"
+       android:text="　　一日，将军潜入花木兰帐内欲行不归，强行要上木兰姐姐，就在这时，将军忽然指着花木兰大叫一声：你~你~你~竟然是个女的......"
+       android:textSize="16sp" />
+
+       
+       
+    </LinearLayout>
+
+</LinearLayout>

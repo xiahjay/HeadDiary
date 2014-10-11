@@ -10,14 +10,17 @@ import java.util.List;
 
 import javax.security.auth.PrivateCredentialPermission;
 
+
 import com.example.headdiary.MainActivity;
 import com.example.headdiary.MainDocumentActivity;
 import com.example.headdiary.R.string;
 import com.example.headdiary.data.Config;
+import com.example.headdiary.data.Diagnose;
 import com.example.headdiary.data.Drug;
 import com.example.headdiary.data.HeadacheDiary;
 import com.example.headdiary.data.HeadacheDiaryDAO;
 import com.example.headdiary.data.StrConfig;
+import com.example.headdiary.data.Suggestion;
 import com.example.headdiary.data.User;
 import com.example.headdiary.data.UserDAO;
 import com.example.headdiary.data.Config.DBConfig;
@@ -87,7 +90,8 @@ public class DBManager {
 		}
 		else{
 			HeadacheDiaryDAO.getInstance().setLastHeadacheDiary(headacheDiary);
-			hint="保存成功!日志尚不完整，记得及时补全";
+			headacheDiary.makeAidDiagnosis();
+			hint="保存成功!日志尚不完整，记得及时补全"+headacheDiary.getStrAidDiagnosis();
 		}
 		
 		Gson gson=new Gson();
@@ -545,6 +549,7 @@ public class DBManager {
 		return headacheDiary;
 	}
 
+	
 	public static void updateAllHeadDiary(ArrayList<HeadacheDiary> hDiaryList) {
 		// TODO Auto-generated method stub
 		SQLiteDatabase db;
@@ -600,4 +605,183 @@ public class DBManager {
 		}
 		db.close();
 	}
+
+	public static Diagnose getDiagnoseInfor(int dignoseId){
+		
+		SQLiteDatabase db;
+		Diagnose diagnose=null;
+		
+		db= openDB(DBConfig.DB_FULLNAME);
+		Cursor mCursor=db.query(DBConfig.DB_TABLENAME,null, "DiagnoseId='"+dignoseId+"'", null, null, null, null);
+		if (mCursor!=null && mCursor.moveToFirst()){	
+			String suggestion = mCursor.getString(mCursor.getColumnIndex(DBConfig.DB_SUGGESTION));
+		    String guidelines = mCursor.getString(mCursor.getColumnIndex(DBConfig.DB_GUIDELINES));	
+		   
+		    diagnose = new Diagnose("", suggestion, guidelines);
+		}
+
+		db.close();
+		
+		return diagnose;
+	}
+
+	public static void saveDruglistToDB(ArrayList<Drug> druglist){
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor;
+		for(int i=0; i<druglist.size(); i++){
+		Boolean flag = true;
+		cursor = db.query("DrugInfor", null,"DrugName='"+druglist.get(i).getName()+"'", null,null,null,null);
+		if(cursor!=null && cursor.moveToFirst()){
+			flag = false;
+			String recTime = druglist.get(i).getRecordTime();
+			String sql ="update DrugInfor set RecordTime='"+recTime+"' where DrugName='"+druglist.get(i).getName()+"'";
+			db.execSQL(sql);			
+		    }
+		if (flag){
+			
+			String sql ="insert into DrugInfor (UserId, DrugName, RecordTime) values('"+UserDAO.getInstance().getUser().getUserId()+"','"+druglist.get(i).getName()+"','"+druglist.get(i).getRecordTime()+"')";
+			db.execSQL(sql);
+			
+			Log.i("UserId", "UserId="+UserDAO.getInstance().getUser().getUserId());
+			Log.i("DrugName", "DrugName="+druglist.get(i).getName());
+			Log.i("RecordTime", "RecordTime="+druglist.get(i).getRecordTime());
+		    }
+					
+		}		
+		
+		db.close();
+	}
+	
+	public static ArrayList<String> getDruglistFromDB() {
+	   ArrayList<String> druglist = new ArrayList<String>();
+	   SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+	   Cursor cursor;
+	   String sql ="select * from DrugInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"' order by RecordTime desc";
+	   cursor=db.rawQuery(sql,null);
+	   if(cursor!=null && cursor.moveToFirst())
+	   do{
+		  druglist.add(cursor.getString(cursor.getColumnIndex("DrugName")));
+	   }while (cursor.moveToNext());
+		
+	   db.close();
+		return druglist;
+	}
+
+	public static void getSuggestionlistFromDB() {
+		// TODO Auto-generated method stub
+		ArrayList<Suggestion> suggestionList = new ArrayList<Suggestion>();
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor;
+		String sql ="select * from SuggestionInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"' order by SuggestionTime desc";
+		cursor=db.rawQuery(sql,null);
+		if(cursor!=null && cursor.moveToFirst())
+		  do{
+			  Suggestion suggestion = new Suggestion();
+			  suggestion.setSuggestion(cursor.getString(cursor.getColumnIndex("Suggestion")));
+			  suggestion.setSuggestionTime(cursor.getString(cursor.getColumnIndex("SuggestionTime")));
+			  suggestion.setRecId(Integer.parseInt(cursor.getString(cursor.getColumnIndex("RecId"))));
+			  suggestionList.add(suggestion);			  			  
+		  }while (cursor.moveToNext());
+		
+		UserDAO.getInstance().setSuggestionList(suggestionList);
+		db.close();
+	}
+
+	public static void getUnreadCountFromDB() {
+		// TODO Auto-generated method stub
+		int count=0;
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor;
+		String sql ="select * from SuggestionInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"' and IfNew=1";
+		cursor = db.rawQuery(sql, null);
+		if(cursor!=null && cursor.moveToFirst())
+		  do{
+			 count++;
+     		}while (cursor.moveToNext());
+		
+		UserDAO.getInstance().setUnreadSuggestion(count);
+		db.close();
+		
+	}
+	
+	public static int getAllCountFromDB() {
+		// TODO Auto-generated method stub
+		int count=0;
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor;
+		String sql ="select * from SuggestionInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"'";
+		cursor = db.rawQuery(sql, null);
+		if(cursor!=null && cursor.moveToFirst())
+		  do{
+			 count++;
+     		}while (cursor.moveToNext());
+		
+		
+		db.close();
+		return count;
+	}
+
+	public static void setSelectedSuggestionRead(int RecId) {
+		// TODO Auto-generated method stub
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor=db.query("SuggestionInfor",null, "UserId='"+UserDAO.getInstance().getUser().getUserId()+"'", null, null, null, null);
+		if(cursor!=null && cursor.moveToFirst()){
+		  int a = 0;
+		  String sql ="update SuggestionInfor set IfNew='"+a+"' where RecId='"+RecId+"'";
+		  db.execSQL(sql);			
+		}
+		
+		db.close();
+	}
+
+	/*public static void getLastSuggestionTimeFromDB() {
+		// TODO Auto-generated method stub
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		Cursor cursor;
+		String lastTime = null;
+		String sql="select SuggestionTime from SuggestionInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"' and SuggestionTime >= all (select SuggestionTime from SuggestionInfor where UserId='"+UserDAO.getInstance().getUser().getUserId()+"')";
+	    
+		cursor= db.rawQuery(sql, null);
+	    if(cursor!=null && cursor.moveToFirst()){
+	       lastTime = cursor.getString(cursor.getColumnIndex("SuggestionTime"));
+	       String sqll ="update UserInfo set LastSuggestionTime='"+lastTime+"' where UserId='"+UserDAO.getInstance().getUser().getUserId()+"'";
+	       db.execSQL(sqll);
+	    }
+	  
+	   UserDAO.getInstance().getUser().setLastSuggestionTime(lastTime);  
+	   db.close();
+	}*/
+
+	public static void updateSuggestionList(ArrayList<Suggestion> nSuggestionList) {
+		// TODO Auto-generated method stub		
+		SQLiteDatabase db;
+		User user=UserDAO.getInstance().getUser();
+		int IfNew=1;
+		for(Suggestion suggestion:nSuggestionList){
+		ContentValues args = new ContentValues();
+		args.put(DBConfig.COL_SuggestionInfor_UserId,user.getUserId());
+		args.put(DBConfig.COL_SuggestionInfor_RecId, suggestion.getRecId());
+		args.put(DBConfig.COL_SuggestionInfor_Suggestion, suggestion.getSuggestion());
+		args.put(DBConfig.COL_SuggestionInfor_SuggestionTime, suggestion.getSuggestionTime());
+		args.put(DBConfig.COL_SuggestionInfor_IfNew, IfNew);
+								
+		db= openDB(DBConfig.DB_FULLNAME);
+		db.insert(DBConfig.TB_SuggestionInfor, null, args);
+		db.close();
+		}
+		
+		
+		
+	}
+
+	public static void updateLastTimetoDB(String lastSuggestionTime) {
+		// TODO Auto-generated method stub
+		SQLiteDatabase db = openDB(DBConfig.DB_FULLNAME);
+		String sql = "update UserInfo set LastSuggestionTime='"+lastSuggestionTime+"' where UserId='"+UserDAO.getInstance().getUser().getUserId()+"'";
+		db.execSQL(sql);
+		
+		db.close();
+	}
+	
+	
 }

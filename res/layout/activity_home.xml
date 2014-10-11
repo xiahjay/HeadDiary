@@ -170,7 +170,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_document"
+                    android:text="查看日志"
                     android:textColor="@color/color_white_to_green"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -193,33 +193,60 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_analysis"
+                    android:text="头痛统计"
                     android:textColor="@color/color_white_to_green"
                     android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="wrap_content"                              
+                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:onClick="onClickOnlineDoctor"  >
+                >    
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-10dp"
+                android:gravity="center"
+                android:onClick="onClickOnlineDoctor"
+                android:orientation="vertical" >
 
                 <ImageView
                     android:id="@+id/home_iv_tab_onlinedoctor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="matrix"
-                    android:src="@drawable/btn_home_onlinedoc"/>
+                    android:src="@drawable/btn_home_onlinedoc" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/title_online_doc"
                     android:textColor="@color/color_white_to_green"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"/>                                               
             </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                         
+                android:layout_marginLeft="-40dp" 
+                >
+            
+                    <TextView
+                        android:id="@+id/main_tab_unread_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"                       
+                        android:background="@drawable/tab_unread_bg"
+                        android:gravity="top|center"
+                        android:text="2"
+                        android:textColor="@android:color/white"
+                        android:textSize="10.0dip"
+                        android:visibility="gone" />
+           </LinearLayout>     
+       </LinearLayout>      
 
             <LinearLayout
                 android:layout_width="wrap_content"
